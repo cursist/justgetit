@@ -12,7 +12,7 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long productId;
     private String naam;
     private BigDecimal inkoopprijs;
     private BigDecimal verkoopprijs;
@@ -44,8 +44,8 @@ public class Product implements Serializable {
         this.besteld = besteld;
     }
 
-    public long getId() {
-        return id;
+    public long getproductId() {
+        return productId;
     }
 
     public String getNaam() {
