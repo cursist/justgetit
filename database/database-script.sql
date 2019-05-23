@@ -26,7 +26,8 @@ DROP TABLE IF EXISTS `JustGetIt`.`merken` ;
 CREATE TABLE IF NOT EXISTS `JustGetIt`.`merken` (
   `merkId` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `naam` VARCHAR(45) NOT NULL,
-  `minimumMarge` DECIMAL UNSIGNED NOT NULL,
+  `minimumMargePercent` DECIMAL UNSIGNED NULL DEFAULT 0,
+  `minimumMargeBedrag` DECIMAL UNSIGNED NULL DEFAULT 0,
   PRIMARY KEY (`merkId`),
   UNIQUE INDEX `merkId_UNIQUE` (`merkId` ASC) VISIBLE,
   UNIQUE INDEX `naam_UNIQUE` (`naam` ASC) VISIBLE)
@@ -55,8 +56,10 @@ DROP TABLE IF EXISTS `JustGetIt`.`subcategorieen` ;
 CREATE TABLE IF NOT EXISTS `JustGetIt`.`subcategorieen` (
   `subcategorieId` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `naam` VARCHAR(45) NOT NULL,
-  `minimumMarge` DECIMAL UNSIGNED NOT NULL,
+  `minimumMargePercent` DECIMAL UNSIGNED NULL DEFAULT 0,
+  `minimumMargeBedrag` DECIMAL UNSIGNED NULL DEFAULT 0,
   `categorieId` BIGINT UNSIGNED NOT NULL,
+  `subcategorieencol` VARCHAR(45) NULL,
   PRIMARY KEY (`subcategorieId`),
   UNIQUE INDEX `subcategorieId_UNIQUE` (`subcategorieId` ASC) VISIBLE,
   INDEX `fk_Subcategorieen_Categorieen1_idx` (`categorieId` ASC) VISIBLE,
