@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manager</title>
+    <style>
+        h3 {
+            font-family: "Baskerville Old Face", cursive;
+        }
+        form {
+            border: 2px solid pink;
+            margin: 0 2rem 2rem;
+        }
+        form label {
+            display: block;
+        }
+        input[type='submit'] {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h3>Maak categorie</h3>
+    <form>
+        <input type="text" name="categorie">
+        <input type="submit" value="opslaan">
+    </form>
+
+    <h3>Maak subcategorie</h3>
+    <form>
+        <label>
+            Kies categorie
+            <select name="categorie" id="categorie">
+                <option value="">categorie</option>
+            </select>
+        </label>
+        <label>
+            naam
+            <input type="text" name="categorie">
+        </label>
+        <input type="submit" value="opslaan">
+    </form>
+
+    <h3>Voeg eigenschap toe</h3>
+    <form>
+        <label >
+            Kies subcategorie
+            <select name="subcategorie" id="subcategorie">
+                <option value="">subcategorie</option>
+            </select>
+        </label>
+        <label>
+            naam
+            <input type="text" name="eigenschap">
+        </label>
+        <input type="submit" value="opslaan">
+    </form>
+
+    <h3>Zet marge van de subcategorie</h3>
+    <form>
+        <label>
+            Kies subcategorie
+            <select name="subcategorie" id="subcategorie">
+                <option value="test">kies subcategorie</option>
+            </select>
+        </label>
+        <label>
+            nieuwe marge in geld
+            <input type="number" name= "geld">
+        </label>
+        <label>
+            nieuwe marge in percentage
+            <input type="number" name= "percentage">
+        </label>
+        <input type="submit" value="opslaan">
+    </form>
+
+    <h3>Zet marge van het merk</h3>
+    <form>
+        <label>
+            Kies merk
+            <select name="merk" id="merk">
+                <option value="">kies merk</option>
+            </select>
+        </label>
+        <label>
+            nieuwe marge in geld
+            <input type="number" name= "geld">
+        </label>
+        <label>
+            nieuwe marge in percentage
+            <input type="number" name= "percentage">
+        </label>
+        <input type="submit" value="opslaan">
+    </form>
+</body>
+</html>
