@@ -1,9 +1,13 @@
 package be.vdab.justgetit.entities;
 
+import be.vdab.justgetit.valueobjects.SubcategorieEigenschappen;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity(name = "subcategorieen")
 public class Subcategorie implements Serializable {
@@ -17,6 +21,10 @@ public class Subcategorie implements Serializable {
     @ManyToOne(optional =false, fetch = FetchType.LAZY)
     @JoinColumn(name = "categorieId")
     private Categorie categorie;
+    @ElementCollection
+    @CollectionTable(name = "subcategorieeigenschappen",
+            joinColumns = @JoinColumn(name = "subcategorieId"))
+    private Set<SubcategorieEigenschappen> eigenschappen;
 
     @Version
     private long versie;
@@ -25,13 +33,13 @@ public class Subcategorie implements Serializable {
     }
 
 
-    public Subcategorie(long subcategorieId, String naam, BigDecimal minimumMargePercent,
+    public Subcategorie( String naam, BigDecimal minimumMargePercent,
                         BigDecimal minimumMargeBedrag, Categorie categorie) {
-        this.subcategorieId = subcategorieId;
         this.naam = naam;
         this.minimumMargePercent = minimumMargePercent;
         this.minimumMargeBedrag = minimumMargeBedrag;
         this.categorie = categorie;
+        this.eigenschappen = new LinkedHashSet<>();
     }
 
 

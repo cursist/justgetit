@@ -49,7 +49,7 @@ public class Merk implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Merk)) return false;
         Merk merk = (Merk) o;
-        return getNaam().equals(merk.getNaam());
+        return getNaam().equalsIgnoreCase(merk.getNaam());
     }
 
     @Override

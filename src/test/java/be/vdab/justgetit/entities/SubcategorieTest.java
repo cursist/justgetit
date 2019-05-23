@@ -15,7 +15,7 @@ public class SubcategorieTest {
     @Before
     public void before(){
         categorie = new Categorie(1L, "test");
-        subcategorie = new Subcategorie(1L, "test", BigDecimal.TEN,
+        subcategorie = new Subcategorie( "test", BigDecimal.TEN,
                 BigDecimal.TEN, categorie);
     }
     @Test
