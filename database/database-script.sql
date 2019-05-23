@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `JustGetIt`.`subcategorieen` (
   PRIMARY KEY (`subcategorieId`),
   UNIQUE INDEX `subcategorieId_UNIQUE` (`subcategorieId` ASC) VISIBLE,
   INDEX `fk_Subcategorieen_Categorieen1_idx` (`categorieId` ASC) VISIBLE,
-  UNIQUE INDEX `naam_UNIQUE` (`naam` ASC) VISIBLE,
+  UNIQUE INDEX `naamInCategorie_UNIQUE` (`naam`, `subcategorieId` ASC) VISIBLE,
   CONSTRAINT `fk_Subcategorieen_Categorieen1`
     FOREIGN KEY (`categorieId`)
     REFERENCES `JustGetIt`.`categorieen` (`categorieId`)
