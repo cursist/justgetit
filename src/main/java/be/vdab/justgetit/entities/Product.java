@@ -1,26 +1,32 @@
 package be.vdab.justgetit.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "producten")
 public class Product implements Serializable {
-
     private static final long serialVersionUID = 1l;
 
     @Id
-    private long id;
-
-    private String naam,omschrijving;
+    private long productId;
+    @NotBlank
+    private String naam;
+    private String omschrijving;
+    @Positive
     private BigDecimal inkoopPrijs,verkoopPrijs,minumumprijs;
     private int voorraad;
-
+    private int besteld;
+    @Positive
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "merkId")
     private Merk merk;
-
+    @Positive
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "subcategorieId")
     private Subcategorie subcategorie;
 
     @Version
@@ -29,23 +35,22 @@ public class Product implements Serializable {
     protected Product() {
     }
 
-    public Product(long id, String naam, String omschrijving,
-                   BigDecimal inkoopPrijs, BigDecimal verkoopPrijs,
-                   BigDecimal minumumprijs, int voorraad,
-                   Subcategorie subcategorie, Merk merk) {
-        this.id = id;
+    public Product(long productId, @NotBlank String naam, @Positive BigDecimal inkoopPrijs,
+                   @Positive BigDecimal verkoopPrijs, @Positive BigDecimal minumumprijs, int voorraad,
+                   int besteld, @Positive Merk merk, @Positive Subcategorie subcategorie) {
+        this.productId = productId;
         this.naam = naam;
-        this.omschrijving = omschrijving;
         this.inkoopPrijs = inkoopPrijs;
         this.verkoopPrijs = verkoopPrijs;
         this.minumumprijs = minumumprijs;
         this.voorraad = voorraad;
-        this.subcategorie = subcategorie;
+        this.besteld = besteld;
         this.merk = merk;
+        this.subcategorie = subcategorie;
     }
 
     public long getId() {
-        return id;
+        return productId;
     }
 
     public String getNaam() {
@@ -70,6 +75,18 @@ public class Product implements Serializable {
 
     public int getVoorraad() {
         return voorraad;
+    }
+
+    public int getBesteld() {
+        return besteld;
+    }
+
+    public Merk getMerk() {
+        return merk;
+    }
+
+    public Subcategorie getSubcategorie() {
+        return subcategorie;
     }
 
     @Override

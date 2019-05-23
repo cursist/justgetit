@@ -15,8 +15,8 @@ public class Categorie implements Serializable {
     private static final long serialVersionUID = 1l;
 
     @Id
-    private long id;
-    @Column(name = "naam")
+    private long categorieId;
+    @Column(name = "naam", unique = true)
     private String naam;
     @Version
     private long versie;
@@ -24,13 +24,13 @@ public class Categorie implements Serializable {
     protected Categorie() {
     }
 
-    public Categorie(long id, String naam) {
-        this.id = id;
+    public Categorie(long categorieId, String naam) {
+        this.categorieId = categorieId;
         this.naam = naam;
     }
 
     public long getId() {
-        return id;
+        return categorieId;
     }
 
     public String getNaam() {

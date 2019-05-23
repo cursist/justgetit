@@ -1,40 +1,47 @@
 package be.vdab.justgetit.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity(name = "merk")
+@Entity(name = "merken")
 public class Merk implements Serializable {
-
     private static final long serialVersionUID = 1l;
-
     @Id
-    private long id;
+    private long merkId;
+    @Column(name = "naam", unique = true)
     private String naam;
-    private BigDecimal minimunMarge;
+    private BigDecimal minimunMargePercent;
+    private BigDecimal minimunMargeBedrag;
 
-    protected Merk() {
+    public Merk() {
     }
 
-    public Merk(long id, String naam, BigDecimal minimunMarge) {
-        this.id = id;
+    public Merk(long merkId, String naam, BigDecimal minimunMargePercent,
+                BigDecimal minimunMargeBedrag) {
+        this.merkId = merkId;
         this.naam = naam;
-        this.minimunMarge = minimunMarge;
+        this.minimunMargePercent = minimunMargePercent;
+        this.minimunMargeBedrag = minimunMargeBedrag;
     }
 
     public long getId() {
-        return id;
+        return merkId;
     }
 
     public String getNaam() {
         return naam;
     }
 
-    public BigDecimal getMinimunMarge() {
-        return minimunMarge;
+    public BigDecimal getMinimunMargePercent() {
+        return minimunMargePercent;
+    }
+
+    public BigDecimal getMinimunMargeBedrag() {
+        return minimunMargeBedrag;
     }
 
     @Override

@@ -1,22 +1,22 @@
 package be.vdab.justgetit.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity(name = "subcategorieen")
 public class Subcategorie implements Serializable {
-
     private static final long serialVersionUID = 1l;
-
     @Id
-    private long id;
-
-    private BigDecimal minimummarge;
+    private long subcategorieId;
+    @Column(name = "naam", unique = true)
     private String naam;
+    private BigDecimal minimumMargePercent;
+    private BigDecimal minimumMargeBedrag;
+    @ManyToOne(optional =false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "categorieId")
+    private Categorie categorie;
 
     @Version
     private long versie;
@@ -24,22 +24,36 @@ public class Subcategorie implements Serializable {
     protected Subcategorie() {
     }
 
-    public Subcategorie(long id, BigDecimal minimummarge, String naam) {
-        this.id = id;
-        this.minimummarge = minimummarge;
+
+    public Subcategorie(long subcategorieId, String naam, BigDecimal minimumMargePercent,
+                        BigDecimal minimumMargeBedrag, Categorie categorie) {
+        this.subcategorieId = subcategorieId;
         this.naam = naam;
+        this.minimumMargePercent = minimumMargePercent;
+        this.minimumMargeBedrag = minimumMargeBedrag;
+        this.categorie = categorie;
     }
+
+
 
     public long getId() {
-        return id;
-    }
-
-    public BigDecimal getMinimummarge() {
-        return minimummarge;
+        return subcategorieId;
     }
 
     public String getNaam() {
         return naam;
+    }
+
+    public BigDecimal getMinimumMargePercent() {
+        return minimumMargePercent;
+    }
+
+    public BigDecimal getMinimumMargeBedrag() {
+        return minimumMargeBedrag;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
     }
 
     @Override
