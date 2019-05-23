@@ -21,8 +21,9 @@
 </head>
 <body>
     <h3>Maak categorie</h3>
-    <form>
-        <input type="text" name="categorie">
+    <form method="post" action="http://localhost:8080/manager/nieuwecategorie"
+          th:object="${categorieNaam}">
+        <input type="text" th:value="*{naam}">
         <input type="submit" value="opslaan">
     </form>
 
@@ -31,23 +32,27 @@
         <label>
             Kies categorie
             <select name="categorie" id="categorie">
-                <option th:each="categorie:${categorieën}"
-                        th:value="${categorie}">categorie</option>
+                <option th:each="categorie:${categorieLijst}"
+                        th:object="${categorie}"
+                        th:value="${categorie}"
+                        th:text="${categorie.naam}"></option>
             </select>
         </label>
         <label>
             naam
-            <input type="text" name="categorie">
+            <input type="text" name="categorie" value="">
         </label>
         <input type="submit" value="opslaan">
     </form>
 
     <h3>Voeg eigenschap toe</h3>
     <form>
-        <label >
+        <label>
             Kies subcategorie
             <select name="subcategorie" id="subcategorie">
-                <option value="">subcategorie</option>
+                <option th:each="subcategorie:${subcategorieLijst}"
+                        th:value="${subcategorie}"
+                        th:text="${subcategorie}"></option>
             </select>
         </label>
         <label>
@@ -62,7 +67,9 @@
         <label>
             Kies subcategorie
             <select name="subcategorie" id="subcategorie">
-                <option value="test">kies subcategorie</option>
+                <option th:each="subcategorie:${subcategorieLijst}"
+                        th:value="${subcategorie}"
+                        th:text="${subcategorie}"></option>
             </select>
         </label>
         <label>
@@ -81,7 +88,9 @@
         <label>
             Kies merk
             <select name="merk" id="merk">
-                <option value="">kies merk</option>
+                <option th:each="merk:${merkLijst}"
+                        th:value="${merk}"
+                        th:text="${merk}"></option>
             </select>
         </label>
         <label>
