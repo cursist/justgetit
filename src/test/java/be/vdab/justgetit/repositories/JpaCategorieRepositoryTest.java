@@ -20,11 +20,11 @@ import static org.junit.Assert.assertFalse;
         @DataJpaTest
         @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
         @Sql("/findCategorie.sql")
-        @Import(JpaCategorieRepositoryTest.class)
+        @Import(JpaCategorieRepository.class)
         public class JpaCategorieRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
 
         @Autowired
-        private JpaCategorieRepositoryTest repository;
+        private JpaCategorieRepository repository;
         private long idVanTestCat () {
         return super.jdbcTemplate.queryForObject(
                 "select id from categorieen where naam = 'testC'", Long.class);
