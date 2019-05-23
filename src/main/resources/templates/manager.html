@@ -21,9 +21,9 @@
 </head>
 <body>
     <h3>Maak categorie</h3>
-    <form method="post" action="http://localhost:8080/manager/nieuwecategorie"
-          th:object="${categorieNaam}">
-        <input type="text" th:value="*{naam}">
+    <form method="get" th:action="@{/manager/nieuwecategorie}"
+          th:object="${categorie}">
+        <input type="text" th:field="*{naam}">
         <input type="submit" value="opslaan">
     </form>
 

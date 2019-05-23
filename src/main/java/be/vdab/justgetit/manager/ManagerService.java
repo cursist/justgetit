@@ -1,6 +1,6 @@
 package be.vdab.justgetit.manager;
 
-import be.vdab.justgetit.mock.Categorie;
+import be.vdab.justgetit.domain.Categorie;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,5 +15,8 @@ public class ManagerService {
         lijst.add(een);
         lijst.add(twee);
         return lijst;
+    }
+
+    public void save(Categorie categorie) {
     }
 }

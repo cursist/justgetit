@@ -1,8 +1,6 @@
 package be.vdab.justgetit.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,12 +9,17 @@ import java.util.Objects;
 public class Categorie implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String naam;
 
     protected Categorie() {}
 
-    public Categorie(long id, String naam) {
+    public Categorie(String naam) {
+        this.naam = naam;
+    }
+
+    Categorie(long id, String naam) {
         this.id = id;
         this.naam = naam;
     }
