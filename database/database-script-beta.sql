@@ -665,9 +665,9 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-INSERT INTO `producten` VALUES (1,'Lord of the Rings Trilogy: Extended Edition',23,100,50,'Meer dan 12u kijkplezier!',0,0,1,5),(2,'Lord of the Rings Boxset',5,18,10,'Meer dan 32u leesplezier!',0,0,3,1),(3,'QE55Q6F(2018) - QLED',200,799,399,'Meer kijkplezier!',0,0,2,7),(4,'Overhemd',5,39,15,'Meer dan zeer comfortabel draagplezier!',0,0,4,3);
-INSERT INTO `producteigenschappen` VALUES (1,2,'Paperback'),(3,4,'M'),(5,1,'2100 minuten'),(7,3,'140 cm');
-INSERT INTO `subcategorieeigenschappen` VALUES (1,'Uitvoering',1),(2,'Druknummer',2),(3,'Maat',3),(4,'Maat',4),(5,'Duur',5),(6,'Duur',6),(7,'Diameter',7),(8,'Verbruik',8),(9,'Houdbaarheidsdatum',9),(10,'Volume',10);
-INSERT INTO `subcategorieen` VALUES (1,'Fictie',0,0,2),(2,'Non-Fictie',0,0,2),(3,'Mannen',0,0,4),(4,'Vrouwen',0,0,4),(5,'DVD',0,0,1),(6,'Blu-Ray',0,0,1),(7,'Televisies',0,0,3),(8,'Huishoudapparatuur',0,0,3),(9,'Fruit',0,0,5),(10,'Conserven',0,0,5);
 INSERT INTO `merken` VALUES (1,'A Film Benelux MSD B.V.',0,0),(2,'Samsung',0,0),(3,'HarperCollins Publishers',0,0),(4,'Hollister Co.',0,0),(5,'Vaporesso',0,0);
 INSERT INTO `categorieen` VALUES (2,'Boeken'),(3,'Elektronica'),(4,'Fashion'),(1,'Films'),(5,'Voeding');
+INSERT INTO `subcategorieen` VALUES (1,'Fictie',0,0,2),(2,'Non-Fictie',0,0,2),(3,'Mannen',0,0,4),(4,'Vrouwen',0,0,4),(5,'DVD',0,0,1),(6,'Blu-Ray',0,0,1),(7,'Televisies',0,0,3),(8,'Huishoudapparatuur',0,0,3),(9,'Fruit',0,0,5),(10,'Conserven',0,0,5);
+INSERT INTO `subcategorieeigenschappen` VALUES (1,'Uitvoering',1),(2,'Druknummer',2),(3,'Maat',3),(4,'Maat',4),(5,'Duur',5),(6,'Duur',6),(7,'Diameter',7),(8,'Verbruik',8),(9,'Houdbaarheidsdatum',9),(10,'Volume',10);
+INSERT INTO `producten` VALUES (1,'Lord of the Rings Trilogy: Extended Edition',23,100,50,'Meer dan 12u kijkplezier!',0,0,1,5),(2,'Lord of the Rings Boxset',5,18,10,'Meer dan 32u leesplezier!',0,0,3,1),(3,'QE55Q6F(2018) - QLED',200,799,399,'Meer kijkplezier!',0,0,2,7),(4,'Overhemd',5,39,15,'Meer dan zeer comfortabel draagplezier!',0,0,4,3);
+INSERT INTO `producteigenschappen` VALUES (1,2,'Paperback'),(3,4,'M'),(5,1,'2100 minuten'),(7,3,'140 cm');
