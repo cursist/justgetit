@@ -7,9 +7,9 @@ import javax.persistence.EntityManager;
 import java.util.Optional;
 
 @Repository
-public class JpaCategorieRepository implements CategorieRepository {
+public class JpaCategorieRepositoryTest implements CategorieRepository {
     private final EntityManager manager;
-    JpaCategorieRepository(EntityManager manager){
+    JpaCategorieRepositoryTest(EntityManager manager){
         this.manager = manager;
     }
 
