@@ -59,7 +59,6 @@ CREATE TABLE IF NOT EXISTS `JustGetIt`.`subcategorieen` (
   `minimumMargePercent` DECIMAL UNSIGNED NULL DEFAULT 0,
   `minimumMargeBedrag` DECIMAL UNSIGNED NULL DEFAULT 0,
   `categorieId` BIGINT UNSIGNED NOT NULL,
-  `subcategorieencol` VARCHAR(45) NULL,
   PRIMARY KEY (`subcategorieId`),
   UNIQUE INDEX `subcategorieId_UNIQUE` (`subcategorieId` ASC) VISIBLE,
   INDEX `fk_Subcategorieen_Categorieen1_idx` (`categorieId` ASC) VISIBLE,
