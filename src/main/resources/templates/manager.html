@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Manager</title>
@@ -31,7 +31,8 @@
         <label>
             Kies categorie
             <select name="categorie" id="categorie">
-                <option value="">categorie</option>
+                <option th:each="categorie:${categorieën}"
+                        th:value="${categorie}">categorie</option>
             </select>
         </label>
         <label>

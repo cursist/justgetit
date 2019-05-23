@@ -10,6 +10,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/manager")
 public class ManagerController {
+
     ModelAndView pagina() {
         return new ModelAndView("manager")
                 .addObject("categorieën", getCategorieen())
