@@ -17,14 +17,13 @@ import static org.junit.Assert.*;
 
 
 @RunWith(SpringRunner.class)
-        @DataJpaTest
-        @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-        @Sql("/findCategorie.sql")
-        @Import(JpaCategorieRepository.class)
-        public class JpaCategorieRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Sql("/findCategorie.sql")
+public class JpaCategorieRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
 
     @Autowired
-    private JpaCategorieRepository repository;
+    private CategorieRepository repository;
     private Categorie categorie;
 
     private long idVanTestCat() {
