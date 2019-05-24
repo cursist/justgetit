@@ -54,4 +54,14 @@ public class DefaultProductService implements ProductService{
     public List<Product> findByVoorraadKleinerDan(BigDecimal aantal) {
         return productRepository.findByVoorraadKleinerDan(aantal);
     }
+
+    @Override
+    public Product save(Product product) {
+        return productRepository.save(product);
+    }
+
+    @Override
+    public void delete(Product product) {
+        productRepository.delete(product);
+    }
 }

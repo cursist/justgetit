@@ -86,6 +86,8 @@ public class Product implements Serializable {
         return subcategorie;
     }
 
+
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;

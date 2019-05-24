@@ -16,4 +16,5 @@ public interface ProductRepository extends JpaRepository <Product, Long> {
     List<Product> findByVerkoopprijsBetween(BigDecimal van , BigDecimal tot);
     List<Product> findByBesteldIsNull();
     List<Product> findByVoorraadKleinerDan(@Param("aantal") BigDecimal aantal);
+
 }

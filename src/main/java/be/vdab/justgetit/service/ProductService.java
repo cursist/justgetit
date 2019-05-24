@@ -16,4 +16,6 @@ public interface ProductService {
     List<Product> findByVerkoopprijsBetween(BigDecimal van , BigDecimal tot);
     List<Product> findByBesteldIsNull();
     List<Product> findByVoorraadKleinerDan(BigDecimal aantal);
+    Product save(Product product);
+    void delete(Product product);
 }

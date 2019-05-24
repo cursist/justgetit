@@ -11,5 +11,7 @@
             select p from Product p where p.voorraad &lt; :aantal order by p.naam
 
         </query>
+
     </named-query>
+
 </entity-mappings>
