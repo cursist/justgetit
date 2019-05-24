@@ -2,10 +2,7 @@ package be.vdab.justgetit.entities;
 
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -15,16 +12,19 @@ public class Categorie implements Serializable {
     private static final long serialVersionUID = 1l;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long categorieId;
     @Column(name = "naam", unique = true)
     private String naam;
-    @Version
-    private long versie;
 
     protected Categorie() {
     }
 
-    public Categorie(long categorieId, String naam) {
+    public Categorie(String naam) {
+        this.naam = naam;
+    }
+
+    protected Categorie(long categorieId, String naam) {
         this.categorieId = categorieId;
         this.naam = naam;
     }

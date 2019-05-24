@@ -429,6 +429,7 @@ CREATE TABLE `subcategorieen` (
   `minimumMargePercent` decimal(10,0) unsigned DEFAULT '0',
   `minimumMargeBedrag` decimal(10,0) unsigned DEFAULT '0',
   `categorieId` bigint(20) unsigned NOT NULL,
+  `versie` int unsigned not null default 0,
   PRIMARY KEY (`subcategorieId`),
   UNIQUE KEY `subcategorieId_UNIQUE` (`subcategorieId`),
   UNIQUE KEY `naamInCategorie_UNIQUE` (`naam`,`subcategorieId`),

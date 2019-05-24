@@ -1,5 +1,6 @@
-package be.vdab.justgetit.domain;
+package be.vdab.justgetit.entities;
 
+import be.vdab.justgetit.entities.Categorie;
 import org.junit.Before;
 import org.junit.Test;
 

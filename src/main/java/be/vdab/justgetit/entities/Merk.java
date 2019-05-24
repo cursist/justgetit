@@ -20,6 +20,10 @@ public class Merk implements Serializable {
     public Merk() {
     }
 
+    public Merk(String naam) {
+        this.naam = naam;
+    }
+
     public Merk(long merkId, String naam, BigDecimal minimunMargePercent,
                 BigDecimal minimunMargeBedrag) {
         this.merkId = merkId;
@@ -42,6 +46,14 @@ public class Merk implements Serializable {
 
     public BigDecimal getMinimunMargeBedrag() {
         return minimunMargeBedrag;
+    }
+
+    public void setMinimunMargePercent(BigDecimal minimunMargePercent) {
+        this.minimunMargePercent = minimunMargePercent;
+    }
+
+    public void setMinimunMargeBedrag(BigDecimal minimunMargeBedrag) {
+        this.minimunMargeBedrag = minimunMargeBedrag;
     }
 
     @Override

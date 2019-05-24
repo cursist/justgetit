@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
-@Embeddable
+@Entity
 @Table(name = "subcategorieeigenschappen")
 public class SubcategorieEigenschappen {
     @Id

@@ -45,7 +45,7 @@ public class DefaultSubcategorieService implements SubcategorieService {
 
     @Override
     public List<Subcategorie> findByEigenschappenNaamLike(String str) {
-        return subcategorieRepository.findByEigenschappenNaamLike(str);
+        return subcategorieRepository.findByNaamLike(str);
     }
 
     @Override

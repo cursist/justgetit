@@ -32,11 +32,10 @@
           th:object="${subcategorie}">
         <label>
             Kies categorie
-            <select name="categorieLijst" id="categorieLijst">
+            <select th:field="*{categorie}">
                 <option th:each="categorie:${categorieLijst}"
-                        th:value="${categorie}"
-                        th:field="*{categorie}"
-                        th:text="${categorie.naam}"></option>
+                        th:value="${categorie.id}"
+                        th:text="${categorie}"></option>
             </select>
         </label>
         <label>
@@ -53,7 +52,7 @@
             <select name="subcategorieLijst1" id="subcategorieLijst1">
                 <option th:each="subcategorie:${subcategorieLijst}"
                         th:value="${subcategorie}"
-                        th:text="${subcategorie.naam}"></option>
+                        th:text="${subcategorie}"></option>
             </select>
         </label>
         <label>
@@ -64,7 +63,8 @@
     </form>
 
     <h3>Zet marge van de subcategorie</h3>
-    <form>
+    <form method="post" th:action="@{/manager/voegmargetoeaansubcategorie}"
+          th:object="${subcategorie}">
         <label>
             Kies subcategorie
             <select name="subcategorieLijst2" id="subcategorieLijst2">
