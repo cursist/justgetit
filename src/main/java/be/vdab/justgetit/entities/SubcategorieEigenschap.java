@@ -1,6 +1,4 @@
-package be.vdab.justgetit.valueobjects;
-
-import be.vdab.justgetit.entities.Subcategorie;
+package be.vdab.justgetit.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -8,8 +6,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "subcategorieeigenschappen")
-public class SubcategorieEigenschappen {
+public class SubcategorieEigenschap {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long subcategorieEigenschapId;
     private String naam;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -36,8 +35,8 @@ public class SubcategorieEigenschappen {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SubcategorieEigenschappen)) return false;
-        SubcategorieEigenschappen that = (SubcategorieEigenschappen) o;
+        if (!(o instanceof SubcategorieEigenschap)) return false;
+        SubcategorieEigenschap that = (SubcategorieEigenschap) o;
         return subcategorieEigenschapId == that.subcategorieEigenschapId;
     }
 
