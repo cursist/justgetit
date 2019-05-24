@@ -11,8 +11,8 @@ import java.util.Optional;
 public interface ProductService {
     List<Product> findAll();
     Optional<Product> findById(long productId);
-    List<Merk> findByMerkId(long merkId);
-    List<Subcategorie> findBySubcategorieId(long subcategorieId);
+    List<Merk> findByMerk(Merk merk);
+    List<Subcategorie> findBySubcategorie(Subcategorie subcategorie);
     List<Product> findByVerkoopprijsBetween(BigDecimal van , BigDecimal tot);
     List<Product> findByBesteldIsNull();
     List<Product> findByVoorraadKleinerDan(BigDecimal aantal);

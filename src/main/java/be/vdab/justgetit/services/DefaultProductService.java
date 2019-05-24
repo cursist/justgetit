@@ -32,13 +32,13 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
-    public List<Merk> findByMerkId(long merkId) {
-        return productRepository.findByMerkId(merkId);
+    public List<Merk> findByMerk(Merk merk) {
+        return productRepository.findByMerk(merk);
     }
 
     @Override
-    public List<Subcategorie> findBySubcategorieId(long subcategorieId) {
-        return productRepository.findBySubcategorieId(subcategorieId);
+    public List<Subcategorie> findBySubcategorie(Subcategorie subcategorie) {
+        return productRepository.findBySubcategorie(subcategorie);
     }
 
     @Override
