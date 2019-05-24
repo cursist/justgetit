@@ -1,14 +1,13 @@
 package be.vdab.justgetit.services;
 
 import be.vdab.justgetit.entities.Categorie;
-import be.vdab.justgetit.repositories.JpaCategorieRepository;
+import be.vdab.justgetit.repositories.CategorieRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
-
 
 import java.util.Optional;
 
@@ -23,7 +22,7 @@ public class DefaultCategorieServiceTest extends AbstractTransactionalJUnit4Spri
     private Categorie categorie;
 
     @Mock
-    private JpaCategorieRepository jpaCategorieRepository;
+    private CategorieRepository jpaCategorieRepository;
 
     @Before
     public void before() {
