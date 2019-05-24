@@ -1,7 +1,7 @@
 package be.vdab.justgetit.services;
 
 
-import be.vdab.justgetit.domain.Categorie;
+import be.vdab.justgetit.entities.Categorie;
 
 import java.util.Optional;
 

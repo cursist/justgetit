@@ -1,1 +1,0 @@
-insert into categorieen(categorieId, naam) values(1,'testC');
