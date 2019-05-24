@@ -1,0 +1,2 @@
+insert into producten(naam, inkoopprijs, verkoopprijs, minimumprijs, omschrijving, voorraad, besteld, merkId, subcategorieId)
+values ('testP',12,15,14,'testP',12,2,(select merkId from merken where merken.naam='testM'),(select subcategorieId from subcategorieen where subcategorieen.naam = 'testSC'));
