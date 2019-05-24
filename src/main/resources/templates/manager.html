@@ -64,23 +64,26 @@
 
     <h3>Zet marge van de subcategorie</h3>
     <form method="post" th:action="@{/manager/voegmargetoeaansubcategorie}"
-          th:object="${subcategorie}">
+          th:object="${subcategoriewijziging}">
         <label>
             Kies subcategorie
-            <select name="subcategorieLijst2" id="subcategorieLijst2">
+            <select th:field="*{id}">
                 <option th:each="subcategorie:${subcategorieLijst}"
-                        th:value="${subcategorie}"
-                        th:text="${subcategorie.naam}"></option>
+                        th:value="${subcategorie.id}"
+                        th:text="${subcategorie}"></option>
             </select>
         </label>
         <label>
             nieuwe marge in geld
-            <input type="number" name= "geld">
+            <span th:errors="*{minimumMargeBedrag}"></span>
+            <input type="number" name= "geld" th:field="*{minimumMargeBedrag}">
         </label>
         <label>
             nieuwe marge in percentage
-            <input type="number" name= "percentage">
+            <span th:errors="*{minimumMargePercent}"></span>
+            <input type="number" name= "percentage" th:field="*{minimumMargePercent}">
         </label>
+
         <input type="submit" value="opslaan">
     </form>
 

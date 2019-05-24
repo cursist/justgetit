@@ -49,12 +49,12 @@ public class DefaultSubcategorieService implements SubcategorieService {
     }
 
     @Override
-    public void Save(Subcategorie subcategorie) {
+    public void save(Subcategorie subcategorie) {
         subcategorieRepository.save(subcategorie);
     }
 
     @Override
-    public void Delete(Subcategorie subcategorie) {
+    public void delete(Subcategorie subcategorie) {
         subcategorieRepository.delete(subcategorie);
     }
 }

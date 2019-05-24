@@ -66,6 +66,14 @@ public class Subcategorie implements Serializable {
         return categorie;
     }
 
+    public void setMinimumMargePercent(BigDecimal minimumMargePercent) {
+        this.minimumMargePercent = minimumMargePercent;
+    }
+
+    public void setMinimumMargeBedrag(BigDecimal minimumMargeBedrag) {
+        this.minimumMargeBedrag = minimumMargeBedrag;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
