@@ -1,11 +1,11 @@
-package be.vdab.justgetit.repositories;
+package be.vdab.justgetit.services;
 
 
 import be.vdab.justgetit.domain.Categorie;
 
 import java.util.Optional;
 
-public interface CategorieRepository {
+public interface CategorieService {
     Optional<Categorie> findById(long id);
     Optional<Categorie> findByNaam(String naam);
 }
