@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 public class DefaultProductService implements ProductService {
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public DefaultProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
