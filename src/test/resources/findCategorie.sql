@@ -1,1 +1,1 @@
-insert into categorieen(categorieId, naam) values(1,'testC');
+insert into Categorie(id, naam) values(1,"testC");

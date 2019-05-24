@@ -1,0 +1,1 @@
+insert into categorieen (naam) values('testC');

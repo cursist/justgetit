@@ -1,7 +1,7 @@
 package be.vdab.justgetit.services;
 
 
-import be.vdab.justgetit.domain.Categorie;
+import be.vdab.justgetit.entities.Categorie;
 import be.vdab.justgetit.repositories.CategorieRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
