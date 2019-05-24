@@ -10,5 +10,11 @@ public interface SubcategorieService {
     List<Subcategorie> findAll();
     Optional<Subcategorie> findById(long id);
     List<Subcategorie> findByCategorieId(long id);
+    Subcategorie findByNaam(String str);
+    List<Subcategorie> findByNameLike(String str);
+    List<Subcategorie> findByEigenschappenNaamLike(String str);
+    void Save(Subcategorie subcategorie);
+    void Delete(Subcategorie subcategorie);
+
 
 }

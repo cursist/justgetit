@@ -30,6 +30,31 @@ public class DefaultSubcategorieService implements SubcategorieService {
 
     @Override
     public List<Subcategorie> findByCategorieId(long id) {
-        return null;
+        return subcategorieRepository.findByCategorieCategorieId(id);
+    }
+
+    @Override
+    public Subcategorie findByNaam(String str) {
+        return subcategorieRepository.findByNaam(str);
+    }
+
+    @Override
+    public List<Subcategorie> findByNameLike(String str) {
+        return subcategorieRepository.findByNaamLike(str);
+    }
+
+    @Override
+    public List<Subcategorie> findByEigenschappenNaamLike(String str) {
+        return subcategorieRepository.findByEigenschappenNaamLike(str);
+    }
+
+    @Override
+    public void Save(Subcategorie subcategorie) {
+        subcategorieRepository.save(subcategorie);
+    }
+
+    @Override
+    public void Delete(Subcategorie subcategorie) {
+        subcategorieRepository.delete(subcategorie);
     }
 }
