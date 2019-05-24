@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.OverridesAttribute;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -63,5 +64,9 @@ public class DefaultProductService implements ProductService{
     @Override
     public void delete(Product product) {
         productRepository.delete(product);
+    }
+    @Override
+    public List<Product>findByNaamContaining(String zoekString){
+        return productRepository.findByNaamContaining(zoekString);
     }
 }

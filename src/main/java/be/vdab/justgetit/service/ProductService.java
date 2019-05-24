@@ -4,6 +4,7 @@ import be.vdab.justgetit.domain.Merk;
 import be.vdab.justgetit.domain.Product;
 import be.vdab.justgetit.domain.Subcategorie;
 
+import javax.swing.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -18,4 +19,5 @@ public interface ProductService {
     List<Product> findByVoorraadKleinerDan(BigDecimal aantal);
     Product save(Product product);
     void delete(Product product);
+    List<Product>findByNaamContaining(String zoekString);
 }
