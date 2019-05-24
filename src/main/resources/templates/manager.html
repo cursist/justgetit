@@ -46,18 +46,19 @@
     </form>
 
     <h3>Voeg eigenschap toe</h3>
-    <form>
+    <form method="post" th:action="@{/manager/nieuweeigenschap}"
+          th:object="${subcategorieeigenschap}" >
         <label>
             Kies subcategorie
-            <select name="subcategorieLijst1" id="subcategorieLijst1">
+            <select th:field="*{subcategorie}" >
                 <option th:each="subcategorie:${subcategorieLijst}"
-                        th:value="${subcategorie}"
+                        th:value="${subcategorie.id}"
                         th:text="${subcategorie}"></option>
             </select>
         </label>
         <label>
             naam
-            <input type="text" name="eigenschap">
+            <input type="text" name="subcategorieeigenschap" th:field="*{naam}" value="" >
         </label>
         <input type="submit" value="opslaan">
     </form>

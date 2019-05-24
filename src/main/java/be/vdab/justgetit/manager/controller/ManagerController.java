@@ -3,6 +3,7 @@ package be.vdab.justgetit.manager.controller;
 import be.vdab.justgetit.entities.Categorie;
 import be.vdab.justgetit.entities.Merk;
 import be.vdab.justgetit.entities.Subcategorie;
+import be.vdab.justgetit.entities.SubcategorieEigenschap;
 import be.vdab.justgetit.manager.ManagerService;
 import be.vdab.justgetit.manager.forms.MargeWijziging;
 import be.vdab.justgetit.services.SubcategorieService;
@@ -44,6 +45,7 @@ public class ManagerController {
                 .addObject("subcategorieLijst", service.vindAlleSubCategorieen())
                 .addObject("merkLijst", service.vindAlleMerken())
                 .addObject("merkwijziging", merkwijziging)
+                .addObject("subcategorieeigenschap", new SubcategorieEigenschap(null, null))
                 .addObject("subcategoriewijziging", subcategoriewijziging);
     }
 
@@ -59,6 +61,13 @@ public class ManagerController {
     ModelAndView maakNieuweSubCategorie(Subcategorie subcategorie) {
         System.out.println(subcategorie.getNaam());
         service.save(subcategorie);
+        return pagina();
+    }
+
+    @PostMapping("nieuweeigenschap")
+    ModelAndView maakNieuweEigenschap(SubcategorieEigenschap subcategorieEigenschap) {
+        System.out.println(subcategorieEigenschap.getNaam());
+        service.save(subcategorieEigenschap);
         return pagina();
     }
 
