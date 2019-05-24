@@ -11,9 +11,9 @@ public class CategorieDomainTest {
 
     @Before
     public void before() {
-        categorie1 = new Categorie(1, "Computers");
-        categorie2 = new Categorie(2, "Kleding");
-        categorie3 = new Categorie(3, "Kleding");
+        categorie1 = new Categorie( "Computers");
+        categorie2 = new Categorie( "Kleding");
+        categorie3 = new Categorie( "Kleding");
     }
 
     @Test

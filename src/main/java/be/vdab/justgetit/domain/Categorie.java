@@ -1,8 +1,6 @@
 package be.vdab.justgetit.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -10,19 +8,19 @@ import java.util.Objects;
 @Table(name = "categorieen" )
 public class Categorie implements Serializable {
     private static final long serialVersionUID = 1L;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private long id;
+    private long categorieId;
     private String naam;
 
     protected Categorie() {}
 
-    public Categorie(long id, String naam) {
-        this.id = id;
+    public Categorie(String naam) {
         this.naam = naam;
     }
 
     public long getId() {
-        return id;
+        return categorieId;
     }
 
     public String getNaam() {
@@ -44,6 +42,6 @@ public class Categorie implements Serializable {
 
     @Override
     public String toString() {
-        return id + naam;
+        return categorieId + naam;
     }
 }
