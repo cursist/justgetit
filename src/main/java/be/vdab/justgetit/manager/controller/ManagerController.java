@@ -4,7 +4,7 @@ import be.vdab.justgetit.entities.Categorie;
 import be.vdab.justgetit.entities.Merk;
 import be.vdab.justgetit.entities.Subcategorie;
 import be.vdab.justgetit.manager.ManagerService;
-import be.vdab.justgetit.manager.forms.SubcategorieMargeWijziging;
+import be.vdab.justgetit.manager.forms.MargeWijziging;
 import be.vdab.justgetit.services.SubcategorieService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("manager")
@@ -31,11 +30,12 @@ public class ManagerController {
 
     @GetMapping
     ModelAndView pagina() {
-        SubcategorieMargeWijziging wijziging = new SubcategorieMargeWijziging(null, null, null);
-        return paginaMetSubcategorieWijziging(wijziging);
+        MargeWijziging subcategorieWijziging = new MargeWijziging(null, null, null);
+        MargeWijziging merkWijziging = new MargeWijziging(null, null, null);
+        return paginaMetWijzigingen(merkWijziging, subcategorieWijziging);
     }
 
-    private ModelAndView paginaMetSubcategorieWijziging(SubcategorieMargeWijziging wijziging) {
+    private ModelAndView paginaMetWijzigingen(MargeWijziging subcategoriewijziging, MargeWijziging merkwijziging) {
         return new ModelAndView("manager")
                 .addObject("categorie", new Categorie("categorie"))
                 .addObject("subcategorie", new Subcategorie("subcategorie", null))
@@ -43,7 +43,8 @@ public class ManagerController {
                 .addObject("categorieLijst", service.vindAlleCategorieen())
                 .addObject("subcategorieLijst", service.vindAlleSubCategorieen())
                 .addObject("merkLijst", service.vindAlleMerken())
-                .addObject("subcategoriewijziging", wijziging);
+                .addObject("merkwijziging", merkwijziging)
+                .addObject("subcategoriewijziging", subcategoriewijziging);
     }
 
     @PostMapping("nieuwecategorie")
@@ -62,11 +63,23 @@ public class ManagerController {
     }
 
     @PostMapping("voegmargetoeaansubcategorie")
-    ModelAndView voegMargeToeAanSubcategorie(@Valid SubcategorieMargeWijziging wijziging, Errors errors) {
+    ModelAndView voegMargeToeAanSubcategorie(@Valid MargeWijziging wijziging, Errors errors) {
         if (errors.hasErrors()) {
-            return paginaMetSubcategorieWijziging(wijziging); //werkt nog niet;
+            MargeWijziging merkWijziging = new MargeWijziging(null, null, null);
+            return paginaMetWijzigingen(merkWijziging, wijziging); //werkt nog niet;
         } else {
-            service.pasMargeAan(wijziging);
+            service.pasSubCategorieMargeAan(wijziging);
+        }
+        return pagina();
+    }
+
+    @PostMapping("voegmargetoeaanmerk")
+    ModelAndView voegMargeToeAanMerk(@Valid MargeWijziging wijziging, Errors errors) {
+        if (errors.hasErrors()) {
+            MargeWijziging subcategorieWijziging = new MargeWijziging(null, null, null);
+            return paginaMetWijzigingen(wijziging, subcategorieWijziging); //werkt nog niet;
+        } else {
+            service.pasMerkMargeAan(wijziging);
         }
         return pagina();
     }

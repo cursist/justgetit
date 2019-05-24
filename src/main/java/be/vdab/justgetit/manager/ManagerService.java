@@ -3,14 +3,14 @@ package be.vdab.justgetit.manager;
 import be.vdab.justgetit.entities.Categorie;
 import be.vdab.justgetit.entities.Merk;
 import be.vdab.justgetit.entities.Subcategorie;
-import be.vdab.justgetit.manager.forms.SubcategorieMargeWijziging;
+import be.vdab.justgetit.manager.forms.MargeWijziging;
 import be.vdab.justgetit.repositories.CategorieRepository;
+import be.vdab.justgetit.repositories.MerkRepository;
 import be.vdab.justgetit.repositories.SubcategorieRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +19,12 @@ import java.util.Optional;
 public class ManagerService {
     private final CategorieRepository categorieRepository;
     private final SubcategorieRepository subcategorieRepository;
+    private final MerkRepository merkRepository;
 
-    public ManagerService(CategorieRepository categorieRepository, SubcategorieRepository subcategorieRepository) {
+    public ManagerService(CategorieRepository categorieRepository, SubcategorieRepository subcategorieRepository, MerkRepository merkRepository) {
         this.categorieRepository = categorieRepository;
         this.subcategorieRepository = subcategorieRepository;
+        this.merkRepository = merkRepository;
     }
 
     public List<Categorie> vindAlleCategorieen() {
@@ -42,12 +44,10 @@ public class ManagerService {
     }
 
     public List<Merk> vindAlleMerken() {
-        List<Merk> lijst = new ArrayList<>();
-        lijst.add(new Merk("test"));
-        return lijst;
+        return merkRepository.findAll();
     }
 
-    public void pasMargeAan(SubcategorieMargeWijziging wijziging) {
+    public void pasSubCategorieMargeAan(MargeWijziging wijziging) {
         long id = wijziging.getId();
         Optional<Subcategorie> optionalSubcategorie = subcategorieRepository.findById(id);
         if (optionalSubcategorie.isPresent()) {
@@ -59,6 +59,22 @@ public class ManagerService {
             }
             if (minimumMargePercent !=null){
                 subcategorie.setMinimumMargePercent(minimumMargePercent);
+            }
+        }
+    }
+
+    public void pasMerkMargeAan(MargeWijziging wijziging) {
+        long id = wijziging.getId();
+        Optional<Merk> optionalMerk = merkRepository.findById(id);
+        if (optionalMerk.isPresent()) {
+            Merk merk = optionalMerk.get();
+            BigDecimal minimumMargeBedrag = wijziging.getMinimumMargeBedrag();
+            BigDecimal minimumMargePercent = wijziging.getMinimumMargePercent();
+            if (minimumMargeBedrag !=null){
+                merk.setMinimumMargeBedrag(minimumMargeBedrag);
+            }
+            if (minimumMargePercent !=null){
+                merk.setMinimumMargePercent(minimumMargePercent);
             }
         }
     }

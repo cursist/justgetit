@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
-public class SubcategorieMargeWijziging {
+public class MargeWijziging {
     @NotNull @Positive
     private Long id;
     @Positive
@@ -12,7 +12,7 @@ public class SubcategorieMargeWijziging {
     @Positive
     private BigDecimal minimumMargeBedrag;
 
-    public SubcategorieMargeWijziging(Long id, BigDecimal minimumMargePercent, BigDecimal minimumMargeBedrag) {
+    public MargeWijziging(Long id, BigDecimal minimumMargePercent, BigDecimal minimumMargeBedrag) {
         this.id = id;
         this.minimumMargePercent = minimumMargePercent;
         this.minimumMargeBedrag = minimumMargeBedrag;
