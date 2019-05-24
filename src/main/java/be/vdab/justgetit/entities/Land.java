@@ -1,22 +1,29 @@
-package be.vdab.justgetit.domain;
+package be.vdab.justgetit.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "categorieen" )
-public class Categorie implements Serializable {
+public class Land implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private long id;
+    @NotBlank
+    @Column(name = "naam", unique = true)
     private String naam;
 
-    protected Categorie() {}
+    protected Land() {}
 
-    public Categorie(String naam) {
+    public Land(long id, String naam) {
+        this.id = id;
+        this.naam = naam;
+    }
+
+    public Land(String naam) {
         this.naam = naam;
     }
 
@@ -31,18 +38,18 @@ public class Categorie implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Categorie categorie = (Categorie) o;
-        return naam.equals(categorie.naam);
+        if (!(o instanceof Land)) return false;
+        Land land = (Land) o;
+        return getNaam().equalsIgnoreCase(land.getNaam());
     }
 
     @Override
     public int hashCode() {
-        return naam.hashCode();
+        return Objects.hash(getNaam());
     }
 
     @Override
     public String toString() {
-        return id + naam;
+        return naam;
     }
 }
