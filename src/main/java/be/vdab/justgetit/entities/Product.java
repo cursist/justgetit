@@ -89,6 +89,11 @@ public class Product implements Serializable {
         return subcategorie;
     }
 
+   
+    public void setSubcategorie(Subcategorie subcategorie) {
+        this.subcategorie = subcategorie;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

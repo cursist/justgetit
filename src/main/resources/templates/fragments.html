@@ -1,0 +1,16 @@
+<head th:fragment="head(title)" xmlns:th="http://www.thymeleaf.org">
+    <title th:text="${title}"/>
+    <!--<link rel="stylesheet" th:href="">-->
+</head>
+
+<nav th:fragment="menu" xmlns:th="http://www.thymeleaf.org">
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/categorieen}">Categorieën</a></li>
+        <li><a th:href="@{/mandje}">Mandje</a></li>
+        <li><a th:href="@{/lijst}">Wenslijst</a></li>
+        <li><a th:href="@{/klant}">Klant</a></li>
+        <li><a th:href="@{/login}">Login</a></li>
+    </ul>
+</nav>
+
