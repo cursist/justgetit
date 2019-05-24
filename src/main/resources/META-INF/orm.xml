@@ -14,4 +14,11 @@
 
     </named-query>
 
+    <named-query name='Bediende.zetProductInSubcategorie'>
+        <query>
+            update Product p
+            set p.subcategorieId = :subcategorie
+        </query>
+    </named-query>
+
 </entity-mappings>

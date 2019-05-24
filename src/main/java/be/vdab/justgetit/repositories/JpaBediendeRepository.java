@@ -16,8 +16,10 @@ public class JpaBediendeRepository implements BediendeRepository{
     }
 
     @Override
-    public void zetProdutInSubCategorie(Product product, Subcategorie subCategorie) {
-        //product.setSubcategrieId(subCategorie.getSubcategorieId());
+    public int zetProductInSubCategorie(Product product, Subcategorie subcategorie) {
+        return manager.createNamedQuery("Product.zetProductInSubcategorie")
+                .setParameter("subcategorie", subcategorie.getId())
+                .executeUpdate();
     }
 
 }

@@ -5,6 +5,6 @@ import be.vdab.justgetit.entities.Subcategorie;
 
 
 public interface BediendeRepository {
-    //void zetProdutInCategorie(Product product, Categorie categorie);
-    void zetProdutInSubCategorie(Product product, Subcategorie subCategorie);
+    //void zetProductInCategorie(Product product, Categorie categorie);
+    int zetProductInSubCategorie(Product product, Subcategorie subCategorie);
 }
