@@ -1,21 +1,31 @@
 package be.vdab.justgetit.entities;
 
+import org.springframework.stereotype.Service;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
-@Entity
-@Table(name = "categorieen" )
+@Entity(name = "categorieen")
 public class Categorie implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private static final long serialVersionUID = 1l;
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long categorieId;
     @Column(name = "naam", unique = true)
     private String naam;
 
-    protected Categorie() {}
+    protected Categorie() {
+    }
 
     public Categorie(String naam) {
+        this.naam = naam;
+    }
+
+    protected Categorie(long categorieId, String naam) {
+        this.categorieId = categorieId;
         this.naam = naam;
     }
 
@@ -30,18 +40,18 @@ public class Categorie implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Categorie)) return false;
         Categorie categorie = (Categorie) o;
-        return naam.equals(categorie.naam);
+        return getNaam().equalsIgnoreCase(categorie.getNaam());
     }
 
     @Override
     public int hashCode() {
-        return naam.hashCode();
+        return Objects.hash(getNaam());
     }
 
     @Override
     public String toString() {
-        return categorieId + naam;
+        return naam;
     }
 }
