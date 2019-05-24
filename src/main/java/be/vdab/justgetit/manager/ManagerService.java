@@ -19,4 +19,12 @@ public class ManagerService {
 
     public void save(Categorie categorie) {
     }
+
+    public List<Categorie> vindAlleSubCategorieen() {
+        return vindAlleCategorieen();
+    }
+
+    public List<Categorie> vindAlleMerken() {
+        return vindAlleCategorieen();
+    }
 }

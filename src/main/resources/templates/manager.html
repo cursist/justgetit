@@ -21,26 +21,27 @@
 </head>
 <body>
     <h3>Maak categorie</h3>
-    <form method="get" th:action="@{/manager/nieuwecategorie}"
+    <form method="post" th:action="@{/manager/nieuwecategorie}"
           th:object="${categorie}">
         <input type="text" th:field="*{naam}">
         <input type="submit" value="opslaan">
     </form>
 
     <h3>Maak subcategorie</h3>
-    <form>
+    <form method="post" th:action="@{/manager/nieuwesubcategorie}"
+          th:object="${subcategorie}">
         <label>
             Kies categorie
-            <select name="categorie" id="categorie">
-                <option th:each="categorie:${categorieLijst}"
-                        th:object="${categorie}"
-                        th:value="${categorie}"
-                        th:text="${categorie.naam}"></option>
+            <select name="categorieLijst" id="categorieLijst">
+<!--                <option th:each="categorie:${categorieLijst}"-->
+<!--                        th:value="${categorie}"-->
+<!--                        th:field="*{categorie}"-->
+<!--                        th:text="${categorie.naam}"></option>-->
             </select>
         </label>
         <label>
             naam
-            <input type="text" name="categorie" value="">
+            <input type="text" name="subcategorie"  th:field="*{naam}" value="">
         </label>
         <input type="submit" value="opslaan">
     </form>
@@ -49,10 +50,10 @@
     <form>
         <label>
             Kies subcategorie
-            <select name="subcategorie" id="subcategorie">
+            <select name="subcategorieLijst1" id="subcategorieLijst1">
                 <option th:each="subcategorie:${subcategorieLijst}"
                         th:value="${subcategorie}"
-                        th:text="${subcategorie}"></option>
+                        th:text="${subcategorie.naam}"></option>
             </select>
         </label>
         <label>
@@ -66,10 +67,10 @@
     <form>
         <label>
             Kies subcategorie
-            <select name="subcategorie" id="subcategorie">
+            <select name="subcategorieLijst2" id="subcategorieLijst2">
                 <option th:each="subcategorie:${subcategorieLijst}"
                         th:value="${subcategorie}"
-                        th:text="${subcategorie}"></option>
+                        th:text="${subcategorie.naam}"></option>
             </select>
         </label>
         <label>

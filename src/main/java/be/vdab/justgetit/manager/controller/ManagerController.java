@@ -23,17 +23,28 @@ public class ManagerController {
     @GetMapping
     ModelAndView pagina() {
         return new ModelAndView("manager")
-                .addObject("categorie", new Categorie("tonen lukt"))
+                .addObject("categorie", new Categorie("categorie"))
+                .addObject("subcategorie", new Categorie("subcategorie"))
+                .addObject("merk", new Categorie("merk"))
                 .addObject("categorieLijst", service.vindAlleCategorieen())
-                .addObject("subcategorieLijst", getCategorieen())
-                .addObject("merkLijst", getCategorieen());
+                .addObject("subcategorieLijst", service.vindAlleSubCategorieen())
+                .addObject("merkLijst", service.vindAlleMerken());
     }
 
-    @GetMapping("nieuwecategorie")
+    @PostMapping("nieuwecategorie")
     ModelAndView maakNieuweCategorie(Categorie categorie) {
+        System.out.println(categorie.getNaam());
         service.save(categorie);
         return pagina();
     }
+
+
+//    @PostMapping("nieuwesubcategorie")
+//    ModelAndView maakNieuweSubCategorie(Subcategorie subcategorie) {
+//        System.out.println(subcategorie.getNaam());
+//        service.save(subcategorie);
+//        return pagina();
+//    }
 
     List<String> getCategorieen() {
         List<String> lijst = new ArrayList<>();
