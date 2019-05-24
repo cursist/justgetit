@@ -14,18 +14,22 @@ public class Merk implements Serializable {
     private long merkId;
     @Column(name = "naam", unique = true)
     private String naam;
-    private BigDecimal minimunMargePercent;
-    private BigDecimal minimunMargeBedrag;
+    private BigDecimal minimumMargePercent;
+    private BigDecimal minimumMargeBedrag;
 
     public Merk() {
     }
 
-    public Merk(long merkId, String naam, BigDecimal minimunMargePercent,
-                BigDecimal minimunMargeBedrag) {
+    public Merk(String naam) {
+        this.naam = naam;
+    }
+
+    public Merk(long merkId, String naam, BigDecimal minimumMargePercent,
+                BigDecimal minimumMargeBedrag) {
         this.merkId = merkId;
         this.naam = naam;
-        this.minimunMargePercent = minimunMargePercent;
-        this.minimunMargeBedrag = minimunMargeBedrag;
+        this.minimumMargePercent = minimumMargePercent;
+        this.minimumMargeBedrag = minimumMargeBedrag;
     }
 
     public long getId() {
@@ -36,12 +40,20 @@ public class Merk implements Serializable {
         return naam;
     }
 
-    public BigDecimal getMinimunMargePercent() {
-        return minimunMargePercent;
+    public BigDecimal getMinimumMargePercent() {
+        return minimumMargePercent;
     }
 
-    public BigDecimal getMinimunMargeBedrag() {
-        return minimunMargeBedrag;
+    public BigDecimal getMinimumMargeBedrag() {
+        return minimumMargeBedrag;
+    }
+
+    public void setMinimumMargePercent(BigDecimal minimunMargePercent) {
+        this.minimumMargePercent = minimunMargePercent;
+    }
+
+    public void setMinimumMargeBedrag(BigDecimal minimunMargeBedrag) {
+        this.minimumMargeBedrag = minimunMargeBedrag;
     }
 
     @Override
