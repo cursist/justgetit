@@ -16,24 +16,24 @@ public class ProductTest {
 
     @Before
     public void before(){
-        merk = new Merk(1l,"test", BigDecimal.TEN,
+        merk = new Merk(1l,"testM", BigDecimal.TEN,
                 BigDecimal.TEN);
-        categorie = new Categorie(1l,"test");
-        subcategorie = new Subcategorie(1l,"test",BigDecimal.TEN,
+        categorie = new Categorie("testC");
+        subcategorie = new Subcategorie("testSC",BigDecimal.TEN,
                 BigDecimal.TEN, categorie);
 
-        product = new Product(1l,"test",BigDecimal.TEN,
+        product = new Product("testP",BigDecimal.TEN,
                  BigDecimal.TEN,BigDecimal.TEN,1,0,
                 merk,subcategorie);
     }
 
     @Test
     public void naamVanMerkisCorrectVanProduct(){
-        assertEquals("test", product.getMerk().getNaam());
+        assertEquals("testM", product.getMerk().getNaam());
     }
 
     @Test
     public void naamVanSubcategorieCorrectVanProduct(){
-        assertEquals("test",product.getSubcategorie().getNaam());
+        assertEquals("testSC",product.getSubcategorie().getNaam());
     }
 }
