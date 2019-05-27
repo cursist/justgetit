@@ -19,7 +19,7 @@ public class ProductTest {
         merk = new Merk(1l,"test", BigDecimal.TEN,
                 BigDecimal.TEN);
         categorie = new Categorie(1l,"test");
-        subcategorie = new Subcategorie(1l,"test",BigDecimal.TEN,
+        subcategorie = new Subcategorie("test",BigDecimal.TEN,
                 BigDecimal.TEN, categorie);
 
         product = new Product(1l,"test",BigDecimal.TEN,

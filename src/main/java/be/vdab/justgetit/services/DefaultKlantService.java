@@ -25,7 +25,7 @@ public class DefaultKlantService implements KlantService {
     }
     @Override
     public List<Klant> findByNaamBegin(String str){
-        return klantRepository.findByGemeenteStartingWithOrderByAchternaamVoornaam(str);
+        return klantRepository.findByGemeenteStartingWithOrderByNaam(str);
     }
     @Override
     public List<Klant> findByPostcode(String str){

@@ -21,13 +21,13 @@ public class Subcategorie implements Serializable {
     @ManyToOne(optional =false, fetch = FetchType.LAZY)
     @JoinColumn(name = "categorieId")
     private Categorie categorie;
-    @ElementCollection
+/*    @ElementCollection
     @CollectionTable(name = "subcategorieeigenschappen",
             joinColumns = @JoinColumn(name = "subcategorieId"))
-    private Set<SubcategorieEigenschappen> eigenschappen;
+    private Set<SubcategorieEigenschappen> eigenschappen;*/
 
-    @Version
-    private long versie;
+  /*  @Version
+    private long versie;*/
 
     protected Subcategorie() {
     }
@@ -39,7 +39,7 @@ public class Subcategorie implements Serializable {
         this.minimumMargePercent = minimumMargePercent;
         this.minimumMargeBedrag = minimumMargeBedrag;
         this.categorie = categorie;
-        this.eigenschappen = new LinkedHashSet<>();
+       /* this.eigenschappen = new LinkedHashSet<>();*/
     }
 
 

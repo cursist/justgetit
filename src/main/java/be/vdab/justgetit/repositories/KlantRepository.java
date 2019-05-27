@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface KlantRepository extends JpaRepository<Klant, Long> {
 
-    List<Klant> findByGemeenteStartingWithOrderByAchternaamVoornaam(String string);
+    List<Klant> findByGemeenteStartingWithOrderByNaam(String string);
 
     List<Klant> findByGemeentePostcodeOrderByGemeentePostcode(String string);
 
