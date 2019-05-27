@@ -33,12 +33,12 @@ public class DefaultProductService implements ProductService {
 
     @Override
     public List<Merk> findByMerkId(long merkId) {
-        return productRepository.findByMerkId(merkId);
+        return productRepository.findByMerkMerkId(merkId);
     }
 
     @Override
-    public List<Subcategorie> findBySubcategorieId(long subcategorieId) {
-        return productRepository.findBySubcategorieId(subcategorieId);
+    public List<Product> findBySubcategorieId(long subcategorieId) {
+        return productRepository.findBySubcategorieSubcategorieId(subcategorieId);
     }
 
     @Override
@@ -53,7 +53,8 @@ public class DefaultProductService implements ProductService {
 
     @Override
     public List<Product> findByVoorraadKleinerDan(BigDecimal aantal) {
-        return productRepository.findByVoorraadKleinerDan(aantal);
+//        return productRepository.findByVoorraadKleinerDan(aantal);
+        return productRepository.findByVoorraadLessThan(aantal);
     }
 
     @Override

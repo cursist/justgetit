@@ -11,10 +11,11 @@ import java.util.List;
 
 
 public interface ProductRepository extends JpaRepository <Product, Long> {
-    List<Merk> findByMerkId(long merkId);
-    List<Subcategorie> findBySubcategorieId(long subcategorieId);
+    List<Merk> findByMerkMerkId(long merkId);
+    List<Product> findBySubcategorieSubcategorieId(long subcategorieId);
     List<Product> findByVerkoopprijsBetween(BigDecimal van , BigDecimal tot);
     List<Product> findByBesteldIsNull();
-    List<Product> findByVoorraadKleinerDan(@Param("aantal") BigDecimal aantal);
+   // List<Product> findByVoorraadKleinerDan(@Param("aantal") BigDecimal aantal);
+    List<Product> findByVoorraadLessThan(BigDecimal aantal);
     List<Product>findByNaamContaining(String zoekString);
 }

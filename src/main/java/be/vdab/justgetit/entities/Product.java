@@ -17,7 +17,7 @@ public class Product implements Serializable {
     private String naam;
     private String omschrijving;
     @Positive
-    private BigDecimal inkoopPrijs,verkoopPrijs,minumumprijs;
+    private BigDecimal inkoopprijs,verkoopprijs,minumumprijs;
     private int voorraad;
     private int besteld;
     @Positive
@@ -40,8 +40,8 @@ public class Product implements Serializable {
                    int besteld, @Positive Merk merk, @Positive Subcategorie subcategorie) {
         this.productId = productId;
         this.naam = naam;
-        this.inkoopPrijs = inkoopPrijs;
-        this.verkoopPrijs = verkoopPrijs;
+        this.inkoopprijs = inkoopPrijs;
+        this.verkoopprijs = verkoopPrijs;
         this.minumumprijs = minumumprijs;
         this.voorraad = voorraad;
         this.besteld = besteld;
@@ -62,11 +62,11 @@ public class Product implements Serializable {
     }
 
     public BigDecimal getInkoopPrijs() {
-        return inkoopPrijs;
+        return inkoopprijs;
     }
 
     public BigDecimal getVerkoopPrijs() {
-        return verkoopPrijs;
+        return verkoopprijs;
     }
 
     public BigDecimal getMinumumprijs() {
