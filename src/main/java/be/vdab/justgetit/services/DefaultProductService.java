@@ -1,10 +1,7 @@
 package be.vdab.justgetit.services;
 
-import be.vdab.justgetit.entities.Merk;
 import be.vdab.justgetit.entities.Product;
-import be.vdab.justgetit.entities.Subcategorie;
 import be.vdab.justgetit.repositories.ProductRepository;
-import be.vdab.justgetit.services.ProductService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +28,7 @@ public class DefaultProductService implements ProductService {
         return productRepository.findById(productId);
     }
 
+/*<<<<<<< HEAD
     @Override
     public List<Merk> findByMerkId(long merkId) {
         return productRepository.findByMerkMerkId(merkId);
@@ -40,6 +38,8 @@ public class DefaultProductService implements ProductService {
     public List<Product> findBySubcategorieId(long subcategorieId) {
         return productRepository.findBySubcategorieSubcategorieId(subcategorieId);
     }
+=======
+>>>>>>> 94b31abc218771c0a62d6112b703c62e9289febd*/
 
     @Override
     public List<Product> findByVerkoopprijsBetween(BigDecimal van, BigDecimal tot) {

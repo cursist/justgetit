@@ -19,8 +19,8 @@ public class Subcategorie implements Serializable {
     @JoinColumn(name = "categorieId")
     private Categorie categorie;
 
-    @Version
-    private long versie;
+/*    @Version
+    private long versie;*/
 
     protected Subcategorie() {
     }
