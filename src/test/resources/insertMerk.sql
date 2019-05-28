@@ -1,2 +1,2 @@
-insert into merken (merkId, naam, minimumMargePercent, minimumMargeBedrag)
-values (1,'testM',10,15);
+insert into merken (naam, minimumMargePercent, minimumMargeBedrag)
+values ('testM',10,15);
