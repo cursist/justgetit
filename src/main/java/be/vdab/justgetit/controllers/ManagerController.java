@@ -1,4 +1,4 @@
-package be.vdab.justgetit.controller;
+package be.vdab.justgetit.controllers;
 
 import be.vdab.justgetit.entities.Categorie;
 import be.vdab.justgetit.entities.Subcategorie;
