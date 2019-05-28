@@ -1,11 +1,13 @@
-package be.vdab.justgetit.manager;
+package be.vdab.justgetit.services;
 
 import be.vdab.justgetit.entities.Categorie;
 import be.vdab.justgetit.entities.Merk;
 import be.vdab.justgetit.entities.Subcategorie;
-import be.vdab.justgetit.manager.forms.MargeWijziging;
+import be.vdab.justgetit.entities.SubcategorieEigenschap;
+import be.vdab.justgetit.forms.MargeWijziging;
 import be.vdab.justgetit.repositories.CategorieRepository;
 import be.vdab.justgetit.repositories.MerkRepository;
+import be.vdab.justgetit.repositories.SubcategorieEigenschapRepository;
 import be.vdab.justgetit.repositories.SubcategorieRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,11 +22,13 @@ public class ManagerService {
     private final CategorieRepository categorieRepository;
     private final SubcategorieRepository subcategorieRepository;
     private final MerkRepository merkRepository;
+    private final SubcategorieEigenschapRepository subcategorieEigenschapRepository;
 
-    public ManagerService(CategorieRepository categorieRepository, SubcategorieRepository subcategorieRepository, MerkRepository merkRepository) {
+    public ManagerService(CategorieRepository categorieRepository, SubcategorieRepository subcategorieRepository, MerkRepository merkRepository, SubcategorieEigenschapRepository subcategorieEigenschapRepository) {
         this.categorieRepository = categorieRepository;
         this.subcategorieRepository = subcategorieRepository;
         this.merkRepository = merkRepository;
+        this.subcategorieEigenschapRepository = subcategorieEigenschapRepository;
     }
 
     public List<Categorie> vindAlleCategorieen() {
@@ -38,6 +42,12 @@ public class ManagerService {
     public void save(Subcategorie subcategorie) {
         subcategorieRepository.save(subcategorie);
     }
+
+    public void save(SubcategorieEigenschap subcategorieEigenschap) {
+        subcategorieEigenschapRepository.save(subcategorieEigenschap);
+    }
+
+
 
     public List<Subcategorie> vindAlleSubCategorieen() {
         return subcategorieRepository.findAll();
