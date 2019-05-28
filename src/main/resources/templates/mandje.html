@@ -12,13 +12,17 @@
             <th>Subtotaal</th>
             </tr>
             <tr>
+                <td>Test</td>
+                <td>0.00</td>
                 <td th:each="best:${bestelling}" th:object="${best}" th:text="*{id}"></td>
                 <td th:each="best:${bestelling}" th:object="${best}" th:text="*{aantal}"></td>
+                <td>
+                <form th:object="${aantalForm}" method="get">
+                    <label>Aantal:<input th:field="*{aantal}" autofocus></label>
+                    <input type="submit" value="Aanpassen">
+                </form>
+                </td>
             </tr>
         </table>
-        <form th:object="${aantalForm}" method="get">
-            <label>Aantal:<input th:field="*{aantal}" autofocus></label>
-            <input type="submit" value="Aanpassen">
-        </form>
     </body>
 </html>
