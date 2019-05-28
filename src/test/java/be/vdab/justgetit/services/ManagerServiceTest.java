@@ -91,6 +91,7 @@ public class ManagerServiceTest extends AbstractTransactionalJUnit4SpringContext
     public void pasMerkAan() {
         String query = "select merkId, naam, minimumMargePercent, minimumMargeBedrag from merken limit 1";
         Merk merkEerst = super.jdbcTemplate.queryForObject(query, merkMapper);
+        long id = merkEerst.getId();
         BigDecimal marge = BigDecimal.ONE;
         if (merkEerst.getMinimumMargePercent() != null) {
             marge = merkEerst.getMinimumMargePercent().add(BigDecimal.ONE);
@@ -98,7 +99,8 @@ public class ManagerServiceTest extends AbstractTransactionalJUnit4SpringContext
         MargeWijziging wijziging = new MargeWijziging(merkEerst.getId(), marge, null);
         service.pasMerkMargeAan(wijziging);
         manager.flush();
-        Merk merkVervolgens = super.jdbcTemplate.queryForObject(query, merkMapper);
+        String query2 = "select merkId, naam, minimumMargePercent, minimumMargeBedrag from merken where merkId = ?";
+        Merk merkVervolgens = super.jdbcTemplate.queryForObject(query2, merkMapper, id);
         assertEquals(marge, merkVervolgens.getMinimumMargePercent());
     }
 }
