@@ -34,7 +34,7 @@ public class DefaultSubcategorieService implements SubcategorieService {
     }
 
     @Override
-    public Subcategorie findByNaam(String str) {
+    public Optional <Subcategorie> findByNaam(String str) {
         return subcategorieRepository.findByNaam(str);
     }
 
