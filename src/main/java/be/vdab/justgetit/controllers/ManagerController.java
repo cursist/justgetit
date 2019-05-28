@@ -82,7 +82,7 @@ public class ManagerController {
             return pagina()
                     .addObject(SUBCATEGORIEWIJZIGING, wijziging);
         } else {
-            service.pasSubCategorieMargeAan(wijziging);
+            service.pasSubcategorieMargeAan(wijziging);
             return pagina();
         }
 

@@ -55,7 +55,7 @@ public class ManagerService {
         return merkRepository.findAll();
     }
 
-    public void pasSubCategorieMargeAan(MargeWijziging wijziging) {
+    public void pasSubcategorieMargeAan(MargeWijziging wijziging) {
         long id = wijziging.getId();
         Optional<Subcategorie> optionalSubcategorie = subcategorieRepository.findById(id);
         if (optionalSubcategorie.isPresent()) {
