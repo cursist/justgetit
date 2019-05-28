@@ -1,8 +1,7 @@
 package be.vdab.justgetit.entities;
 
-import org.springframework.stereotype.Service;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -14,7 +13,9 @@ public class Categorie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long categorieId;
+
     @Column(name = "naam", unique = true)
+    @NotBlank
     private String naam;
 
     protected Categorie() {

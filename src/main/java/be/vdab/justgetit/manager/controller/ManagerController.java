@@ -8,6 +8,7 @@ import be.vdab.justgetit.manager.ManagerService;
 import be.vdab.justgetit.manager.forms.MargeWijziging;
 import be.vdab.justgetit.services.SubcategorieService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,11 +23,9 @@ import java.util.List;
 @RequestMapping("manager")
 public class ManagerController {
     private final ManagerService service;
-    private final SubcategorieService subcategorieService;
 
-    public ManagerController(ManagerService service, SubcategorieService subcategorieService) {
+    public ManagerController(ManagerService service) {
         this.service = service;
-        this.subcategorieService = subcategorieService;
     }
 
     @GetMapping
@@ -49,8 +48,21 @@ public class ManagerController {
                 .addObject("subcategoriewijziging", subcategoriewijziging);
     }
 
+    private ModelAndView paginaMetBestaandeForm(Categorie categorie) {
+        ModelAndView modelAndView = basisPagina();
+        if (ca)
+        return basisPagina();
+    }
+
+    private ModelAndView basisPagina() {
+        return new ModelAndView("manager")
+                .addObject("categorieLijst", service.vindAlleCategorieen())
+                .addObject("subcategorieLijst", service.vindAlleSubCategorieen())
+                .addObject("merkLijst", service.vindAlleMerken());
+    }
+
     @PostMapping("nieuwecategorie")
-    ModelAndView maakNieuweCategorie(Categorie categorie) {
+    ModelAndView maakNieuweCategorie(@Valid Categorie categorie) {
         System.out.println(categorie.getNaam());
         service.save(categorie);
         return pagina();
@@ -58,14 +70,14 @@ public class ManagerController {
 
 
     @PostMapping("nieuwesubcategorie")
-    ModelAndView maakNieuweSubCategorie(Subcategorie subcategorie) {
+    ModelAndView maakNieuweSubCategorie(@Valid Subcategorie subcategorie) {
         System.out.println(subcategorie.getNaam());
         service.save(subcategorie);
         return pagina();
     }
 
     @PostMapping("nieuweeigenschap")
-    ModelAndView maakNieuweEigenschap(SubcategorieEigenschap subcategorieEigenschap) {
+    ModelAndView maakNieuweEigenschap(@Valid SubcategorieEigenschap subcategorieEigenschap) {
         System.out.println(subcategorieEigenschap.getNaam());
         service.save(subcategorieEigenschap);
         return pagina();

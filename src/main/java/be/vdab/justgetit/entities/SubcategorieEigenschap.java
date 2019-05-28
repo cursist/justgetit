@@ -11,12 +11,16 @@ public class SubcategorieEigenschap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long subcategorieEigenschapId;
+
     @NotBlank
     private String naam;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "subcategorieId")
     @NotNull
     private Subcategorie subcategorie;
+
+    protected SubcategorieEigenschap() {}
 
     public SubcategorieEigenschap(String naam, Subcategorie subcategorie) {
         this.naam = naam;
