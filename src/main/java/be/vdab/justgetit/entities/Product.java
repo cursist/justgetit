@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity(name = "producten")
-@NamedQuery(name = "Product.findByVoorraadLessThan",query = "select p from Product p where p.voorraad < :aantal order by naam")
+//@NamedQuery(name = "Product.findByVoorraadLessThan",query = "select p from Product p where p.voorraad < :aantal order by p.naam")
 public class Product implements Serializable {
     private static final long serialVersionUID = 1l;
 
@@ -18,7 +18,7 @@ public class Product implements Serializable {
     private String naam;
     private String omschrijving;
     @Positive
-    private BigDecimal inkoopPrijs,verkoopPrijs,minumumprijs;
+    private BigDecimal inkoopPrijs,verkoopPrijs, minumumPrijs;
     private int voorraad;
     private int besteld;
     @Positive
@@ -36,12 +36,12 @@ public class Product implements Serializable {
     protected Product() {
     }
 
-    public Product(String naam, BigDecimal inkoopPrijs,BigDecimal verkoopPrijs, BigDecimal minumumprijs, int voorraad,
+    public Product(String naam, BigDecimal inkoopPrijs,BigDecimal verkoopPrijs, BigDecimal minumumPrijs, int voorraad,
                    int besteld, Merk merk, Subcategorie subcategorie) {
         this.naam = naam;
         this.inkoopPrijs = inkoopPrijs;
         this.verkoopPrijs = verkoopPrijs;
-        this.minumumprijs = minumumprijs;
+        this.minumumPrijs = minumumPrijs;
         this.voorraad = voorraad;
         this.besteld = besteld;
         this.merk = merk;
@@ -68,8 +68,8 @@ public class Product implements Serializable {
         return verkoopPrijs;
     }
 
-    public BigDecimal getMinumumprijs() {
-        return minumumprijs;
+    public BigDecimal getMinumumPrijs() {
+        return minumumPrijs;
     }
 
     public int getVoorraad() {
