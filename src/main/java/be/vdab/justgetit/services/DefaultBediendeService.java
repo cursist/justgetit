@@ -2,7 +2,8 @@ package be.vdab.justgetit.services;
 
 import be.vdab.justgetit.entities.Product;
 import be.vdab.justgetit.entities.Subcategorie;
-import be.vdab.justgetit.repositories.BediendeRepository;
+import be.vdab.justgetit.repositories.ProductRepository;
+import be.vdab.justgetit.repositories.SubcategorieRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,48 +12,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 public class DefaultBediendeService implements BediendeService {
 
-    private final BediendeRepository bediendeRepository;
+    private final ProductRepository productService;
+    private final SubcategorieRepository subcategorieService;
 
-    public DefaultBediendeService(BediendeRepository bediendeRepository) {
-        this.bediendeRepository = bediendeRepository;
+    public DefaultBediendeService(ProductRepository productService, SubcategorieRepository subcategorieService) {
+        this.productService = productService;
+        this.subcategorieService = subcategorieService;
     }
 
     @Override
-    public void zetProductInSubCategorie(Product product, Subcategorie subcategorie) {
-        bediendeRepository.zetProductInSubCategorie(product,subcategorie);
+    @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
+    public void zetProductInSubCategorie(long productid, long subcategorieid) {
+        Product product = productService.findById(productid).get();
+        Subcategorie subcategorie = subcategorieService.findById(subcategorieid).get();
+        product.setSubcategorie(subcategorie);
+//        productService.save(product);
     }
 
 }
 
-//package be.vdab.justgetit.services;
-//
-//
-//        import be.vdab.justgetit.domain.Categorie;
-//        import be.vdab.justgetit.repositories.CategorieRepository;
-//        import org.springframework.stereotype.Service;
-//        import org.springframework.transaction.annotation.Isolation;
-//        import org.springframework.transaction.annotation.Transactional;
-//
-//        import java.util.Optional;
-//
-//@Service
-//@Transactional(readOnly = true , isolation = Isolation.READ_COMMITTED)
-//public class DefaultCategorieService implements CategorieService {
-//
-//
-//    private final CategorieRepository categorieRepository;
-//
-//    public DefaultCategorieService(CategorieRepository categorieRepository) {
-//        this.categorieRepository = categorieRepository;
-//    }
-//
-//    @Override
-//    public Optional<Categorie> findById(long id) {
-//        return categorieRepository.findById(id);
-//    }
-//
-//    @Override
-//    public Optional<Categorie> findByNaam(String naam) {
-//        return categorieRepository.findByNaam(naam);
-//    }
-//}

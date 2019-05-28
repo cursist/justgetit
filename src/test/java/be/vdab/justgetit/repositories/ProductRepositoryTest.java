@@ -47,8 +47,10 @@ public class ProductRepositoryTest extends AbstractTransactionalJUnit4SpringCont
         merk = new Merk(1L,"testM", BigDecimal.TEN, BigDecimal.TEN);
         categorie = new Categorie("testC");
         subcategorie = new Subcategorie("testSC", categorie);
+
         product = new Product("testP",BigDecimal.ONE,
                 BigDecimal.TEN,BigDecimal.TEN,1,0, merk,subcategorie);
+
     }
 
     @Test
@@ -65,8 +67,24 @@ public class ProductRepositoryTest extends AbstractTransactionalJUnit4SpringCont
         });
     }
 
+    @Test
+    public void findByBesteldIsNull(){
+        List<Product> producten = productRepository.findByBesteldIsNull();
+        assertEquals(0,producten.size());
+    }
+
+    @Test
+    public void findByVoorraadLessThan(){
+        List<Product> producten = productRepository.findByVoorraadLessThan(15);
+        for (Product product : producten) {
+            assertTrue(product.getVoorraad() < 15);
+        }
+    }
 
 
-
-
+    @Test
+    public void findByNaamContaining(){
+        List<Product> producten = productRepository.findByNaamContaining("test");
+        assertEquals(1,producten.size());
+    }
 }
