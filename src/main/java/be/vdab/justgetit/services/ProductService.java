@@ -11,7 +11,7 @@ public interface ProductService {
     Optional<Product> findById(long productId);
     List<Product> findByVerkoopprijsBetween(BigDecimal van , BigDecimal tot);
     List<Product> findByBesteldIsNull();
-    List<Product> findByVoorraadLessThan(BigDecimal aantal);
+    List<Product> findByVoorraadLessThan(int aantal);
     Product save(Product product);
     void delete(Product product);
     List<Product>findByNaamContaining(String zoekString);

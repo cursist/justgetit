@@ -55,9 +55,9 @@ public class JpaCategorieRepositoryTest extends AbstractTransactionalJUnit4Sprin
         assertEquals("testC", categorie.getNaam());
     }
 
-    @Test(expected = NoResultException.class)
+    @Test
     public void findByOnbestaandeNaam() {
-        assertEquals(null, repository.findByNaam("bla"));
+        assertFalse(repository.findByNaam("bla").isPresent());
     }
 }
 
