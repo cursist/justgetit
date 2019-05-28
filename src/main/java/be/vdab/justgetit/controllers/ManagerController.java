@@ -1,4 +1,4 @@
-package be.vdab.justgetit.controller;
+package be.vdab.justgetit.controllers;
 
 import be.vdab.justgetit.entities.Categorie;
 import be.vdab.justgetit.entities.Subcategorie;
@@ -67,11 +67,9 @@ public class ManagerController {
     @PostMapping("nieuweeigenschap")
     ModelAndView maakNieuweEigenschap(@Valid SubcategorieEigenschap subcategorieEigenschap, Errors errors) {
         if (errors.hasErrors()) {
-            System.out.println("error gevonden ");
             return pagina()
                     .addObject(subcategorieEigenschap);
         } else {
-            System.out.println(subcategorieEigenschap.getNaam());
             service.save(subcategorieEigenschap);
             return pagina();
         }
@@ -81,11 +79,10 @@ public class ManagerController {
     @PostMapping("voegmargetoeaansubcategorie")
     ModelAndView voegMargeToeAanSubcategorie(@Valid @ModelAttribute(SUBCATEGORIEWIJZIGING) MargeWijziging wijziging, Errors errors) {
         if (errors.hasErrors()) {
-            System.out.println("fout met bigdecimal");
             return pagina()
                     .addObject(SUBCATEGORIEWIJZIGING, wijziging);
         } else {
-            service.pasSubCategorieMargeAan(wijziging);
+            service.pasSubcategorieMargeAan(wijziging);
             return pagina();
         }
 
