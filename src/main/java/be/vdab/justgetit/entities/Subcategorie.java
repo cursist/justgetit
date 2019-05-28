@@ -1,26 +1,34 @@
 package be.vdab.justgetit.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity(name = "subcategorieen")
 public class Subcategorie implements Serializable {
-    private static final long serialVersionUID = 1l;
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long subcategorieId;
+
     @Column(name = "naam", unique = true)
+    @NotBlank
     private String naam;
+
     private BigDecimal minimumMargePercent;
     private BigDecimal minimumMargeBedrag;
+
     @ManyToOne(optional =false, fetch = FetchType.LAZY)
     @JoinColumn(name = "categorieId")
+    @NotNull
     private Categorie categorie;
 
-    @Version
-    private long versie;
+/*    @Version
+    private long versie;*/
 
     protected Subcategorie() {
     }

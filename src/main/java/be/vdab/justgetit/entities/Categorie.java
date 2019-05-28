@@ -1,20 +1,20 @@
 package be.vdab.justgetit.entities;
 
-import org.springframework.stereotype.Service;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity(name = "categorieen")
 public class Categorie implements Serializable {
-
     private static final long serialVersionUID = 1l;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long categorieId;
+
     @Column(name = "naam", unique = true)
+    @NotBlank
     private String naam;
 
     protected Categorie() {

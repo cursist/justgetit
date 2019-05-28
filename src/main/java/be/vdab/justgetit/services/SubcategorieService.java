@@ -12,7 +12,7 @@ public interface SubcategorieService {
     List<Subcategorie> findByCategorieId(long id);
     Subcategorie findByNaam(String str);
     List<Subcategorie> findByNameLike(String str);
-    List<Subcategorie> findByEigenschappenNaamLike(String str);
+  //  List<Subcategorie> findByEigenschappenNaamLike(String str);
     void Save(Subcategorie subcategorie);
     void Delete(Subcategorie subcategorie);
 
