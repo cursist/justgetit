@@ -65,8 +65,22 @@ public class ProductRepositoryTest extends AbstractTransactionalJUnit4SpringCont
         });
     }
 
+    @Test
+    public void findByBesteldIsNull(){
+        List<Product> producten = productRepository.findByBesteldIsNull();
+        assertEquals(0,producten.size());
+    }
+
+    @Test
+    public void findByVoorraadLessThan(){
+        List<Product> producten = productRepository.findByVoorraadLessThan(15);
+        assertEquals(1,producten.size());
+    }
 
 
-
-
+    @Test
+    public void findByNaamContaining(){
+        List<Product> producten = productRepository.findByNaamContaining("test");
+        assertEquals(1,producten.size());
+    }
 }
