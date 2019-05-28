@@ -18,8 +18,8 @@ public class DefaultBediendeService implements BediendeService {
     }
 
     @Override
-    public int zetProductInSubCategorie(Product product, Subcategorie subcategorie) {
-        return bediendeRepository.zetProductInSubCategorie(product,subcategorie);
+    public void zetProductInSubCategorie(Product product, Subcategorie subcategorie) {
+        bediendeRepository.zetProductInSubCategorie(product,subcategorie);
     }
 
 }

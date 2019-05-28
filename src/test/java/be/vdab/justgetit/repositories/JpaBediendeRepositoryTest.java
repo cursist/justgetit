@@ -4,6 +4,7 @@ import be.vdab.justgetit.entities.Merk;
 import be.vdab.justgetit.entities.Product;
 import be.vdab.justgetit.entities.Subcategorie;
 import be.vdab.justgetit.services.DefaultCategorieService;
+import be.vdab.justgetit.services.DefaultMerkService;
 import be.vdab.justgetit.services.DefaultSubcategorieService;
 import be.vdab.justgetit.services.SubcategorieService;
 import org.junit.Before;
@@ -27,6 +28,7 @@ import static org.junit.Assert.assertEquals;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql("/insertCategorie.sql")
 @Sql("/insertSubCategorie.sql")
+@Sql("/insertMerk.sql")
 
 @Import(JpaBediendeRepository.class)
 public class JpaBediendeRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
@@ -37,6 +39,9 @@ public class JpaBediendeRepositoryTest extends AbstractTransactionalJUnit4Spring
     private EntityManager manager;
     @Autowired
     private DefaultSubcategorieService defSubCatService;
+    @Autowired
+    private DefaultMerkService defMerkService;
+
 
     private Product product;
     private Merk merk;
@@ -44,15 +49,20 @@ public class JpaBediendeRepositoryTest extends AbstractTransactionalJUnit4Spring
     private Subcategorie subcat2;
 
     private long idVanSubcategorie(){
-        return super.jdbcTemplate.queryForObject("select subcategorieid from subcategorieen where naam = 'TestSubCategorie'", Long.class);
+        return super.jdbcTemplate.queryForObject("select subcategorieId from subcategorieen where naam = 'TestSubCategorie'", Long.class);
+    }
+
+    private long idVanMerk(){
+        return super.jdbcTemplate.queryForObject("select merkId from merken where naam = 'testM'", Long.class);
     }
 
     @Before
     public void before (){
         subcategorie = defSubCatService.findByNaam("TestSubCategorie");
         subcat2 = defSubCatService.findByNaam("Test2SubCategorie");
-        product = new Product (99999, "testproduct", BigDecimal.ONE, BigDecimal.ONE,
-                BigDecimal.ONE,1, 1,merk, subcategorie);
+        merk = defMerkService.findByNaamLike("testM").get();
+        product = new Product ("testproduct", BigDecimal.valueOf(9999), BigDecimal.ONE, BigDecimal.ONE,
+                1,1, merk, subcategorie);
     }
 
     @Test
@@ -60,6 +70,4 @@ public class JpaBediendeRepositoryTest extends AbstractTransactionalJUnit4Spring
         repo.zetProductInSubCategorie(product,subcat2);
         assertEquals(product.getSubcategorie().getId(), subcat2.getId());
     }
-
-
 }
