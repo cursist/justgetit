@@ -47,8 +47,10 @@ public class ProductRepositoryTest extends AbstractTransactionalJUnit4SpringCont
         merk = new Merk(1L,"testM", BigDecimal.TEN, BigDecimal.TEN);
         categorie = new Categorie("testC");
         subcategorie = new Subcategorie("testSC", categorie);
+
         product = new Product("testP",BigDecimal.ONE,
                 BigDecimal.TEN,BigDecimal.TEN,1,0, merk,subcategorie);
+
     }
 
     @Test
