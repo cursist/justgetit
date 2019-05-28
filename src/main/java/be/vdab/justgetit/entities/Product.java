@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity(name = "producten")
-@NamedQuery(name = "Product.findByVoorraadLessThan",query = "select p from Product p where p.voorraad < :aantal order by naam")
 public class Product implements Serializable {
     private static final long serialVersionUID = 1l;
 
