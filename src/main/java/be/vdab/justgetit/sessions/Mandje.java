@@ -34,4 +34,8 @@ public class Mandje implements Serializable {
             mandje.remove(id);
         }
     }
+
+    public Map<Long, Integer> getIds () {
+        return Collections.unmodifiableMap(mandje);
+    }
 }

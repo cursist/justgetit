@@ -4,6 +4,18 @@
     <body>
         <nav th:replace="fragments::menu"/>
         <h1>Mandje</h1>
+        <table th:object="${bestelling}">
+            <tr>
+            <th>Naam</th>
+            <th>Prijs/stuk</th>
+            <th>Aantal</th>
+            <th>Subtotaal</th>
+            </tr>
+            <tr>
+                <td th:each="best:${bestelling}" th:object="${best}" th:text="*{id}"></td>
+                <td th:each="best:${bestelling}" th:object="${best}" th:text="*{aantal}"></td>
+            </tr>
+        </table>
         <form th:object="${aantalForm}" method="get">
             <label>Aantal:<input th:field="*{aantal}" autofocus></label>
             <input type="submit" value="Aanpassen">
