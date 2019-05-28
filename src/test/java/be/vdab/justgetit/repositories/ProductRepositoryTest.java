@@ -47,14 +47,13 @@ public class ProductRepositoryTest extends AbstractTransactionalJUnit4SpringCont
         subcategorie = new Subcategorie("testSC", categorie);
         product = new Product("testP",BigDecimal.TEN,
                 BigDecimal.TEN,BigDecimal.valueOf(15),1,0, merk,subcategorie);
-        tot hier
     }
 
-    @Test
+   /* @Test
     public void findByVerkoopprijsBetween(){
         List<Product> producten = productRepository.findByVerkoopprijsBetween(BigDecimal.TEN,BigDecimal.valueOf(15));
-
-    }
+        assertEquals(super.countRowsInTableWhere(PRODUCTEN,"prijs between"))
+    }*/
 
 
 
