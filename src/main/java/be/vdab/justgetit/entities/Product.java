@@ -20,11 +20,9 @@ public class Product implements Serializable {
     private BigDecimal inkoopprijs,verkoopprijs, minimumprijs;
     private int voorraad;
     private int besteld;
-    @Positive
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "merkId")
     private Merk merk;
-    @Positive
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "subcategorieId")
     private Subcategorie subcategorie;

@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Provincie implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long provincieId;
     @NotBlank
     @Column(name="naam")
@@ -20,7 +21,7 @@ public class Provincie implements Serializable {
 
     protected Provincie(){}
 
-    public Provincie(@NotBlank String naam, Land land) {
+    public Provincie(String naam, Land land) {
         this.naam = naam;
         this.land = land;
     }
