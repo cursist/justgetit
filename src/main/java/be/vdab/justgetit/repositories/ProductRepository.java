@@ -10,6 +10,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository <Product, Long> {
     List<Product> findByVerkoopprijsBetween(BigDecimal van , BigDecimal tot);
     List<Product> findByBesteldIsNull();
+
     List<Product> findByVoorraadLessThan(int aantal);
     List<Product>findByNaamContaining(String zoekString);
 }
