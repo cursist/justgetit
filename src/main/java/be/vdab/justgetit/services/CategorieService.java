@@ -1,9 +1,11 @@
 package be.vdab.justgetit.services;
 
+
 import be.vdab.justgetit.entities.Categorie;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface CategorieService {
-    List<Categorie> findByNaamLike(String naam);
+    Optional<Categorie> findById(long id);
+    Optional<Categorie> findByNaam(String naam);
 }

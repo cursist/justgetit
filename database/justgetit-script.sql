@@ -250,6 +250,7 @@ CREATE TABLE `lijstregels` (
   `lijstId` int(10) unsigned NOT NULL,
   `productId` bigint(20) unsigned NOT NULL,
   `aantal` bigint(20) unsigned NOT NULL,
+  `datumToegevoegd` date NOT NULL,
   PRIMARY KEY (`lijstId`,`productId`),
   KEY `fk_LijstRegels_Lijsten1_idx` (`lijstId`),
   KEY `fk_LijstRegels_Producten1_idx` (`productId`),
@@ -429,7 +430,6 @@ CREATE TABLE `subcategorieen` (
   `minimumMargePercent` decimal(10,0) unsigned DEFAULT '0',
   `minimumMargeBedrag` decimal(10,0) unsigned DEFAULT '0',
   `categorieId` bigint(20) unsigned NOT NULL,
-  `versie` int unsigned not null default 0,
   PRIMARY KEY (`subcategorieId`),
   UNIQUE KEY `subcategorieId_UNIQUE` (`subcategorieId`),
   UNIQUE KEY `naamInCategorie_UNIQUE` (`naam`,`subcategorieId`),
@@ -465,4 +465,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-23 15:42:17
+-- Dump completed on 2019-05-24 12:29:22

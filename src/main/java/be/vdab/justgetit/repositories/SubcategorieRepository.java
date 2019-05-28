@@ -12,4 +12,6 @@ public interface SubcategorieRepository extends JpaRepository<Subcategorie,Long>
     Subcategorie findByNaam(String str);
 
     List<Subcategorie> findByNaamLike(String str);
+
+    List<Subcategorie> findByEigenschappenNaamLike(String str);
 }
