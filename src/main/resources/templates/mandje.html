@@ -4,6 +4,9 @@
     <body>
         <nav th:replace="fragments::menu"/>
         <h1>Mandje</h1>
-
+        <form th:object="${aantalForm}" method="get">
+            <label>Aantal:<input th:field="*{aantal}" autofocus></label>
+            <input type="submit" value="Aanpassen">
+        </form>
     </body>
 </html>
