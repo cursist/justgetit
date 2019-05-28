@@ -23,7 +23,8 @@
     <h3>Maak categorie</h3>
     <form method="post" th:action="@{/manager/nieuwecategorie}"
           th:object="${categorie}">
-        <input type="text" th:field="*{naam}">
+        <span th:errors="*{naam}"></span>
+        <input type="text" th:field="*{naam}" required>
         <input type="submit" value="opslaan">
     </form>
 
@@ -32,6 +33,7 @@
           th:object="${subcategorie}">
         <label>
             Kies categorie
+            <span th:errors="*{categorie}"></span>
             <select th:field="*{categorie}">
                 <option th:each="categorie:${categorieLijst}"
                         th:value="${categorie.id}"
@@ -40,6 +42,7 @@
         </label>
         <label>
             naam
+            <span th:errors="*{naam}"></span>
             <input type="text" name="subcategorie"  th:field="*{naam}" value="">
         </label>
         <input type="submit" value="opslaan">
@@ -47,9 +50,10 @@
 
     <h3>Voeg eigenschap toe</h3>
     <form method="post" th:action="@{/manager/nieuweeigenschap}"
-          th:object="${subcategorieeigenschap}" >
+          th:object="${subcategorieEigenschap}" >
         <label>
             Kies subcategorie
+            <span th:errors="*{subcategorie}"></span>
             <select th:field="*{subcategorie}" >
                 <option th:each="subcategorie:${subcategorieLijst}"
                         th:value="${subcategorie.id}"
@@ -58,16 +62,18 @@
         </label>
         <label>
             naam
-            <input type="text" name="subcategorieeigenschap" th:field="*{naam}" value="" >
+            <span th:errors="*{naam}"></span>
+            <input type="text" name="subcategorieeigenschap"  th:field="*{naam}" value="">
         </label>
         <input type="submit" value="opslaan">
     </form>
 
     <h3>Zet marge van de subcategorie</h3>
     <form method="post" th:action="@{/manager/voegmargetoeaansubcategorie}"
-          th:object="${subcategoriewijziging}">
+          th:object="${subcategorieWijziging}">
         <label>
             Kies subcategorie
+            <span th:errors="*{id}"></span>
             <select th:field="*{id}">
                 <option th:each="subcategorie:${subcategorieLijst}"
                         th:value="${subcategorie.id}"
@@ -90,9 +96,10 @@
 
     <h3>Zet marge van het merk</h3>
     <form method="post" th:action="@{/manager/voegmargetoeaanmerk}"
-          th:object="${merkwijziging}">
+          th:object="${merkWijziging}">
         <label>
             Kies merk
+            <span th:errors="*{id}"></span>
             <select th:field="*{id}">
                 <option th:each="merk:${merkLijst}"
                         th:value="${merk.id}"

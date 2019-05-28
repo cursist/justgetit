@@ -10,9 +10,7 @@ import be.vdab.justgetit.services.SubcategorieService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -22,6 +20,8 @@ import java.util.List;
 @Controller
 @RequestMapping("manager")
 public class ManagerController {
+    private static final String SUBCATEGORIEWIJZIGING = "subcategorieWijziging";
+    private static final String MERKWIJZIGING = "merkWijziging";
     private final ManagerService service;
 
     public ManagerController(ManagerService service) {
@@ -30,28 +30,12 @@ public class ManagerController {
 
     @GetMapping
     ModelAndView pagina() {
-        MargeWijziging subcategorieWijziging = new MargeWijziging(null, null, null);
-        MargeWijziging merkWijziging = new MargeWijziging(null, null, null);
-        return paginaMetWijzigingen(merkWijziging, subcategorieWijziging);
-    }
-
-    private ModelAndView paginaMetWijzigingen(MargeWijziging subcategoriewijziging, MargeWijziging merkwijziging) {
-        return new ModelAndView("manager")
-                .addObject("categorie", new Categorie("categorie"))
-                .addObject("subcategorie", new Subcategorie("subcategorie", null))
-                .addObject("merk", new Merk("merk"))
-                .addObject("categorieLijst", service.vindAlleCategorieen())
-                .addObject("subcategorieLijst", service.vindAlleSubCategorieen())
-                .addObject("merkLijst", service.vindAlleMerken())
-                .addObject("merkwijziging", merkwijziging)
-                .addObject("subcategorieeigenschap", new SubcategorieEigenschap(null, null))
-                .addObject("subcategoriewijziging", subcategoriewijziging);
-    }
-
-    private ModelAndView paginaMetBestaandeForm(Categorie categorie) {
-        ModelAndView modelAndView = basisPagina();
-        if (ca)
-        return basisPagina();
+        return basisPagina()
+                .addObject(new Categorie(null))
+                .addObject(new Subcategorie(null, null))
+                .addObject(new SubcategorieEigenschap(null, null))
+                .addObject(SUBCATEGORIEWIJZIGING, new MargeWijziging(null, null, null))
+                .addObject(MERKWIJZIGING, new MargeWijziging(null, null, null));
     }
 
     private ModelAndView basisPagina() {
@@ -62,54 +46,65 @@ public class ManagerController {
     }
 
     @PostMapping("nieuwecategorie")
-    ModelAndView maakNieuweCategorie(@Valid Categorie categorie) {
-        System.out.println(categorie.getNaam());
-        service.save(categorie);
-        return pagina();
+    ModelAndView maakNieuweCategorie(@Valid Categorie categorie, Errors errors) {
+        if (errors.hasErrors()) {
+            return pagina()
+                    .addObject(categorie);
+        } else {
+            System.out.println(categorie.getNaam());
+            service.save(categorie);
+            return pagina();
+        }
     }
 
-
     @PostMapping("nieuwesubcategorie")
-    ModelAndView maakNieuweSubCategorie(@Valid Subcategorie subcategorie) {
-        System.out.println(subcategorie.getNaam());
-        service.save(subcategorie);
-        return pagina();
+    ModelAndView maakNieuweSubCategorie(@Valid Subcategorie subcategorie, Errors errors) {
+        if (errors.hasErrors()) {
+            return pagina()
+                    .addObject(subcategorie);
+        } else {
+            System.out.println(subcategorie.getNaam());
+            service.save(subcategorie);
+            return pagina();
+        }
     }
 
     @PostMapping("nieuweeigenschap")
-    ModelAndView maakNieuweEigenschap(@Valid SubcategorieEigenschap subcategorieEigenschap) {
-        System.out.println(subcategorieEigenschap.getNaam());
-        service.save(subcategorieEigenschap);
-        return pagina();
+    ModelAndView maakNieuweEigenschap(@Valid SubcategorieEigenschap subcategorieEigenschap, Errors errors) {
+        if (errors.hasErrors()) {
+            System.out.println("error gevonden ");
+            return pagina()
+                    .addObject(subcategorieEigenschap);
+        } else {
+            System.out.println(subcategorieEigenschap.getNaam());
+            service.save(subcategorieEigenschap);
+            return pagina();
+        }
+
     }
 
     @PostMapping("voegmargetoeaansubcategorie")
-    ModelAndView voegMargeToeAanSubcategorie(@Valid MargeWijziging wijziging, Errors errors) {
+    ModelAndView voegMargeToeAanSubcategorie(@Valid @ModelAttribute(SUBCATEGORIEWIJZIGING) MargeWijziging wijziging, Errors errors) {
         if (errors.hasErrors()) {
-            MargeWijziging merkWijziging = new MargeWijziging(null, null, null);
-            return paginaMetWijzigingen(merkWijziging, wijziging); //werkt nog niet;
+            System.out.println("fout met bigdecimal");
+            return pagina()
+                    .addObject(SUBCATEGORIEWIJZIGING, wijziging);
         } else {
             service.pasSubCategorieMargeAan(wijziging);
+            return pagina();
         }
-        return pagina();
+
     }
 
     @PostMapping("voegmargetoeaanmerk")
-    ModelAndView voegMargeToeAanMerk(@Valid MargeWijziging wijziging, Errors errors) {
+    ModelAndView voegMargeToeAanMerk(@Valid @ModelAttribute(MERKWIJZIGING) MargeWijziging wijziging, Errors errors) {
         if (errors.hasErrors()) {
-            MargeWijziging subcategorieWijziging = new MargeWijziging(null, null, null);
-            return paginaMetWijzigingen(wijziging, subcategorieWijziging); //werkt nog niet;
+            return pagina()
+                    .addObject(MERKWIJZIGING, wijziging);
         } else {
             service.pasMerkMargeAan(wijziging);
+            return pagina();
         }
-        return pagina();
-    }
-
-    List<String> getCategorieen() {
-        List<String> lijst = new ArrayList<>();
-        lijst.add("test1");
-        lijst.add("test");
-        return lijst;
     }
 
 }
