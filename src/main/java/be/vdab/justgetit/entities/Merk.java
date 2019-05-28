@@ -11,13 +11,10 @@ public class Merk implements Serializable {
     private static final long serialVersionUID = 1l;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Positive
     private long merkId;
     @Column(name = "naam", unique = true)
     private String naam;
-    @Positive
     private BigDecimal minimumMargeBedrag;
-    @Positive
     private BigDecimal minimumMargePercent;
 
     public Merk() {
