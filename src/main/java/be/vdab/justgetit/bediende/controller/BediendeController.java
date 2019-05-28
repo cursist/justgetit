@@ -27,8 +27,8 @@ public class BediendeController {
 
     @GetMapping
     ModelAndView bediendeModelAndView() {
-
-        ModelAndView modelAndView = new ModelAndView("producten");
+/*        List <Product> product= productService.findAll();*/
+        ModelAndView modelAndView = new ModelAndView("bediende");
         modelAndView.addObject("productenlijst", productService.findAll());
         modelAndView.addObject("subcatlijst", subcatService.findAll());
         return modelAndView;
