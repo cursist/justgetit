@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity(name = "producten")
+
 public class Product implements Serializable {
     private static final long serialVersionUID = 1l;
 
@@ -17,7 +18,9 @@ public class Product implements Serializable {
     private String naam;
     private String omschrijving;
     @Positive
-    private BigDecimal inkoopPrijs,verkoopPrijs,minumumprijs;
+
+    private BigDecimal inkoopprijs,verkoopprijs, minimumprijs;
+
     private int voorraad;
     private int besteld;
     @Positive
@@ -29,18 +32,18 @@ public class Product implements Serializable {
     @JoinColumn(name = "subcategorieId")
     private Subcategorie subcategorie;
 
-    @Version
-    private long versie;
 
     protected Product() {
     }
 
-    public Product(String naam, BigDecimal inkoopPrijs,BigDecimal verkoopPrijs, BigDecimal minumumprijs, int voorraad,
+    public Product(String naam, BigDecimal inkoopPrijs,BigDecimal verkoopPrijs, BigDecimal minimumPrijs, int voorraad,
                    int besteld, Merk merk, Subcategorie subcategorie) {
         this.naam = naam;
-        this.inkoopPrijs = inkoopPrijs;
-        this.verkoopPrijs = verkoopPrijs;
-        this.minumumprijs = minumumprijs;
+        this.inkoopprijs = inkoopPrijs;
+        this.verkoopprijs = verkoopPrijs;
+
+        this.minimumprijs = minimumPrijs;
+
         this.voorraad = voorraad;
         this.besteld = besteld;
         this.merk = merk;
@@ -59,16 +62,18 @@ public class Product implements Serializable {
         return omschrijving;
     }
 
-    public BigDecimal getInkoopPrijs() {
-        return inkoopPrijs;
+
+    public BigDecimal getInkoopprijs() {
+        return inkoopprijs;
     }
 
-    public BigDecimal getVerkoopPrijs() {
-        return verkoopPrijs;
+    public BigDecimal getVerkoopprijs() {
+
+        return verkoopprijs;
     }
 
-    public BigDecimal getMinumumprijs() {
-        return minumumprijs;
+    public BigDecimal getMinimumprijs() {
+        return minimumprijs;
     }
 
     public int getVoorraad() {

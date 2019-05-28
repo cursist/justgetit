@@ -1,21 +1,16 @@
-package be.vdab.justgetit.manager.controller;
+package be.vdab.justgetit.controller;
 
 import be.vdab.justgetit.entities.Categorie;
-import be.vdab.justgetit.entities.Merk;
 import be.vdab.justgetit.entities.Subcategorie;
 import be.vdab.justgetit.entities.SubcategorieEigenschap;
-import be.vdab.justgetit.manager.ManagerService;
-import be.vdab.justgetit.manager.forms.MargeWijziging;
-import be.vdab.justgetit.services.SubcategorieService;
+import be.vdab.justgetit.services.ManagerService;
+import be.vdab.justgetit.forms.MargeWijziging;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("manager")
