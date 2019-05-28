@@ -1,10 +1,10 @@
-package be.vdab.justgetit.manager;
+package be.vdab.justgetit.services;
 
 import be.vdab.justgetit.entities.Categorie;
 import be.vdab.justgetit.entities.Merk;
 import be.vdab.justgetit.entities.Subcategorie;
 import be.vdab.justgetit.entities.SubcategorieEigenschap;
-import be.vdab.justgetit.manager.forms.MargeWijziging;
+import be.vdab.justgetit.forms.MargeWijziging;
 import be.vdab.justgetit.repositories.CategorieRepository;
 import be.vdab.justgetit.repositories.MerkRepository;
 import be.vdab.justgetit.repositories.SubcategorieEigenschapRepository;
