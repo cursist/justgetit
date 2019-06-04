@@ -18,6 +18,8 @@ import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static org.junit.Assert.*;
+
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -37,7 +39,7 @@ public class ProductRepositoryTest extends AbstractTransactionalJUnit4SpringCont
     private EntityManager manager;
 
     private long idVanTestProduct(){
-        return super.jdbcTemplate.queryForObject("select productId from producten where naam='testP'",long.class);
+        return super.jdbcTemplate.queryForObject("select productId from producten where naam='testP'",Long.class);
     }
 
     @Before
@@ -45,18 +47,49 @@ public class ProductRepositoryTest extends AbstractTransactionalJUnit4SpringCont
         merk = new Merk(1L,"testM", BigDecimal.TEN, BigDecimal.TEN);
         categorie = new Categorie("testC");
         subcategorie = new Subcategorie("testSC", categorie);
-        product = new Product("testP",BigDecimal.TEN,
-                BigDecimal.TEN,BigDecimal.valueOf(15),1,0, merk,subcategorie);
-        tot hier
+
+        product = new Product("testP",BigDecimal.ONE,
+                BigDecimal.TEN,BigDecimal.TEN,1,0, merk,subcategorie);
+
     }
 
     @Test
     public void findByVerkoopprijsBetween(){
-        List<Product> producten = productRepository.findByVerkoopprijsBetween(BigDecimal.TEN,BigDecimal.valueOf(15));
 
+        List<Product> producten = productRepository.findByVerkoopprijsBetween(BigDecimal.ONE,BigDecimal.TEN);
+        assertEquals(super.countRowsInTableWhere(PRODUCTEN,"verkoopprijs between 1 and 10"),producten.size());
+        producten.stream().map(product1 -> product.getVerkoopprijs())
+                .reduce((vorigePrijs,prijs)->{
+            assertTrue(prijs.compareTo(BigDecimal.ONE)>= 0);
+            assertTrue(prijs.compareTo(BigDecimal.TEN)<= 0);
+            assertTrue(prijs.compareTo(vorigePrijs)>=0);
+            return prijs;
+        });
+    }
+
+    @Test
+    public void findByBesteldIsNull(){
+        List<Product> producten = productRepository.findByBesteldIsNull();
+        for (Product product : producten){
+            assertTrue(product.getBesteld()==0);
+        }
+    }
+
+    @Test
+    public void findByVoorraadLessThan(){
+        List<Product> producten = productRepository.findByVoorraadLessThan(15);
+        for (Product product:producten){
+            assertTrue(product.getVoorraad()<15);
+        }
     }
 
 
-
+    @Test
+    public void findByNaamContaining(){
+        List<Product> producten = productRepository.findByNaamContaining("test");
+        for (Product product : producten){
+            assertTrue(product.getNaam().contains("test"));
+        }
+    }
 
 }

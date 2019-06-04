@@ -1,6 +1,9 @@
 package be.vdab.justgetit.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -12,15 +15,19 @@ public class Subcategorie implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long subcategorieId;
     @Column(name = "naam", unique = true)
+    @NotBlank
     private String naam;
+    @Positive
     private BigDecimal minimumMargePercent;
+    @Positive
     private BigDecimal minimumMargeBedrag;
     @ManyToOne(optional =false, fetch = FetchType.LAZY)
     @JoinColumn(name = "categorieId")
+    @NotNull
     private Categorie categorie;
 
-    @Version
-    private long versie;
+/*    @Version
+    private long versie;*/
 
     protected Subcategorie() {
     }

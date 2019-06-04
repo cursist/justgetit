@@ -1,1 +1,1 @@
-insert into categorieen (naam) values('testC');
+insert into categorieen (naam) values('testD');

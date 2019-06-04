@@ -1,8 +1,7 @@
 package be.vdab.justgetit.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -11,11 +10,12 @@ import java.util.Objects;
 public class Merk implements Serializable {
     private static final long serialVersionUID = 1l;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long merkId;
     @Column(name = "naam", unique = true)
     private String naam;
-    private BigDecimal minimumMargePercent;
     private BigDecimal minimumMargeBedrag;
+    private BigDecimal minimumMargePercent;
 
     public Merk() {
     }

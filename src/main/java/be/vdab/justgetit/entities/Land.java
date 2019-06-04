@@ -1,8 +1,6 @@
 package be.vdab.justgetit.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,6 +9,7 @@ import java.util.Objects;
 public class Land implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotBlank
     @Column(name = "naam", unique = true)

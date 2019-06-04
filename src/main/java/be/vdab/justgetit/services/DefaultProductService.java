@@ -40,7 +40,7 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
-    public List<Product> findByVoorraadLessThan(BigDecimal aantal) {
+    public List<Product> findByVoorraadLessThan(int aantal) {
         return productRepository.findByVoorraadLessThan(aantal);
     }
 
