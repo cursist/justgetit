@@ -17,9 +17,14 @@
         <select th:field="*{id}">
             <option th:each="subcategorie:${subcategorieen}"
                     th:value="${subcategorie.id}"
-                    th:text="${subcategorie.categorie.naam} + ' / ' + ${subcategorie}"></option>
+                    th:text="${subcategorie} +' ('+ ${subcategorie.categorie.naam} + ')'"></option>
         </select>
     </label>
+    <input type="submit" value="subcategorieKeuze" >
+</form>
+<form method="post" th:action="@{/manager/voegmargetoeaansubcategorie/wijzig}"
+      th:object="${subcategorieWijziging}" >
+    <span th:text="${subcategorie.naam}+ ': '"></span>
     <label>
         nieuwe marge in geld
         <span th:errors="*{minimumMargeBedrag}"></span>

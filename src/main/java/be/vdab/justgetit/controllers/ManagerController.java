@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.jws.WebParam;
 import javax.validation.Valid;
+import java.math.BigDecimal;
 
 @Controller
 @RequestMapping("manager")
@@ -20,7 +21,11 @@ public class ManagerController {
     private static final String SUBCATEGORIEWIJZIGING = "subcategorieWijziging";
     private static final String MERKWIJZIGING = "merkWijziging";
     private final ManagerService service;
-
+    private String categorieNaamKeuze = "";
+    private Subcategorie subcategorieKeuze = null;
+    private long subcategorieId;
+    private BigDecimal bedragSubcategorie;
+    private BigDecimal percentSubcategorie;
     public ManagerController(ManagerService service) {
         this.service = service;
     }
@@ -51,10 +56,11 @@ public class ManagerController {
 
     @GetMapping("nieuwesubcategorie")
     ModelAndView subcategorie() {
+
         return new ModelAndView("nieuwesubcategorie")
                 .addObject("categorieen", service.vindAlleCategorieen())
                 .addObject("subcategorieen", service.vindAlleSubCategorieen())
-                .addObject(new Subcategorie(null, null));
+                .addObject(new Subcategorie(null, new Categorie(categorieNaamKeuze)));
     }
 
     @PostMapping("nieuwesubcategorie")
@@ -63,6 +69,7 @@ public class ManagerController {
             return subcategorie()
                     .addObject(subcategorie);
         } else {
+            this.categorieNaamKeuze = subcategorie.getCategorie().getNaam();
             System.out.println(subcategorie.getNaam());
             service.save(subcategorie);
             return subcategorie();
@@ -74,7 +81,7 @@ public class ManagerController {
         return new ModelAndView("nieuwesubcategorieeigenschap")
                 .addObject("subcategorieen", service.vindAlleSubCategorieen())
                 .addObject("subcategorieeigenschappen", service.vindAlleEigenschappen())
-                .addObject(new SubcategorieEigenschap(null, null));
+                .addObject(new SubcategorieEigenschap(null, subcategorieKeuze ));
     }
 
     @PostMapping("nieuwesubcategorieeigenschap")
@@ -83,6 +90,7 @@ public class ManagerController {
             return subcategorieeigenschap()
                     .addObject(subcategorieEigenschap);
         } else {
+            this.subcategorieKeuze = subcategorieEigenschap.getSubcategorie();
             service.save(subcategorieEigenschap);
             return subcategorieeigenschap();
         }
@@ -115,15 +123,22 @@ public class ManagerController {
                 .addObject("subcategorieen", service.vindAlleSubCategorieen())
                 .addObject("categorieen", service.vindAlleCategorieen())
                 .addObject(SUBCATEGORIEWIJZIGING,
-                        new MargeWijziging(null, null, null));
+                        new MargeWijziging(subcategorieId, percentSubcategorie, bedragSubcategorie));
     }
 
     @PostMapping("voegmargetoeaansubcategorie")
+    ModelAndView kiesSubcategorieVoorMarge(@Valid @ModelAttribute(SUBCATEGORIEWIJZIGING) MargeWijziging wijziging, Errors errors) {
+    return null;
+    }
+
+
+    @PostMapping("voegmargetoeaansubcategorie/wijzig")
     ModelAndView voegMargeToeAanSubcategorie(@Valid @ModelAttribute(SUBCATEGORIEWIJZIGING) MargeWijziging wijziging, Errors errors) {
         if (errors.hasErrors()) {
             return voegMargeToeSubcategorie()
                     .addObject(SUBCATEGORIEWIJZIGING, wijziging);
         } else {
+
             service.pasSubcategorieMargeAan(wijziging);
             return voegMargeToeSubcategorie();
         }
