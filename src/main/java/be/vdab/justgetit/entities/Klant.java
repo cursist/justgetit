@@ -1,5 +1,7 @@
 package be.vdab.justgetit.entities;
 
+import be.vdab.justgetit.valueobjects.Account;
+
 import javax.persistence.*;
 import java.io.Serializable;
 

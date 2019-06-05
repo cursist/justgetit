@@ -4,7 +4,7 @@
 <body>
 <h1>Maak een account aan bij JustGetIt</h1>
 <nav th:replace="fragments::menu"/>
-<form method="post" th:object="${klant}">
+<form th:action="@{/login/accountmaken/submit}" method="post" th:object="${klant}">
     <label>Voornaam</label>
     <input type="text" placeholder="Geef voornaam" required th:field="*{voornaam}">
     <label>Achternaam</label>
@@ -24,9 +24,9 @@
     <label>Land</label>
     <input type="text" placeholder="Geef land" name="land" required th:field="*{gemeente.provincie.land.naam}">
     <label>Accountnaam</label>
-    <input type="text" placeholder="Geef accountnaam" name="gebruikersnaam" required>
+    <input type="text" placeholder="Geef accountnaam" name="gebruikersnaam" required th:field="*{account.accountnaam}">
     <label>Wachtwoord</label>
-    <input type="password" placeholder="Voer wachtwoord in" name="wachtwoord" required>
+    <input type="password" placeholder="Voer wachtwoord in" name="wachtwoord" required th:field="*{account.wachtwoord}">
     <input type="submit" value="Maak aan">
 </form>
 </body>

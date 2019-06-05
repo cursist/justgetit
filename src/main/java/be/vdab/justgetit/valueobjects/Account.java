@@ -1,4 +1,4 @@
-package be.vdab.justgetit.entities;
+package be.vdab.justgetit.valueobjects;
 
 import javax.persistence.*;
 
