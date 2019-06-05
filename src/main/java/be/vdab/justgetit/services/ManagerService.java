@@ -10,14 +10,17 @@ import be.vdab.justgetit.repositories.MerkRepository;
 import be.vdab.justgetit.repositories.SubcategorieEigenschapRepository;
 import be.vdab.justgetit.repositories.SubcategorieRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.transaction.annotation.Isolation.*;
+
 @Service
-@Transactional
+@Transactional(readOnly = false, isolation = READ_COMMITTED)
 public class ManagerService {
     private final CategorieRepository categorieRepository;
     private final SubcategorieRepository subcategorieRepository;
@@ -31,6 +34,7 @@ public class ManagerService {
         this.subcategorieEigenschapRepository = subcategorieEigenschapRepository;
     }
 
+    @Transactional(readOnly = true, isolation = READ_COMMITTED)
     public List<Categorie> vindAlleCategorieen() {
         return categorieRepository.findAll();
     }
@@ -47,14 +51,16 @@ public class ManagerService {
         subcategorieEigenschapRepository.save(subcategorieEigenschap);
     }
 
-    public void save(Merk merk){
-        merkRepository.save(merk);
+    public Merk save(Merk merk) {
+        return merkRepository.save(merk);
     }
 
+    @Transactional(readOnly = true, isolation = READ_COMMITTED)
     public List<Subcategorie> vindAlleSubCategorieen() {
         return subcategorieRepository.findAll();
     }
 
+    @Transactional(readOnly = true, isolation = READ_COMMITTED)
     public List<Merk> vindAlleMerken() {
         return merkRepository.findAll();
     }
@@ -66,12 +72,14 @@ public class ManagerService {
             Subcategorie subcategorie = optionalSubcategorie.get();
             BigDecimal minimumMargeBedrag = wijziging.getMinimumMargeBedrag();
             BigDecimal minimumMargePercent = wijziging.getMinimumMargePercent();
-            if (minimumMargeBedrag !=null){
+            if (minimumMargeBedrag !=null) {
                 subcategorie.setMinimumMargeBedrag(minimumMargeBedrag);
             }
-            if (minimumMargePercent !=null){
+            if (minimumMargePercent !=null) {
                 subcategorie.setMinimumMargePercent(minimumMargePercent);
             }
+        } else {
+            throw new RuntimeException("subcategorie niet gevonden");
         }
     }
 
@@ -88,6 +96,8 @@ public class ManagerService {
             if (minimumMargePercent !=null){
                 merk.setMinimumMargePercent(minimumMargePercent);
             }
+        } else {
+            throw new RuntimeException("merk niet gevonden");
         }
     }
 }

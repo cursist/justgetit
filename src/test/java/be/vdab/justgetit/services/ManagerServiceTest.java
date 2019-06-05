@@ -25,7 +25,7 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = NONE)
-@Sql("/insertMerk.sql")
+//@Sql("/insertMerk.sql")
 public class ManagerServiceTest extends AbstractTransactionalJUnit4SpringContextTests {
     private RowMapper<Merk> merkMapper =
             (resultSet, i) -> {
@@ -64,6 +64,14 @@ public class ManagerServiceTest extends AbstractTransactionalJUnit4SpringContext
     }
 
     @Test
+    public void saveMerk() {
+        int aantalMerkenVooraf = super.countRowsInTable("merken");
+        service.save(merk);
+        int aantalMerkenAchteraf = super.countRowsInTable("merken");
+        assertEquals(aantalMerkenAchteraf, aantalMerkenVooraf + 1);
+    }
+
+    @Test
     public void saveSubcategorie() {
         int aantalSubcategorieenVooraf = super.countRowsInTable("subcategorieen");
         service.save(categorie);
@@ -96,17 +104,20 @@ public class ManagerServiceTest extends AbstractTransactionalJUnit4SpringContext
 
     @Test
     public void pasMerkAan() {
-        String naam = "testM";
-        String query = "select naam, minimumMargePercent, minimumMargeBedrag from merken where naam = ?";
-        Merk merkEerst = super.jdbcTemplate.queryForObject(query, merkMapper, naam);
+        String naam = merk.getNaam();
+        Merk merkEerst = service.save(merk);
+        long id = merkEerst.getId();
+//        String query = "select naam, minimumMargePercent, minimumMargeBedrag from merken where naam = ?";
+//        Merk merkEerst = super.jdbcTemplate.queryForObject(query, merkMapper, naam);
+
         BigDecimal nieuweMarge = BigDecimal.ONE;
         MargeWijziging wijziging = new MargeWijziging(merkEerst.getId(), nieuweMarge, null);
 
         service.pasMerkMargeAan(wijziging);
         manager.flush();
 
-        String query2 = "select naam, minimumMargePercent, minimumMargeBedrag from merken where naam = ?";
-        Merk merkVervolgens = super.jdbcTemplate.queryForObject(query2, merkMapper, naam);
+        String query2 = "select naam, minimumMargePercent, minimumMargeBedrag from merken where merkId = ?";
+        Merk merkVervolgens = super.jdbcTemplate.queryForObject(query2, merkMapper, id);
         assertEquals(nieuweMarge, merkVervolgens.getMinimumMargePercent());
     }
 }
