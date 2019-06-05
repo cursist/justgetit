@@ -1,6 +1,7 @@
 package be.vdab.justgetit.controllers;
 
 import be.vdab.justgetit.entities.Categorie;
+import be.vdab.justgetit.entities.Merk;
 import be.vdab.justgetit.entities.Subcategorie;
 import be.vdab.justgetit.entities.SubcategorieEigenschap;
 import be.vdab.justgetit.services.ManagerService;
@@ -10,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.WebParam;
 import javax.validation.Valid;
 
 @Controller
@@ -40,62 +42,119 @@ public class ManagerController {
                 .addObject("merkLijst", service.vindAlleMerken());
     }
 
+    @GetMapping("nieuwecategorie")
+    ModelAndView categorie() {
+        return new ModelAndView("nieuwecategorie")
+                .addObject("categorieLijst", service.vindAlleCategorieen())
+                .addObject(new Categorie(null));
+    }
+
     @PostMapping("nieuwecategorie")
     ModelAndView maakNieuweCategorie(@Valid Categorie categorie, Errors errors) {
         if (errors.hasErrors()) {
-            return pagina()
+            return categorie()
                     .addObject(categorie);
         } else {
             System.out.println(categorie.getNaam());
             service.save(categorie);
-            return pagina();
+            return categorie();
         }
+    }
+
+    @GetMapping("nieuwesubcategorie")
+    ModelAndView subcategorie() {
+        return new ModelAndView("nieuwesubcategorie")
+                .addObject("categorieLijst", service.vindAlleCategorieen())
+                .addObject("subcategorieLijst", service.vindAlleSubCategorieen())
+                .addObject(new Subcategorie(null, null));
     }
 
     @PostMapping("nieuwesubcategorie")
     ModelAndView maakNieuweSubCategorie(@Valid Subcategorie subcategorie, Errors errors) {
         if (errors.hasErrors()) {
-            return pagina()
+            return subcategorie()
                     .addObject(subcategorie);
         } else {
             System.out.println(subcategorie.getNaam());
             service.save(subcategorie);
-            return pagina();
+            return subcategorie();
         }
     }
 
-    @PostMapping("nieuweeigenschap")
+    @GetMapping("nieuwesubcategorieeigenschap")
+    ModelAndView subcategorieeigenschap() {
+        return new ModelAndView("nieuwesubcategorieeigenschap")
+                .addObject("subcategorieLijst", service.vindAlleSubCategorieen())
+                .addObject(new SubcategorieEigenschap(null, null));
+    }
+
+    @PostMapping("nieuwesubcategorieeigenschap")
     ModelAndView maakNieuweEigenschap(@Valid SubcategorieEigenschap subcategorieEigenschap, Errors errors) {
         if (errors.hasErrors()) {
-            return pagina()
+            return subcategorieeigenschap()
                     .addObject(subcategorieEigenschap);
         } else {
             service.save(subcategorieEigenschap);
-            return pagina();
+            return subcategorieeigenschap();
         }
 
+    }
+
+    @GetMapping("voegmerktoe")
+    ModelAndView voegmerktoe() {
+        return new ModelAndView("voegmerktoe")
+                .addObject(new Merk("nieuw merk"))
+                .addObject("merkLijst", service.vindAlleMerken());
+    }
+
+    @PostMapping("voegmerktoe")
+    ModelAndView voegmerktoe(@Valid Merk merk, Errors errors) {
+        if (errors.hasErrors()) {
+            System.out.println(merk.getNaam() + "fout");
+            return voegmerktoe()
+                    .addObject(merk);
+        } else {
+            System.out.println(merk.getNaam());
+            service.save(merk);
+            return voegmerktoe();
+        }
+    }
+
+    @GetMapping("voegmargetoeaansubcategorie")
+    ModelAndView voegMargeToeSubcategorie() {
+        return new ModelAndView("voegmargetoeaansubcategorie")
+                .addObject("subcategorieLijst", service.vindAlleSubCategorieen())
+                .addObject(SUBCATEGORIEWIJZIGING,
+                        new MargeWijziging(null, null, null));
     }
 
     @PostMapping("voegmargetoeaansubcategorie")
     ModelAndView voegMargeToeAanSubcategorie(@Valid @ModelAttribute(SUBCATEGORIEWIJZIGING) MargeWijziging wijziging, Errors errors) {
         if (errors.hasErrors()) {
-            return pagina()
+            return voegMargeToeSubcategorie()
                     .addObject(SUBCATEGORIEWIJZIGING, wijziging);
         } else {
             service.pasSubcategorieMargeAan(wijziging);
-            return pagina();
+            return voegMargeToeSubcategorie();
         }
 
+    }
+
+    @GetMapping("voegmargetoeaanmerk")
+    ModelAndView voegMargeToeAanMerk() {
+        return new ModelAndView("voegmargetoeaanmerk")
+                .addObject("merkLijst", service.vindAlleMerken())
+                .addObject(MERKWIJZIGING, new MargeWijziging(null, null, null));
     }
 
     @PostMapping("voegmargetoeaanmerk")
     ModelAndView voegMargeToeAanMerk(@Valid @ModelAttribute(MERKWIJZIGING) MargeWijziging wijziging, Errors errors) {
         if (errors.hasErrors()) {
-            return pagina()
+            return voegMargeToeAanMerk()
                     .addObject(MERKWIJZIGING, wijziging);
         } else {
             service.pasMerkMargeAan(wijziging);
-            return pagina();
+            return voegMargeToeAanMerk();
         }
     }
 

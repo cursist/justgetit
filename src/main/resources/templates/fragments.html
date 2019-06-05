@@ -14,3 +14,13 @@
     </ul>
 </nav>
 
+<nav th:fragment="managerMenu" xmlns:th="http://www.thymeleaf.org">
+    <ul>
+        <li><a th:href="@{/manager/nieuwecategorie}">Categorie Toevoegen</a></li>
+        <li><a th:href="@{/manager/nieuwesubcategorie}">Subcategorie Toevoegen</a></li>
+        <li><a th:href="@{/manager/nieuwesubcategorieeigenschap}">Subcategorie Eigenschap Toevoegen</a></li>
+        <li><a th:href="@{/manager/voegmerktoe}">Merk Toevoegen</a></li>
+        <li><a th:href="@{/manager/voegmargetoeaansubcategorie}">Voeg Marge Toe Aan Subcategorie</a></li>
+        <li><a th:href="@{/manager/voegmargetoeaanmerk}">Voeg Marge Toe Aan Merk</a></li>
+    </ul>
+</nav>
