@@ -13,7 +13,7 @@ public class Klant implements Serializable {
     private long klantId;
     private String voornaam;
     private String achternaam;
-    private  String naam;
+    //private  String naam;
     private String adres;
     @Column(name="telefoonnummer", unique = true)
     private String telefoonnummer;
@@ -23,6 +23,9 @@ public class Klant implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name="gemeenteId")
     private Gemeente gemeente;
+
+    @Embedded
+    private Account account;
 
     protected Klant() {}
 
@@ -34,7 +37,7 @@ public class Klant implements Serializable {
         this.telefoonnummer = telefoonnummer;
         this.email = email;
         this.gemeente = gemeente;
-        setNaam(voornaam, achternaam);
+//        setNaam(voornaam, achternaam);
     }
 
     public long getKlantId() {
@@ -49,13 +52,13 @@ public class Klant implements Serializable {
         return achternaam;
     }
 
-    public String getNaam() {
+    /*public String getNaam() {
         return naam;
-    }
+    }*/
 
-    public void setNaam(String voornaam, String achternaam) {
+    /*public void setNaam(String voornaam, String achternaam) {
         this.naam = voornaam + achternaam;
-    }
+    }*/
 
     public String getAdres() {
         return adres;

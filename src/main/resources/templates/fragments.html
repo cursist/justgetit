@@ -1,4 +1,4 @@
-<head th:fragment="head(title)" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <title th:text="${title}"/>
     <!--<link rel="stylesheet" th:href="">-->
 </head>
@@ -10,7 +10,13 @@
         <li><a th:href="@{/mandje}">Mandje</a></li>
         <li><a th:href="@{/lijst}">Wenslijst</a></li>
         <li><a th:href="@{/klant}">Klant</a></li>
-        <li><a th:href="@{/login}">Login</a></li>
+        <li><a th:href="@{/login}">Aanmelden</a></li>
+        <li>
+            <form method="post" th:action="@{/logout}" >
+                <input type="submit" value="Afmelden">
+            </form>
+        </li>
     </ul>
+    <span sec:authentication="name"></span>
 </nav>
 

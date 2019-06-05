@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Maak een account')"/>
+<body>
+<h1>Maak een account aan bij JustGetIt</h1>
+<nav th:replace="fragments::menu"/>
+<form method="post" th:object="${klant}">
+    <label>Voornaam</label>
+    <input type="text" placeholder="Geef voornaam" required th:field="*{voornaam}">
+    <label>Achternaam</label>
+    <input type="text" placeholder="Geef achternaam" name="achternaam" required th:field="*{achternaam}">
+    <label>Email</label>
+    <input type="email" placeholder="Geef email" name="email" required th:field="*{email}">
+    <label>Telefoonnummer</label>
+    <input type="text" placeholder="Geef telefoonnummer" name="telefoonnummer" th:field="*{telefoonnummer}">
+    <label>Straatnaam + nummer</label>
+    <input type="text" placeholder="Geef straatnaam en huisnummer" name="adres" required th:field="*{adres}">
+    <label>Gemeente</label>
+    <input type="text" placeholder="Geef gemeente" name="gemeente" required th:field="*{gemeente.naam}">
+    <label>Postcode</label>
+    <input type="text" placeholder="Geef postcode" name="postcode" required th:field="*{gemeente.postcode}">
+    <label>Provincie</label>
+    <input type="text" placeholder="Geef provincie" name="provincie" required th:field="*{gemeente.provincie.naam}">
+    <label>Land</label>
+    <input type="text" placeholder="Geef land" name="land" required th:field="*{gemeente.provincie.land.naam}">
+    <label>Accountnaam</label>
+    <input type="text" placeholder="Geef accountnaam" name="gebruikersnaam" required>
+    <label>Wachtwoord</label>
+    <input type="password" placeholder="Voer wachtwoord in" name="wachtwoord" required>
+    <input type="submit" value="Maak aan">
+</form>
+</body>
+</html>

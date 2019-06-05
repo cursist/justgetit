@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface KlantRepository extends JpaRepository<Klant, Long> {
 
-    List<Klant> findByGemeenteStartingWithOrderByNaam(String string);
+    List<Klant> findByGemeenteStartingWith(String string);
 
     List<Klant> findByGemeentePostcodeOrderByGemeentePostcode(String string);
 
-    List<Klant> findByVoornaamContainingOrderByNaam(String string);
+    List<Klant> findByVoornaamContaining(String string);
 
 
 }
