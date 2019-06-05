@@ -4,6 +4,7 @@ import be.vdab.justgetit.entities.Gemeente;
 import be.vdab.justgetit.entities.Klant;
 import be.vdab.justgetit.entities.Land;
 import be.vdab.justgetit.entities.Provincie;
+import be.vdab.justgetit.services.AccountService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.DataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("login")
 public class LoginController {
+
+    private AccountService service;
+
+    public LoginController(AccountService service){
+        this.service = service;
+    }
+
     @GetMapping
     String pagina(){
         return "login";
@@ -28,7 +36,7 @@ public class LoginController {
 
     @PostMapping("accountmaken/submit")
     ModelAndView accountMaken(Klant klant) {
-        System.out.println(klant.getVoornaam());
+        service.save(klant);
         return accountMakenPagina();
     }
 

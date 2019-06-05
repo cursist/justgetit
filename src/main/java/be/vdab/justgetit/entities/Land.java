@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Table(name = "landen")
 public class Land implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
