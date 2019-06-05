@@ -44,7 +44,9 @@ public class ProductRepositoryTest extends AbstractTransactionalJUnit4SpringCont
 
     @Before
     public void before(){
-        merk = new Merk(1L,"testM", BigDecimal.TEN, BigDecimal.TEN);
+        merk = new Merk("testM");
+        merk.setMinimumMargePercent(BigDecimal.TEN);
+        merk.setMinimumMargeBedrag(BigDecimal.TEN);
         categorie = new Categorie("testC");
         subcategorie = new Subcategorie("testSC", categorie);
 

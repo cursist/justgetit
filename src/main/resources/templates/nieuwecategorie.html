@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>nieuwe categorie</title>
+</head>
+<body>
+    <nav th:replace="fragments::managerMenu"></nav>
+
+    <h3>Maak categorie</h3>
+    <form method="post" th:action="@{/manager/nieuwecategorie}"
+          th:object="${categorie}">
+        <span th:errors="*{naam}"></span>
+        <input type="text" th:field="*{naam}" required>
+        <input type="submit" value="opslaan">
+    </form>
+</body>
+</html>
