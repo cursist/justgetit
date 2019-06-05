@@ -4,15 +4,13 @@
 	<body>
 		<h1>Bediende portaal</h1>
 		<nav th:replace="fragments::menu"/>
-		<ul>
-			<li th:each="product:${productenlijst}" th:object="${product}">
-				<span th:text="*{naam}"></span>
-			</li>
-		</ul>
-		<ul>
-			<li th:each="subcat:${subcatlijst}" th:object="${subcat}">
-				<span th:text="*{naam}"></span>
-			</li>
-		</ul>
+		<h3>Zoek product om subcategorie te veranderen</h3>
+		<form method="post" th:action="@{/bediende}"
+		      th:object="${bediendeProductForm}">
+			<span th:errors="*{zoekterm}"></span>
+			<input type="text" th:field="*{zoekterm}" required>
+			<input type="submit" value="zoek">
+		</form>
+
 	</body>
 </html>
