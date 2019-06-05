@@ -17,25 +17,16 @@
     </label>
     <input type="submit" value="opslaan">
 </form>
-<!--<h3>Maak subcategorie</h3>
-<form method="post" th:action="@{/manager/nieuwesubcategorie}"
-      th:object="${subcategorie}">
-    <label>
-        Kies categorie
-        <span th:errors="*{categorie}"></span>
-        <select th:field="*{categorie}">
-            <option th:each="categorie:${categorieLijst}"
-                    th:value="${categorie.id}"
-                    th:text="${categorie}"></option>
-        </select>
-    </label>
-    <label>
-        naam
-        <span th:errors="*{naam}"></span>
-        <input type="text" name="subcategorie"  th:field="*{naam}" required>
-    </label>
-    <input type="submit" value="opslaan">
-</form>-->
+
+<h4>Bestaande merken</h4>
+
+<ul class="merk">
+
+    <li th:each="merk:${merken}" th:object="${merk}">
+        <span th:text="*{naam}" ></span>
+    </li>
+
+</ul>
 
 </body>
 </html>

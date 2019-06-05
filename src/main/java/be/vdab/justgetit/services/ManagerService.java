@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -32,7 +33,10 @@ public class ManagerService {
     }
 
     public List<Categorie> vindAlleCategorieen() {
-        return categorieRepository.findAll();
+
+        return categorieRepository.findAll()
+                .stream().sorted((o1, o2) -> o1.getNaam().compareToIgnoreCase(o2.getNaam()))
+                .collect(Collectors.toList());
     }
 
     public void save(Categorie categorie) {
@@ -52,11 +56,21 @@ public class ManagerService {
     }
 
     public List<Subcategorie> vindAlleSubCategorieen() {
-        return subcategorieRepository.findAll();
+        return subcategorieRepository.findAll()
+                .stream().sorted((o1, o2) -> o1.getNaam().compareToIgnoreCase(o2.getNaam()))
+                .collect(Collectors.toList());
     }
 
     public List<Merk> vindAlleMerken() {
-        return merkRepository.findAll();
+        return merkRepository.findAll()
+                .stream().sorted((o1, o2) -> o1.getNaam().compareToIgnoreCase(o2.getNaam()))
+                .collect(Collectors.toList());
+    }
+
+    public List<SubcategorieEigenschap> vindAlleEigenschappen(){
+        return subcategorieEigenschapRepository.findAll()
+                .stream().sorted((o1, o2) -> o1.getNaam().compareToIgnoreCase(o2.getNaam()))
+                .collect(Collectors.toList());
     }
 
     public void pasSubcategorieMargeAan(MargeWijziging wijziging) {

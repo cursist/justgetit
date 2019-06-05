@@ -27,25 +27,13 @@ public class ManagerController {
 
     @GetMapping
     ModelAndView pagina() {
-        return basisPagina()
-                .addObject(new Categorie(null))
-                .addObject(new Subcategorie(null, null))
-                .addObject(new SubcategorieEigenschap(null, null))
-                .addObject(SUBCATEGORIEWIJZIGING, new MargeWijziging(null, null, null))
-                .addObject(MERKWIJZIGING, new MargeWijziging(null, null, null));
-    }
-
-    private ModelAndView basisPagina() {
-        return new ModelAndView("manager")
-                .addObject("categorieLijst", service.vindAlleCategorieen())
-                .addObject("subcategorieLijst", service.vindAlleSubCategorieen())
-                .addObject("merkLijst", service.vindAlleMerken());
+        return new ModelAndView("manager");
     }
 
     @GetMapping("nieuwecategorie")
     ModelAndView categorie() {
         return new ModelAndView("nieuwecategorie")
-                .addObject("categorieLijst", service.vindAlleCategorieen())
+                .addObject("categorieen", service.vindAlleCategorieen())
                 .addObject(new Categorie(null));
     }
 
@@ -64,8 +52,8 @@ public class ManagerController {
     @GetMapping("nieuwesubcategorie")
     ModelAndView subcategorie() {
         return new ModelAndView("nieuwesubcategorie")
-                .addObject("categorieLijst", service.vindAlleCategorieen())
-                .addObject("subcategorieLijst", service.vindAlleSubCategorieen())
+                .addObject("categorieen", service.vindAlleCategorieen())
+                .addObject("subcategorieen", service.vindAlleSubCategorieen())
                 .addObject(new Subcategorie(null, null));
     }
 
@@ -84,7 +72,8 @@ public class ManagerController {
     @GetMapping("nieuwesubcategorieeigenschap")
     ModelAndView subcategorieeigenschap() {
         return new ModelAndView("nieuwesubcategorieeigenschap")
-                .addObject("subcategorieLijst", service.vindAlleSubCategorieen())
+                .addObject("subcategorieen", service.vindAlleSubCategorieen())
+                .addObject("subcategorieeigenschappen", service.vindAlleEigenschappen())
                 .addObject(new SubcategorieEigenschap(null, null));
     }
 
@@ -103,8 +92,8 @@ public class ManagerController {
     @GetMapping("voegmerktoe")
     ModelAndView voegmerktoe() {
         return new ModelAndView("voegmerktoe")
-                .addObject(new Merk("nieuw merk"))
-                .addObject("merkLijst", service.vindAlleMerken());
+                .addObject(new Merk(null))
+                .addObject("merken", service.vindAlleMerken());
     }
 
     @PostMapping("voegmerktoe")
@@ -123,7 +112,8 @@ public class ManagerController {
     @GetMapping("voegmargetoeaansubcategorie")
     ModelAndView voegMargeToeSubcategorie() {
         return new ModelAndView("voegmargetoeaansubcategorie")
-                .addObject("subcategorieLijst", service.vindAlleSubCategorieen())
+                .addObject("subcategorieen", service.vindAlleSubCategorieen())
+                .addObject("categorieen", service.vindAlleCategorieen())
                 .addObject(SUBCATEGORIEWIJZIGING,
                         new MargeWijziging(null, null, null));
     }

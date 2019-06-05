@@ -14,5 +14,12 @@
         <input type="text" th:field="*{naam}" required>
         <input type="submit" value="opslaan">
     </form>
+
+<h4>Bestaande categorieën</h4>
+<ul class="categorieen">
+    <li th:each="categorie:${categorieen}" th:object="${categorie}" >
+        <span th:text="*{naam}"></span>
+    </li>
+</ul>
 </body>
 </html>

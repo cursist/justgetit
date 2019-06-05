@@ -10,13 +10,14 @@
 <h3>Zet marge van de subcategorie</h3>
 <form method="post" th:action="@{/manager/voegmargetoeaansubcategorie}"
       th:object="${subcategorieWijziging}">
+
     <label>
         Kies subcategorie
         <span th:errors="*{id}"></span>
         <select th:field="*{id}">
-            <option th:each="subcategorie:${subcategorieLijst}"
+            <option th:each="subcategorie:${subcategorieen}"
                     th:value="${subcategorie.id}"
-                    th:text="${subcategorie}"></option>
+                    th:text="${subcategorie.categorie.naam} + ' / ' + ${subcategorie}"></option>
         </select>
     </label>
     <label>
