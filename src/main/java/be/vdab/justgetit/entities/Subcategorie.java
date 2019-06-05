@@ -27,7 +27,7 @@ public class Subcategorie implements Serializable {
     private Categorie categorie;
 
     @Version
-    private long versie;
+    private Long versie;
 
     protected Subcategorie() {
     }

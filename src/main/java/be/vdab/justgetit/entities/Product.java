@@ -28,7 +28,7 @@ public class Product implements Serializable {
     @JoinColumn(name = "subcategorieId")
     private Subcategorie subcategorie;
     @Version
-    BigInteger versie;
+    private Long versie;
 
 
     protected Product() {
