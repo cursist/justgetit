@@ -11,10 +11,12 @@
         <th>Verwijder</th>
     </tr>
     <form method="get" th:action="@{/aantal}">
-        <div th:each="regel:${mandjeForm.mandjeForm}" th:object="${regel}">
+        <div th:each="regel:${mandjeForm.mandje}" th:object="${regel}">
             <tr>
                 <td th:text="*{key.naam}"></td>
-                <td th:text="*{value.aantal}"></td>
+                <td th:text="*{value.aantal}"></td><!-- TODO veranderen naar input met value -->
+                <!-- TODO checkbox voor verwijderen producten -->
+                
             </tr>
         </div>
     </form>

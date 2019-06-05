@@ -6,29 +6,29 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MandjeForm {
-    private final Map<Product, AantalForm> mandjeForm;
+    private final Map<Product, AantalForm> mandje;
 
     public MandjeForm() {
-        this.mandjeForm = new LinkedHashMap<>();
+        this.mandje = new LinkedHashMap<>();
     }
 
     public void put(Product product){
-        mandjeForm.put(product, new AantalForm(null));
+        mandje.put(product, new AantalForm(null));
     }
 
     public void put(Product product, int aantal){
-        mandjeForm.put(product, new AantalForm(aantal));
+        mandje.put(product, new AantalForm(aantal));
     }
 
     public void remove(Product product){
-        mandjeForm.remove(product);
+        mandje.remove(product);
     }
 
-    public Map<Product, AantalForm> getMandjeForm() {
-        return Collections.unmodifiableMap(mandjeForm);
+    public Map<Product, AantalForm> getMandje() {
+        return Collections.unmodifiableMap(mandje);
     }
 
     public int getLengte() {
-        return mandjeForm.size();
+        return mandje.size();
     }
 }
