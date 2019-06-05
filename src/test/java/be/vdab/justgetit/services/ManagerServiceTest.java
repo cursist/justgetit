@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -24,17 +25,23 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = NONE)
+@Sql("/insertMerk.sql")
 public class ManagerServiceTest extends AbstractTransactionalJUnit4SpringContextTests {
     private RowMapper<Merk> merkMapper =
-            (resultSet, i) -> new Merk(
-                    resultSet.getLong("merkId"),
-                    resultSet.getString("naam"),
-                    resultSet.getBigDecimal("minimumMargePercent"),
-                    resultSet.getBigDecimal("minimumMargeBedrag")
-            );
+            (resultSet, i) -> {
+                Merk merk = new Merk(
+                        resultSet.getString("naam"));
+                merk.setMinimumMargeBedrag(resultSet.getBigDecimal("minimumMargeBedrag"));
+                merk.setMinimumMargePercent(resultSet.getBigDecimal("minimumMargePercent"));
 
-    @Autowired private ManagerService service;
-    @Autowired private EntityManager manager;
+                return merk;
+            };
+
+
+    @Autowired
+    private ManagerService service;
+    @Autowired
+    private EntityManager manager;
     private Categorie categorie;
     private Subcategorie subcategorie;
     private SubcategorieEigenschap subcategorieEigenschap;
@@ -43,8 +50,8 @@ public class ManagerServiceTest extends AbstractTransactionalJUnit4SpringContext
     @Before
     public void setUp() {
         categorie = new Categorie("unieke categorie");
-        subcategorie = new Subcategorie("unieke subcategorie",categorie);
-        subcategorieEigenschap = new SubcategorieEigenschap("unieke subcategorieEigenschapp",subcategorie);
+        subcategorie = new Subcategorie("unieke subcategorie", categorie);
+        subcategorieEigenschap = new SubcategorieEigenschap("unieke subcategorieEigenschapp", subcategorie);
         merk = new Merk("uniek merk");
     }
 
@@ -89,18 +96,17 @@ public class ManagerServiceTest extends AbstractTransactionalJUnit4SpringContext
 
     @Test
     public void pasMerkAan() {
-        String query = "select merkId, naam, minimumMargePercent, minimumMargeBedrag from merken limit 1";
-        Merk merkEerst = super.jdbcTemplate.queryForObject(query, merkMapper);
-        long id = merkEerst.getId();
-        BigDecimal marge = BigDecimal.ONE;
-        if (merkEerst.getMinimumMargePercent() != null) {
-            marge = merkEerst.getMinimumMargePercent().add(BigDecimal.ONE);
-        }
-        MargeWijziging wijziging = new MargeWijziging(merkEerst.getId(), marge, null);
+        String naam = "testM";
+        String query = "select naam, minimumMargePercent, minimumMargeBedrag from merken where naam = ?";
+        Merk merkEerst = super.jdbcTemplate.queryForObject(query, merkMapper, naam);
+        BigDecimal nieuweMarge = BigDecimal.ONE;
+        MargeWijziging wijziging = new MargeWijziging(merkEerst.getId(), nieuweMarge, null);
+
         service.pasMerkMargeAan(wijziging);
         manager.flush();
-        String query2 = "select merkId, naam, minimumMargePercent, minimumMargeBedrag from merken where merkId = ?";
-        Merk merkVervolgens = super.jdbcTemplate.queryForObject(query2, merkMapper, id);
-        assertEquals(marge, merkVervolgens.getMinimumMargePercent());
+
+        String query2 = "select naam, minimumMargePercent, minimumMargeBedrag from merken where naam = ?";
+        Merk merkVervolgens = super.jdbcTemplate.queryForObject(query2, merkMapper, naam);
+        assertEquals(nieuweMarge, merkVervolgens.getMinimumMargePercent());
     }
 }

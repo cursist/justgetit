@@ -47,6 +47,10 @@ public class ManagerService {
         subcategorieEigenschapRepository.save(subcategorieEigenschap);
     }
 
+    public void save(Merk merk){
+        merkRepository.save(merk);
+    }
+
     public List<Subcategorie> vindAlleSubCategorieen() {
         return subcategorieRepository.findAll();
     }

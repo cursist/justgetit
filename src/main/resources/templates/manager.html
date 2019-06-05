@@ -20,6 +20,7 @@
     </style>
 </head>
 <body>
+<nav th:replace="fragments::managerMenu"></nav>
     <h3>Maak categorie</h3>
     <form method="post" th:action="@{/manager/nieuwecategorie}"
           th:object="${categorie}">
