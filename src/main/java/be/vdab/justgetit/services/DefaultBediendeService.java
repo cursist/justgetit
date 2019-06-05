@@ -26,7 +26,7 @@ public class DefaultBediendeService implements BediendeService {
         Product product = productService.findById(productid).get();
         Subcategorie subcategorie = subcategorieService.findById(subcategorieid).get();
         product.setSubcategorie(subcategorie);
-//        productService.save(product);
+        productService.save(product);
     }
 
 }
