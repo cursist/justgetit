@@ -101,6 +101,32 @@ INSERT INTO `categorieen` VALUES (2,'Boeken'),(3,'Elektronica'),(4,'Fashion'),(1
 UNLOCK TABLES;
 
 --
+-- Table structure for table `gebruikersrollen`
+--
+
+DROP TABLE IF EXISTS `gebruikersrollen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `gebruikersrollen` (
+  `klantId` bigint(20) unsigned NOT NULL,
+  `rolId` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`klantId`),
+  KEY `fk_gebruikersrollen_rollen_idx` (`rolId`),
+  CONSTRAINT `fk_gebruikersrollen_klantenaccounts` FOREIGN KEY (`klantId`) REFERENCES `klantenaccounts` (`klantId`),
+  CONSTRAINT `fk_gebruikersrollen_rollen` FOREIGN KEY (`rolId`) REFERENCES `rollen` (`rolId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gebruikersrollen`
+--
+
+LOCK TABLES `gebruikersrollen` WRITE;
+/*!40000 ALTER TABLE `gebruikersrollen` DISABLE KEYS */;
+/*!40000 ALTER TABLE `gebruikersrollen` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `gemeenten`
 --
 
@@ -159,6 +185,34 @@ LOCK TABLES `klanten` WRITE;
 /*!40000 ALTER TABLE `klanten` DISABLE KEYS */;
 INSERT INTO `klanten` VALUES (1,'Hilde','Pollet','Groenstraat 33','016447001','hildepollet@gmail.com',1),(2,'Gervijn','Pollet','Koningin Astridlaan 158','','gervijnpollet@gmail.com',2),(3,'Jan','Nannas','Broekstraat 43','0478456283','janvddr@gmail.com',3),(4,'Joske','Vermeulen','Tramazantenlaan 143','078659325','joskedebospoeper@geenechtadres.be',4),(5,'Kers','T. Man','Hofstraat 1','+3169696969','hey@ho.ho',5);
 /*!40000 ALTER TABLE `klanten` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `klantenaccounts`
+--
+
+DROP TABLE IF EXISTS `klantenaccounts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `klantenaccounts` (
+  `klantId` bigint(20) unsigned NOT NULL,
+  `accountnaam` varchar(12) COLLATE utf8_bin NOT NULL,
+  `wachtwoord` varchar(255) COLLATE utf8_bin NOT NULL,
+  `actief` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`klantId`),
+  UNIQUE KEY `accountnaam_UNIQUE` (`accountnaam`),
+  UNIQUE KEY `klantId_UNIQUE` (`klantId`),
+  CONSTRAINT `fk_klanten_klantenaccounts` FOREIGN KEY (`klantId`) REFERENCES `klanten` (`klantId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `klantenaccounts`
+--
+
+LOCK TABLES `klantenaccounts` WRITE;
+/*!40000 ALTER TABLE `klantenaccounts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `klantenaccounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -280,6 +334,7 @@ CREATE TABLE `merken` (
   `naam` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `minimumMargePercent` decimal(10,0) unsigned DEFAULT '0',
   `minimumMargeBedrag` decimal(10,0) unsigned DEFAULT '0',
+  `versie` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`merkId`),
   UNIQUE KEY `merkId_UNIQUE` (`merkId`),
   UNIQUE KEY `naam_UNIQUE` (`naam`)
@@ -292,7 +347,7 @@ CREATE TABLE `merken` (
 
 LOCK TABLES `merken` WRITE;
 /*!40000 ALTER TABLE `merken` DISABLE KEYS */;
-INSERT INTO `merken` VALUES (1,'A Film Benelux MSD B.V.',0,0),(2,'Samsung',0,0),(3,'HarperCollins Publishers',0,0),(4,'Hollister Co.',0,0),(5,'Vaporesso',0,0);
+INSERT INTO `merken` VALUES (1,'A Film Benelux MSD B.V.',0,0,NULL),(2,'Samsung',0,0,NULL),(3,'HarperCollins Publishers',0,0,NULL),(4,'Hollister Co.',0,0,NULL),(5,'Vaporesso',0,0,NULL);
 /*!40000 ALTER TABLE `merken` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -342,6 +397,7 @@ CREATE TABLE `producten` (
   `besteld` bigint(20) unsigned NOT NULL DEFAULT '0',
   `merkId` bigint(20) unsigned NOT NULL,
   `subcategorieId` bigint(20) unsigned NOT NULL,
+  `versie` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`productId`),
   UNIQUE KEY `productId_UNIQUE` (`productId`),
   KEY `fk_Producten_Merken1_idx` (`merkId`),
@@ -357,7 +413,7 @@ CREATE TABLE `producten` (
 
 LOCK TABLES `producten` WRITE;
 /*!40000 ALTER TABLE `producten` DISABLE KEYS */;
-INSERT INTO `producten` VALUES (1,'Lord of the Rings Trilogy: Extended Edition',23,100,50,'Meer dan 12u kijkplezier!',0,0,1,5),(2,'Lord of the Rings Boxset',5,18,10,'Meer dan 32u leesplezier!',0,0,3,1),(3,'QE55Q6F(2018) - QLED',200,799,399,'Meer kijkplezier!',0,0,2,7),(4,'Overhemd',5,39,15,'Meer dan zeer comfortabel draagplezier!',0,0,4,3);
+INSERT INTO `producten` VALUES (1,'Lord of the Rings Trilogy: Extended Edition',23,100,50,'Meer dan 12u kijkplezier!',0,0,1,5,NULL),(2,'Lord of the Rings Boxset',5,18,10,'Meer dan 32u leesplezier!',0,0,3,1,NULL),(3,'QE55Q6F(2018) - QLED',200,799,399,'Meer kijkplezier!',0,0,2,7,NULL),(4,'Overhemd',5,39,15,'Meer dan zeer comfortabel draagplezier!',0,0,4,3,NULL);
 /*!40000 ALTER TABLE `producten` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -387,6 +443,31 @@ LOCK TABLES `provincies` WRITE;
 /*!40000 ALTER TABLE `provincies` DISABLE KEYS */;
 INSERT INTO `provincies` VALUES (1,'Vlaams-Brabant',1),(2,'West-Vlaanderen',1),(3,'Antwerpen',1),(4,'Limburg',1),(5,'Limburg',2);
 /*!40000 ALTER TABLE `provincies` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rollen`
+--
+
+DROP TABLE IF EXISTS `rollen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `rollen` (
+  `rolId` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `naam` varchar(45) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`rolId`),
+  UNIQUE KEY `rolId_UNIQUE` (`rolId`),
+  UNIQUE KEY `naam_UNIQUE` (`naam`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rollen`
+--
+
+LOCK TABLES `rollen` WRITE;
+/*!40000 ALTER TABLE `rollen` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rollen` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -430,6 +511,7 @@ CREATE TABLE `subcategorieen` (
   `minimumMargePercent` decimal(10,0) unsigned DEFAULT '0',
   `minimumMargeBedrag` decimal(10,0) unsigned DEFAULT '0',
   `categorieId` bigint(20) unsigned NOT NULL,
+  `versie` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`subcategorieId`),
   UNIQUE KEY `subcategorieId_UNIQUE` (`subcategorieId`),
   UNIQUE KEY `naamInCategorie_UNIQUE` (`naam`,`subcategorieId`),
@@ -444,7 +526,7 @@ CREATE TABLE `subcategorieen` (
 
 LOCK TABLES `subcategorieen` WRITE;
 /*!40000 ALTER TABLE `subcategorieen` DISABLE KEYS */;
-INSERT INTO `subcategorieen` VALUES (1,'Fictie',0,0,2),(2,'Non-Fictie',0,0,2),(3,'Mannen',0,0,4),(4,'Vrouwen',0,0,4),(5,'DVD',0,0,1),(6,'Blu-Ray',0,0,1),(7,'Televisies',0,0,3),(8,'Huishoudapparatuur',0,0,3),(9,'Fruit',0,0,5),(10,'Conserven',0,0,5);
+INSERT INTO `subcategorieen` VALUES (1,'Fictie',0,0,2,NULL),(2,'Non-Fictie',0,0,2,NULL),(3,'Mannen',0,0,4,NULL),(4,'Vrouwen',0,0,4,NULL),(5,'DVD',0,0,1,NULL),(6,'Blu-Ray',0,0,1,NULL),(7,'Televisies',0,0,3,NULL),(8,'Huishoudapparatuur',0,0,3,NULL),(9,'Fruit',0,0,5,NULL),(10,'Conserven',0,0,5,NULL);
 /*!40000 ALTER TABLE `subcategorieen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -465,4 +547,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-24 12:29:22
+-- Dump completed on 2019-06-04 14:26:46
