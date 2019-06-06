@@ -12,7 +12,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import javax.sql.DataSource;
 
 @EnableWebSecurity
-class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //rollen uit DB
     private static final String USERS_BY_USERNAME =
@@ -42,10 +42,12 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String KLANT = "klant";
 
     //hardcoded rollen
-    /*@Bean
+/*    @Bean
     InMemoryUserDetailsManager inMemoryUserDetailsManager() {
         return new InMemoryUserDetailsManager(
                 User.builder().username("testManager").password("{noop}ikzaag")
+                        .authorities(MANAGER).build(),
+                User.builder().username("frank").password("{noop}harzregio")
                         .authorities(MANAGER).build(),
                 User.builder().username("testBediende").password("{noop}ikkreun")
                         .authorities(BEDIENDE).build(),

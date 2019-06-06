@@ -29,6 +29,8 @@ public class AccountService {
 
     public Klant save(Klant klant){
         bewaarSubEntities(klant);
+        String nieuwWachtwoord = "{noop}"+klant.getWachtwoord();
+        klant.setWachtwoord(nieuwWachtwoord);
         //vervangRollen(klant);
         return klantRepo.saveAndFlush(klant);
     }

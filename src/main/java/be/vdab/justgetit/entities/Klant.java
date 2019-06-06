@@ -100,4 +100,8 @@ public class Klant implements Serializable {
     public void setGemeente(Gemeente gemeente) {
         this.gemeente = gemeente;
     }
+
+    public void setWachtwoord(String string){
+        this.wachtwoord = string;
+    }
 }
