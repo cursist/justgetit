@@ -14,5 +14,5 @@ public interface ProductService {
     List<Product> findByVoorraadLessThan(int aantal);
     Product save(Product product);
     void delete(Product product);
-    List<Product>findByNaamContainingIgnoreCase(String zoekString);
+    List<Product>findByNaamContaining(String zoekString);
 }

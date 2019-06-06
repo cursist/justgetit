@@ -87,7 +87,7 @@ public class ProductRepositoryTest extends AbstractTransactionalJUnit4SpringCont
 
     @Test
     public void findByNaamContaining(){
-        List<Product> producten = productRepository.findByNaamContaining("test");
+        List<Product> producten = productRepository.findByNaamContainingIgnoreCase("test");
         for (Product product : producten){
             assertTrue(product.getNaam().contains("test"));
         }
