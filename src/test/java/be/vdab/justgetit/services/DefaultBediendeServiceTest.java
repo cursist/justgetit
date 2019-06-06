@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 
 @RunWith(SpringRunner.class)
@@ -48,10 +49,22 @@ public class DefaultBediendeServiceTest extends AbstractTransactionalJUnit4Sprin
         return super.jdbcTemplate.queryForObject("select subcategorieId from producten where naam = 'testP'",long.class);
     }
 
+    private long minimaleVerkoopprijsVanProduct(){
+        return super.jdbcTemplate.queryForObject("select minimumprijs from producten where naam = 'testP'",long.class);
+    }
+
     @Test
     public void zetProductInSubcategorie(){
         service.zetProductInSubCategorie(idVanTestProduct(),subcategorieIdVanTestSubcategorie());
         manager.flush();
         assertEquals(subcategorieIdVanTestProduct(),subcategorieIdVanTestSubcategorie());
+    }
+
+    @Test
+    public void bepaalMinimaleVerkoopprijs(){
+        long voorUpdate = minimaleVerkoopprijsVanProduct();
+        service.bepaalMinimaleVerkoopprijs(idVanTestProduct());
+        long naUpdate = minimaleVerkoopprijsVanProduct();
+        assertNotEquals(voorUpdate,naUpdate);
     }
 }

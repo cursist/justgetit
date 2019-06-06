@@ -4,11 +4,11 @@ import javax.validation.constraints.NotNull;
 
 public class BediendeZoeklijstForm {
     @NotNull
-    private Long productFormId;
+    private long productFormId;
     @NotNull
-    private Long subcategorieFormId;
+    private long subcategorieFormId;
 
-    public BediendeZoeklijstForm(Long productFormId, Long subcategorieFormId) {
+    public BediendeZoeklijstForm(long productFormId, long subcategorieFormId) {
         this.productFormId = productFormId;
         this.subcategorieFormId = subcategorieFormId;
     }
