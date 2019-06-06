@@ -15,6 +15,8 @@ public interface SubcategorieRepository extends JpaRepository<Subcategorie,Long>
 
     List<Subcategorie> findByNaamLike(String str);
 
+    Optional<Subcategorie> findById(long id);
+
 
     @Query("select s.subcategorie from SubcategorieEigenschap s where s.naam = :str")
     List<Subcategorie> findByEigenschappenNaamLike(String str);

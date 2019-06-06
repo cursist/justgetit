@@ -17,7 +17,7 @@
         <select th:field="*{subcategorie}" >
             <option th:each="subcategorie:${subcategorieen}"
                     th:value="${subcategorie.id}"
-                    th:text="${subcategorie}"></option>
+                    th:text="${subcategorie} +' ('+ ${subcategorie.categorie.naam} + ')'"></option>
         </select>
     </label>
     <label>

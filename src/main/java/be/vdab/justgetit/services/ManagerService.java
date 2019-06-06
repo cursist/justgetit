@@ -61,10 +61,26 @@ public class ManagerService {
                 .collect(Collectors.toList());
     }
 
+    public Optional<Subcategorie> findSubcategorieById(long id){
+        if (subcategorieRepository.findById(id).isPresent()) {
+            return subcategorieRepository.findById(id);
+        }else{
+            return Optional.empty();
+        }
+    }
+
     public List<Merk> vindAlleMerken() {
         return merkRepository.findAll()
                 .stream().sorted((o1, o2) -> o1.getNaam().compareToIgnoreCase(o2.getNaam()))
                 .collect(Collectors.toList());
+    }
+    public Optional<Merk> findMerkById(long id){
+        if (merkRepository.findById(id).isPresent()){
+            return merkRepository.findById(id);
+        }
+        else {
+            return Optional.empty();
+        }
     }
 
     public List<SubcategorieEigenschap> vindAlleEigenschappen(){

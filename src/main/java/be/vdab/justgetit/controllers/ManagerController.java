@@ -26,6 +26,12 @@ public class ManagerController {
     private long subcategorieId;
     private BigDecimal bedragSubcategorie;
     private BigDecimal percentSubcategorie;
+    private String margeCatKeuze="";
+    private Subcategorie subcatKeuze;
+    private Merk merkKeuze;
+    private long merkId;
+    private BigDecimal percentMerk;
+    private BigDecimal bedragMerk;
     public ManagerController(ManagerService service) {
         this.service = service;
     }
@@ -122,24 +128,41 @@ public class ManagerController {
         return new ModelAndView("voegmargetoeaansubcategorie")
                 .addObject("subcategorieen", service.vindAlleSubCategorieen())
                 .addObject("categorieen", service.vindAlleCategorieen())
+                .addObject("subcatKeuze", subcatKeuze)
+                .addObject(new Subcategorie(null, new Categorie("")))
                 .addObject(SUBCATEGORIEWIJZIGING,
                         new MargeWijziging(subcategorieId, percentSubcategorie, bedragSubcategorie));
     }
 
     @PostMapping("voegmargetoeaansubcategorie")
-    ModelAndView kiesSubcategorieVoorMarge(@Valid @ModelAttribute(SUBCATEGORIEWIJZIGING) MargeWijziging wijziging, Errors errors) {
-    return null;
+    ModelAndView kiesSubcategorieVoorMarge(@Valid @ModelAttribute(SUBCATEGORIEWIJZIGING) MargeWijziging wijziging,@Valid long id, Errors errors) {
+        if (errors.hasErrors()) {
+            return voegMargeToeSubcategorie();
+        } else {
+                Subcategorie subc = service.findSubcategorieById(id).get();
+                subcategorieId = subc.getId();
+                percentSubcategorie = subc.getMinimumMargePercent();
+                bedragSubcategorie = subc.getMinimumMargeBedrag();
+                this.subcatKeuze = subc;
+            return voegMargeToeSubcategorie();
+        }
     }
 
 
     @PostMapping("voegmargetoeaansubcategorie/wijzig")
-    ModelAndView voegMargeToeAanSubcategorie(@Valid @ModelAttribute(SUBCATEGORIEWIJZIGING) MargeWijziging wijziging, Errors errors) {
+    ModelAndView voegMargeToeAanSubcategorie(@ModelAttribute(SUBCATEGORIEWIJZIGING) MargeWijziging wijziging, Errors errors) {
         if (errors.hasErrors()) {
             return voegMargeToeSubcategorie()
                     .addObject(SUBCATEGORIEWIJZIGING, wijziging);
         } else {
+           MargeWijziging mw = new MargeWijziging(subcatKeuze.getId(),
+                    wijziging.getMinimumMargePercent(),wijziging.getMinimumMargeBedrag());
+            service.pasSubcategorieMargeAan(mw);
+            subcategorieId = 0L;
+            percentSubcategorie = null;
+            bedragSubcategorie = null;
+            subcatKeuze = null;
 
-            service.pasSubcategorieMargeAan(wijziging);
             return voegMargeToeSubcategorie();
         }
 
@@ -148,19 +171,44 @@ public class ManagerController {
     @GetMapping("voegmargetoeaanmerk")
     ModelAndView voegMargeToeAanMerk() {
         return new ModelAndView("voegmargetoeaanmerk")
-                .addObject("merkLijst", service.vindAlleMerken())
-                .addObject(MERKWIJZIGING, new MargeWijziging(null, null, null));
+                .addObject("merken", service.vindAlleMerken())
+                .addObject("merkKeuze", merkKeuze)
+                .addObject(new Merk(null))
+                .addObject(MERKWIJZIGING, new MargeWijziging(merkId, percentMerk, bedragMerk));
     }
 
     @PostMapping("voegmargetoeaanmerk")
-    ModelAndView voegMargeToeAanMerk(@Valid @ModelAttribute(MERKWIJZIGING) MargeWijziging wijziging, Errors errors) {
+    ModelAndView voegMargeToeAanMerk( @ModelAttribute(MERKWIJZIGING) MargeWijziging wijziging, @Valid long id, Errors errors) {
         if (errors.hasErrors()) {
-            return voegMargeToeAanMerk()
-                    .addObject(MERKWIJZIGING, wijziging);
+            return voegMargeToeAanMerk();
         } else {
-            service.pasMerkMargeAan(wijziging);
+            Merk mk = service.findMerkById(id).get();
+            merkId = mk.getId();
+            percentMerk = mk.getMinimumMargePercent();
+            bedragMerk = mk.getMinimumMargeBedrag();
+            this.merkKeuze = mk;
             return voegMargeToeAanMerk();
         }
+    }
+
+
+    @PostMapping("voegmargetoeaanmerk/wijzig")
+    ModelAndView voegMargeToeAanMerk(@ModelAttribute(MERKWIJZIGING) MargeWijziging wijziging, Errors errors) {
+        if (errors.hasErrors()) {
+            return voegMargeToeAanMerk()
+            .addObject(MERKWIJZIGING, wijziging);
+        }else{
+            MargeWijziging mw = new MargeWijziging(merkKeuze.getId(),wijziging.getMinimumMargePercent(),wijziging.getMinimumMargeBedrag());
+            service.pasMerkMargeAan(mw);
+            merkId = 0L;
+            percentMerk = null;
+            bedragMerk = null;
+            merkKeuze = null;
+            return voegMargeToeAanMerk();
+        }
+
+
+
     }
 
 }
