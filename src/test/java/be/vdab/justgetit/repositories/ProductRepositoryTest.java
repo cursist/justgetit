@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
 @Sql("/insertMerk.sql")
 @Sql("/insertProduct.sql")
 public class ProductRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
-    private static final String PRODUCTEN = "producten";
+    private static final String PRODUCTEN = "producten.html";
     private Merk merk;
     private Categorie categorie;
     private Subcategorie subcategorie;
