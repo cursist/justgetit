@@ -4,16 +4,23 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "rollen")
-public class Rol {
-    public enum RolEnum {
-        MANAGER, BEDIENDE, KLANT
-    }
+public enum Rol {
+    MANAGER(1, "manager"), BEDIENDE(2,"bediende"), KLANT(3,"klant");
     @Id
-    private long id;
-    @Enumerated(EnumType.STRING)
-    private RolEnum rol;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String naam;
 
-    public Rol() {
-        this.rol = RolEnum.KLANT;
+    Rol(int id,String naam) {
+        this.id = id;
+        this.naam = naam;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNaam() {
+        return naam;
     }
 }

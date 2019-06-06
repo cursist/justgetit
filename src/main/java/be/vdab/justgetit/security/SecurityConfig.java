@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 
 @EnableWebSecurity
 class SecurityConfig extends WebSecurityConfigurerAdapter {
-    // TODO: juist maken
+
     //rollen uit DB
     private static final String USERS_BY_USERNAME =
             "select accountnaam as username, wachtwoord as password, actief as enabled" +

@@ -60,5 +60,6 @@ public class AccountServiceTest extends AbstractTransactionalJUnit4SpringContext
                 "inner join gebruikersrollen on rollen.rolId = gebruikersrollen.rolId " +
                 "where gebruikersrollen.klantId = ?";
         String rol = super.jdbcTemplate.queryForObject(query, String.class, id);
+        assertEquals("klant",rol);
     }
 }

@@ -11,6 +11,7 @@ public class Land implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "landId")
     private long id;
     @NotBlank
     @Column(name = "naam", unique = true)
@@ -27,7 +28,7 @@ public class Land implements Serializable {
         this.naam = naam;
     }
 
-    public long getId() {
+    public long getLandId() {
         return id;
     }
 

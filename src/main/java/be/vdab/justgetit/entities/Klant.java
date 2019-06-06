@@ -2,6 +2,7 @@ package be.vdab.justgetit.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,7 +45,7 @@ public class Klant implements Serializable {
         this.telefoonnummer = telefoonnummer;
         this.email = email;
         this.gemeente = gemeente;
-        rollen.add(new Rol());
+        rollen.add(Rol.KLANT);
     }
 
     public long getKlantId() {
@@ -86,5 +87,17 @@ public class Klant implements Serializable {
 
     public String getWachtwoord() {
         return wachtwoord;
+    }
+
+    public Set<Rol> getRollen() {
+        return Collections.unmodifiableSet(rollen);
+    }
+
+    public void replaceRollen(Set<Rol> nieuweRollen) {
+        this.rollen = nieuweRollen;
+    }
+
+    public void setGemeente(Gemeente gemeente) {
+        this.gemeente = gemeente;
     }
 }

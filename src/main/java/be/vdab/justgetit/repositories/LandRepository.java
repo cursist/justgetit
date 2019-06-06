@@ -8,5 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LandRepository extends JpaRepository<Land, Long> {
-
+    boolean existsByNaam(String string);
+    Land findByNaam(String naam);
 }
