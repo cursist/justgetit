@@ -35,7 +35,7 @@ public class Mandje implements Serializable {
         }
     }
 
-    public Map<Long, Integer> getIds () {
+    public Map<Long, Integer> getMandje () {
         return Collections.unmodifiableMap(mandje);
     }
 }

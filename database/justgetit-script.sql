@@ -357,7 +357,7 @@ INSERT INTO `producteigenschappen` VALUES (1,2,'Paperback'),(3,4,'M'),(5,1,'2100
 UNLOCK TABLES;
 
 --
--- Table structure for table `producten`
+-- Table structure for table `producten.html`
 --
 
 DROP TABLE IF EXISTS `producten`;
@@ -385,7 +385,7 @@ CREATE TABLE `producten` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `producten`
+-- Dumping data for table `producten.html`
 --
 
 LOCK TABLES `producten` WRITE;

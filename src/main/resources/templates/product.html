@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments::head(title='Product')">
-    <meta charset="UTF-8">
-</head>
-<body>
+<head th:replace="fragments::head(title='Product')"></head>
+<body th:object="${product}">
 <nav th:replace="fragments::menu"></nav>
-<dl th:if="${product} != null" th:object="${product} ">
+<dl th:if="${product} != null">
     <h1 th:text="*{naam}"></h1>
     <dt>Subcategorie</dt>
     <dd th:text="*{subcategorie}"></dd>
@@ -16,6 +14,15 @@
     <dt>Merk</dt>
     <dd th:text="*{merk}"></dd>
 </dl>
+
+    <form th:object="${aantalForm}" method="get" th:action="@{/mandje/aantal}">
+        <label>
+            Aantal:
+            <input th:field="*{aantal}" autofocus>
+            <input th:type="hidden" th:name="id" th:value="${product.id}">
+        </label>
+        <input type="submit" value="Toevoegen">
+    </form>
 
 
 </body>

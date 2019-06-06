@@ -59,7 +59,8 @@ public class ProductRepositoryTest extends AbstractTransactionalJUnit4SpringCont
     public void findByVerkoopprijsBetween(){
         List<Product> producten = productRepository.findByVerkoopprijsBetween(BigDecimal.ONE,BigDecimal.TEN);
         assertEquals(super.countRowsInTableWhere(PRODUCTEN,"verkoopprijs between 1 and 10"),producten.size());
-        producten.stream().map(product1 -> product.getVerkoopprijs())
+        producten.stream()
+                .map(product1 -> product1.getVerkoopprijs())
                 .reduce((vorigePrijs,prijs)->{
             assertTrue(prijs.compareTo(BigDecimal.ONE)>= 0);
             assertTrue(prijs.compareTo(BigDecimal.TEN)<= 0);
