@@ -43,11 +43,22 @@ public class AccountServiceTest extends AbstractTransactionalJUnit4SpringContext
     }
 
     @Test
-    public void save() {
+    public void saveVoegtNieuweKlantToe() {
         int aantalKlantenVooraf = super.countRowsInTable("klanten");
         service.save(klant);
-        manager.flush();
+//        manager.flush();
         int aantalKlantenAchteraf = super.countRowsInTable("klanten");
         assertEquals(aantalKlantenAchteraf, aantalKlantenVooraf + 1);
+    }
+
+    @Test
+    public void saveMaaktKlantMetRolKlant() {
+        Klant bewaardeKlant = service.save(klant);
+        long id = bewaardeKlant.getKlantId();
+//        manager.flush();
+        String query = "select naam from rollen " +
+                "inner join gebruikersrollen on rollen.rolId = gebruikersrollen.rolId " +
+                "where gebruikersrollen.klantId = ?";
+        String rol = super.jdbcTemplate.queryForObject(query, String.class, id);
     }
 }

@@ -10,7 +10,7 @@
             <label>Wachtwoord</label>
             <input type="password" placeholder="Voer wachtwoord in" name="password" required>
             <button type="submit">Login</button>
-            <a th:href="@{login/accountmaken}"> Nog geen account?</a>
+            <a th:href="@{/login/accountmaken}"> Nog geen account?</a>
         </form>
         <div th:if="${param.error} != null" class="fout">
             Verkeerde gebruikersnaam of paswoord

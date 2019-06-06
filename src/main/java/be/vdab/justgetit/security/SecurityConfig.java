@@ -31,8 +31,11 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
     JdbcDaoImpl jdbcDaoImpl(DataSource dataSource) {
         JdbcDaoImpl impl = new JdbcDaoImpl();
         impl.setDataSource(dataSource);
+        impl.setUsersByUsernameQuery(USERS_BY_USERNAME);
+        impl.setAuthoritiesByUsernameQuery(AUTHORITIES_BY_USERNAME);
         return impl;
     }
+
     //hardcoded rollen
     private static final String MANAGER = "manager";
     private static final String BEDIENDE = "bediende";

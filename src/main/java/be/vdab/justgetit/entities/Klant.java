@@ -2,6 +2,8 @@ package be.vdab.justgetit.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name= "klanten")
 public class Klant implements Serializable {
@@ -26,6 +28,12 @@ public class Klant implements Serializable {
     private String accountnaam;
     private String wachtwoord;
 
+    @ManyToMany
+    @JoinTable(name = "gebruikersrollen",
+               joinColumns = @JoinColumn(name = "klantId"),
+               inverseJoinColumns = @JoinColumn(name = "rolId"))
+    private Set<Rol> rollen = new HashSet<>();
+
     protected Klant() {}
 
     public Klant(String voornaam, String achternaam, String adres,
@@ -36,6 +44,7 @@ public class Klant implements Serializable {
         this.telefoonnummer = telefoonnummer;
         this.email = email;
         this.gemeente = gemeente;
+        rollen.add(new Rol());
     }
 
     public long getKlantId() {
@@ -71,4 +80,11 @@ public class Klant implements Serializable {
         this.wachtwoord = wachtwoord;
     }
 
+    public String getAccountnaam() {
+        return accountnaam;
+    }
+
+    public String getWachtwoord() {
+        return wachtwoord;
+    }
 }

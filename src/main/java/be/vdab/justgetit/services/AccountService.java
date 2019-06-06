@@ -35,6 +35,6 @@ public class AccountService {
         landRepo.save(land);
         provincieRepo.save(provincie);
         gemeenteRepo.save(gemeente);
-        return klantRepo.save(klant);
+        return klantRepo.saveAndFlush(klant);
     }
 }
