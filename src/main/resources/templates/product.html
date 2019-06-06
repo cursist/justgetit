@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Product')">
+    <meta charset="UTF-8">
+</head>
+<body>
+<nav th:replace="fragments::menu"></nav>
+<dl th:if="${product} != null" th:object="${product} ">
+    <h1 th:text="*{naam}"></h1>
+    <dt>Subcategorie</dt>
+    <dd th:text="*{subcategorie}"></dd>
+    <dt>Omschrijving</dt>
+    <dd th:text="*{omschrijving}"></dd>
+    <dt>Prijs</dt>
+    <dd th:text="|*{#numbers.formatDecimal(verkoopprijs,1,2)} &euro;|"></dd>
+    <dt>Merk</dt>
+    <dd th:text="*{merk}"></dd>
+
+
+</dl>
+
+
+</body>
+<script>
+    document.querySelector("form").onsubmit = function (event) {
+        event.target.querySelector("input[type=submit]").disabled = true;
+    }
+</script>
+</html>
