@@ -9,16 +9,26 @@
 
 <h3>Zet marge van het merk</h3>
 <form method="post" th:action="@{/manager/voegmargetoeaanmerk}"
+th:object="${merk}">
+
+    <div th:if="${#strings.isEmpty(merkKeuze)}">
+<label>
+    Kies merk
+    <span th:errors="*{id}"></span>
+    <select th:field="*{id}">
+        <option th:each="merk:${merken}"
+                th:value="${merk.id}"
+                th:text="${merk}"></option>
+    </select>
+</label>
+<label><input type="submit" value="merkKeuze">
+</label>
+    </div>
+</form>
+<form method="post" th:action="@{/manager/voegmargetoeaanmerk/wijzig}"
       th:object="${merkWijziging}">
-    <label>
-        Kies merk
-        <span th:errors="*{id}"></span>
-        <select th:field="*{id}">
-            <option th:each="merk:${merkLijst}"
-                    th:value="${merk.id}"
-                    th:text="${merk}"></option>
-        </select>
-    </label>
+    <div th:if="${!#strings.isEmpty(merkKeuze)}">
+        <span th:text="${merkKeuze}+': '"></span>
     <label>
         nieuwe marge in geld
         <span th:errors="*{minimumMargeBedrag}"></span>
@@ -30,6 +40,7 @@
         <input type="number" name= "percentage" th:field="*{minimumMargePercent}" min=0>
     </label>
     <input type="submit" value="opslaan">
+    </div>
 </form>
 
 </body>

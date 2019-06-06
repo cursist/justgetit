@@ -8,17 +8,28 @@
 <nav th:replace="fragments::managerMenu"></nav>
 
 <h3>Zet marge van de subcategorie</h3>
+
 <form method="post" th:action="@{/manager/voegmargetoeaansubcategorie}"
-      th:object="${subcategorieWijziging}">
+      th:object="${subcategorie}">
+
+    <div th:if="${#strings.isEmpty(subcatKeuze)}" >
     <label>
         Kies subcategorie
         <span th:errors="*{id}"></span>
         <select th:field="*{id}">
-            <option th:each="subcategorie:${subcategorieLijst}"
+            <option th:each="subcategorie:${subcategorieen}"
                     th:value="${subcategorie.id}"
-                    th:text="${subcategorie}"></option>
+                    th:text="${subcategorie} +' ('+ ${subcategorie.categorie.naam} + ')'"></option>
         </select>
     </label>
+    <input type="submit" value="subcategorieKeuze" >
+    </div>
+</form>
+<form method="post" th:action="@{/manager/voegmargetoeaansubcategorie/wijzig}"
+      th:object="${subcategorieWijziging}" >
+    <div th:if="${!#strings.isEmpty(subcatKeuze)}" >
+
+    <span th:text="${subcatKeuze}+ ': '"></span>
     <label>
         nieuwe marge in geld
         <span th:errors="*{minimumMargeBedrag}"></span>
@@ -31,6 +42,7 @@
     </label>
 
     <input type="submit" value="opslaan">
+    </div>
 </form>
 </body>
 </html>

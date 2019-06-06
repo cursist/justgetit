@@ -15,9 +15,9 @@
         Kies subcategorie
         <span th:errors="*{subcategorie}"></span>
         <select th:field="*{subcategorie}" >
-            <option th:each="subcategorie:${subcategorieLijst}"
+            <option th:each="subcategorie:${subcategorieen}"
                     th:value="${subcategorie.id}"
-                    th:text="${subcategorie}"></option>
+                    th:text="${subcategorie} +' ('+ ${subcategorie.categorie.naam} + ')'"></option>
         </select>
     </label>
     <label>
@@ -27,6 +27,20 @@
     </label>
     <input type="submit" value="opslaan">
 </form>
+
+<h4>Bestaande subcategorie eigenschappen</h4>
+<ul class="subcategorieen">
+    <li th:each="subcategorie:${subcategorieen}" th:object="${subcategorie}" >
+        <span th:text="*{naam}"></span>
+        <ul class="subcategorieeigenschappen">
+            <li th:each="subcategorieeigenschap:${subcategorieeigenschappen}" th:object="${subcategorieeigenschap}"
+                th:if="${subcategorie.id == subcategorieeigenschap.subcategorie.id}">
+                <span th:text="*{naam}"></span>
+            </li>
+
+        </ul>
+    </li>
+</ul>
 
 </body>
 </html>
