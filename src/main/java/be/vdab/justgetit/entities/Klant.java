@@ -23,8 +23,8 @@ public class Klant implements Serializable {
     @JoinColumn(name="gemeenteId")
     private Gemeente gemeente;
 
-    @OneToOne(mappedBy = "klantId")
-    private Account account;
+    private String accountnaam;
+    private String wachtwoord;
 
     protected Klant() {}
 
@@ -66,8 +66,9 @@ public class Klant implements Serializable {
         return gemeente;
     }
 
-    public void addAccount(String accountnaam, String wachtwoord) {
-        this.account = new Account(this.klantId, accountnaam, wachtwoord);
+    public void setAccount(String accountnaam, String wachtwoord) {
+        this.accountnaam = accountnaam;
+        this.wachtwoord = wachtwoord;
     }
 
 }
