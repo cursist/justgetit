@@ -13,11 +13,11 @@ public class MandjeForm {
     }
 
     public void put(Product product){
-        mandje.put(product, new AantalForm(null));
+        mandje.put(product, new AantalForm(null, null));
     }
 
     public void put(Product product, int aantal){
-        mandje.put(product, new AantalForm(aantal));
+        mandje.put(product, new AantalForm(aantal, product.getId()));
     }
 
     public void remove(Product product){

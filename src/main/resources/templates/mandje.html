@@ -7,19 +7,32 @@
 <table>
     <tr>
         <th>Naam </th>
+        <th>Prijs</th>
         <th>Aantal</th>
+        <th>Subtotaal</th>
         <th>Verwijder</th>
     </tr>
-    <form method="get" th:action="@{/aantal}">
-        <div th:each="regel:${mandjeForm.mandje}" th:object="${regel}">
-            <tr>
-                <td th:text="*{key.naam}"></td>
-                <td th:text="*{value.aantal}"></td><!-- TODO veranderen naar input met value -->
-                <!-- TODO checkbox voor verwijderen producten -->
-                
-            </tr>
-        </div>
-    </form>
+    <tr th:each="regel:${mandjeForm.mandje}" th:object="${regel}">
+        <td th:text="*{key.naam}"></td>
+        <td th:text="*{key.verkoopprijs}"></td>
+        <td>
+            <form th:object="${aantalForm}" method="get" th:action="@{/mandje/aantal}">
+                <label>
+                    <input th:field="*{aantal}" autofocus th:placeholder="${regel.value.aantal}">
+                    <input th:type="hidden" th:name="id" th:value="${regel.key.id}">
+                </label>
+                <input type="submit" value="ok">
+            </form>
+        </td>
+        <td th:text="*{key.verkoopprijs} * *{value.aantal}"></td>
+        <td>
+            <form method="get" th:object="${regel.key}" th:action="@{/mandje/verwijder}">
+                <input th:type="submit" value="v">
+                <input th:type="hidden" th:name="id" th:value="*{id}">
+            </form>
+        </td>
+    </tr>
 </table>
+<h1 th:text="|Totaal: ${totaal}|"></h1>
 </body>
 </html>
