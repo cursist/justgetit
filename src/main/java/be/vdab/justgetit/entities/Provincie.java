@@ -56,4 +56,8 @@ public class Provincie implements Serializable {
     public String toString() {
         return naam;
     }
+
+    public void setLand(Land land) {
+        this.land = land;
+    }
 }
