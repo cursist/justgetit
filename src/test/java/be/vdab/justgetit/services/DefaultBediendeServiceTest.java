@@ -59,5 +59,5 @@ public class DefaultBediendeServiceTest extends AbstractTransactionalJUnit4Sprin
         manager.flush();
         assertEquals(subcategorieIdVanTestProduct(),subcategorieIdVanTestSubcategorie());
     }
-
+    
 }
