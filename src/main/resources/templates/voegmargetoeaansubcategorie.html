@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Voeg marge toe aan subcategorie</title>
+</head>
+<body>
+<nav th:replace="fragments::managerMenu"></nav>
+
+<h3>Zet marge van de subcategorie</h3>
+
+<form method="post" th:action="@{/manager/voegmargetoeaansubcategorie}"
+      th:object="${subcategorie}">
+
+    <div th:if="${#strings.isEmpty(subcatKeuze)}" >
+    <label>
+        Kies subcategorie
+        <span th:errors="*{id}"></span>
+        <select th:field="*{id}">
+            <option th:each="subcategorie:${subcategorieen}"
+                    th:value="${subcategorie.id}"
+                    th:text="${subcategorie} +' ('+ ${subcategorie.categorie.naam} + ')'"></option>
+        </select>
+    </label>
+    <input type="submit" value="subcategorieKeuze" >
+    </div>
+</form>
+<form method="post" th:action="@{/manager/voegmargetoeaansubcategorie/wijzig}"
+      th:object="${subcategorieWijziging}" >
+    <div th:if="${!#strings.isEmpty(subcatKeuze)}" >
+
+    <span th:text="${subcatKeuze}+ ': '"></span>
+    <label>
+        nieuwe marge in geld
+        <span th:errors="*{minimumMargeBedrag}"></span>
+        <input type="number" name= "geld" th:field="*{minimumMargeBedrag}" min=0>
+    </label>
+    <label>
+        nieuwe marge in percentage
+        <span th:errors="*{minimumMargePercent}"></span>
+        <input type="number" name= "percentage" th:field="*{minimumMargePercent}" min=0>
+    </label>
+
+    <input type="submit" value="opslaan">
+    </div>
+</form>
+</body>
+</html>

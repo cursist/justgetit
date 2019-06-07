@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Objects;
 
 @Entity(name = "producten")
@@ -26,6 +27,8 @@ public class Product implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "subcategorieId")
     private Subcategorie subcategorie;
+    @Version
+    private Long versie;
 
 
     protected Product() {

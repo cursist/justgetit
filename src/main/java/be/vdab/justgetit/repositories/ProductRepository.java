@@ -12,5 +12,5 @@ public interface ProductRepository extends JpaRepository <Product, Long> {
     List<Product> findByBesteldIsNull();
 
     List<Product> findByVoorraadLessThan(int aantal);
-    List<Product>findByNaamContaining(String zoekString);
+    List<Product>findByNaamContainingIgnoreCase(String zoekString);
 }

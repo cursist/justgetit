@@ -10,14 +10,18 @@ import be.vdab.justgetit.repositories.MerkRepository;
 import be.vdab.justgetit.repositories.SubcategorieEigenschapRepository;
 import be.vdab.justgetit.repositories.SubcategorieRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static org.springframework.transaction.annotation.Isolation.*;
 
 @Service
-@Transactional
+@Transactional(readOnly = false, isolation = READ_COMMITTED)
 public class ManagerService {
     private final CategorieRepository categorieRepository;
     private final SubcategorieRepository subcategorieRepository;
@@ -31,8 +35,12 @@ public class ManagerService {
         this.subcategorieEigenschapRepository = subcategorieEigenschapRepository;
     }
 
+    @Transactional(readOnly = true, isolation = READ_COMMITTED)
     public List<Categorie> vindAlleCategorieen() {
-        return categorieRepository.findAll();
+
+        return categorieRepository.findAll()
+                .stream().sorted((o1, o2) -> o1.getNaam().compareToIgnoreCase(o2.getNaam()))
+                .collect(Collectors.toList());
     }
 
     public void save(Categorie categorie) {
@@ -47,12 +55,44 @@ public class ManagerService {
         subcategorieEigenschapRepository.save(subcategorieEigenschap);
     }
 
-    public List<Subcategorie> vindAlleSubCategorieen() {
-        return subcategorieRepository.findAll();
+    public Merk save(Merk merk) {
+        return merkRepository.save(merk);
     }
 
+    @Transactional(readOnly = true, isolation = READ_COMMITTED)
+    public List<Subcategorie> vindAlleSubCategorieen() {
+        return subcategorieRepository.findAll()
+                .stream().sorted((o1, o2) -> o1.getNaam().compareToIgnoreCase(o2.getNaam()))
+                .collect(Collectors.toList());
+    }
+
+    public Optional<Subcategorie> findSubcategorieById(long id){
+        if (subcategorieRepository.findById(id).isPresent()) {
+            return subcategorieRepository.findById(id);
+        }else{
+            return Optional.empty();
+        }
+    }
+
+    @Transactional(readOnly = true, isolation = READ_COMMITTED)
     public List<Merk> vindAlleMerken() {
-        return merkRepository.findAll();
+        return merkRepository.findAll()
+                .stream().sorted((o1, o2) -> o1.getNaam().compareToIgnoreCase(o2.getNaam()))
+                .collect(Collectors.toList());
+    }
+    public Optional<Merk> findMerkById(long id){
+        if (merkRepository.findById(id).isPresent()){
+            return merkRepository.findById(id);
+        }
+        else {
+            return Optional.empty();
+        }
+    }
+
+    public List<SubcategorieEigenschap> vindAlleEigenschappen(){
+        return subcategorieEigenschapRepository.findAll()
+                .stream().sorted((o1, o2) -> o1.getNaam().compareToIgnoreCase(o2.getNaam()))
+                .collect(Collectors.toList());
     }
 
     public void pasSubcategorieMargeAan(MargeWijziging wijziging) {
@@ -62,12 +102,14 @@ public class ManagerService {
             Subcategorie subcategorie = optionalSubcategorie.get();
             BigDecimal minimumMargeBedrag = wijziging.getMinimumMargeBedrag();
             BigDecimal minimumMargePercent = wijziging.getMinimumMargePercent();
-            if (minimumMargeBedrag !=null){
+            if (minimumMargeBedrag !=null) {
                 subcategorie.setMinimumMargeBedrag(minimumMargeBedrag);
             }
-            if (minimumMargePercent !=null){
+            if (minimumMargePercent !=null) {
                 subcategorie.setMinimumMargePercent(minimumMargePercent);
             }
+        } else {
+            throw new RuntimeException("subcategorie niet gevonden");
         }
     }
 
@@ -84,6 +126,8 @@ public class ManagerService {
             if (minimumMargePercent !=null){
                 merk.setMinimumMargePercent(minimumMargePercent);
             }
+        } else {
+            throw new RuntimeException("merk niet gevonden");
         }
     }
 }

@@ -55,6 +55,6 @@ public class DefaultProductService implements ProductService {
     }
     @Override
     public List<Product>findByNaamContaining(String zoekString){
-        return productRepository.findByNaamContaining(zoekString);
+        return productRepository.findByNaamContainingIgnoreCase(zoekString);
     }
 }
