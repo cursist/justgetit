@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments::head(title='Bediende Menu')"/>
+	<body>
+		<h1>Gevonden producten</h1>
+		<nav th:replace="fragments::menu"/>
+		<h3>Kies product en subcategorie</h3>
+		<form method="post" th:action="@{/bediende/bediendeproductenform}"
+		      th:object="${bediendeZoekLijstForm}">
+			<label>
+				Kies Product
+					<select th:field="*{productFormId}">
+					<option th:each="product:${alleGevondenProducten}"
+					        th:value="${product.id}"
+					        th:text="${product.naam}"></option>
+				</select>
+			</label>
+			<label>
+				Kies subcategorie
+					<select th:field="*{subcategorieFormId}">
+					<option th:each="subcategorie:${alleGevondenSubcategorieen}"
+					        th:value="${subcategorie.id}"
+					        th:text="${subcategorie.naam}"></option>
+				</select>
+			</label>
+			<input type="submit" value="opslaan">
+		</form>
+
+	</body>
+</html>
