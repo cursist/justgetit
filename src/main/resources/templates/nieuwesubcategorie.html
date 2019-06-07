@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments::managerHead">
     <meta charset="UTF-8">
-    <title>subcategorie</title>
 </head>
 <body>
 <nav th:replace="fragments::managerMenu"></nav>
@@ -28,11 +27,11 @@
 </form>
 
 <h4>Bestaande subcategorieën</h4>
-<ul class="categorieen">
-    <li th:each="categorie:${categorieen}" th:object="${categorie}" >
+<ul th:class="bestaandecss" class="categorieen">
+    <li th:class="categoriecss" th:each="categorie:${categorieen}" th:object="${categorie}" >
         <span th:text="*{naam}"></span>
         <ul class="subcategorieen">
-            <li th:each="subcategorie:${subcategorieen}" th:object="${subcategorie}"
+            <li class="subcategoriecss" th:each="subcategorie:${subcategorieen}" th:object="${subcategorie}"
              th:if="${categorie.id == subcategorie.categorie.id}">
                     <span th:text="*{naam}"></span>
             </li>
