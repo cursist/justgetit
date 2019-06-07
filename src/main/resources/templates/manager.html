@@ -1,27 +1,13 @@
 <!DOCTYPE html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments::managerHead">
     <meta charset="UTF-8">
-    <title>Manager</title>
-    <style>
-        h3 {
-            font-family: "Baskerville Old Face", cursive;
-        }
-        form {
-            border: 2px solid pink;
-            margin: 0 2rem 2rem;
-        }
-        form label {
-            display: block;
-        }
-        input[type='submit'] {
-            display: block;
-        }
-    </style>
 </head>
 <body>
-    <h3>Welkom</h3>
+
     <nav th:replace="fragments::managerMenu"></nav>
+
+    <h3>Welkom</h3>
 
 </body>
 </html>

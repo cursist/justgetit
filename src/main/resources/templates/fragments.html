@@ -1,9 +1,15 @@
 <head th:fragment="head(title)" xmlns:th="http://www.thymeleaf.org">
     <title th:text="${title}"/>
-    <!--<link rel="stylesheet" th:href="">-->
+    <link rel="stylesheet" th:href="@{/css/klantStyleSheet.css}">
 </head>
 
-<nav th:fragment="menu" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="klantHead(title)" xmlns:th="http://www.thymeleaf.org">
+    <title th:text="${title}"/>
+    <link rel="stylesheet" th:href="@{/css/klantStyleSheet.css}">
+</head>
+
+
+<nav class="clearfix" th:fragment="menu" xmlns:th="http://www.thymeleaf.org">
     <ul>
         <li><a th:href="@{/}">Home</a></li>
         <li><a th:href="@{/categorieen}">Categorieën</a></li>
@@ -14,7 +20,14 @@
     </ul>
 </nav>
 
+<head th:fragment="managerHead" xmlns:th="http://www.thymeleaf.org">
+    <title>Manager</title>
+    <link rel="stylesheet" th:href="@{/css/managerStyleSheet.css}">
+</head>
+
+
 <nav th:fragment="managerMenu" xmlns:th="http://www.thymeleaf.org">
+
     <ul>
         <li><a th:href="@{/manager/nieuwecategorie}">Categorie Toevoegen</a></li>
         <li><a th:href="@{/manager/nieuwesubcategorie}">Subcategorie Toevoegen</a></li>
