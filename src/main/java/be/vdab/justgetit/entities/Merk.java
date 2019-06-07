@@ -1,6 +1,7 @@
 package be.vdab.justgetit.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,18 +14,19 @@ public class Merk implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long merkId;
     @Column(name = "naam", unique = true)
+    @NotBlank
     private String naam;
     private BigDecimal minimumMargeBedrag;
     private BigDecimal minimumMargePercent;
 
-    public Merk() {
+    protected Merk() {
     }
 
     public Merk(String naam) {
         this.naam = naam;
     }
 
-    public Merk(long merkId, String naam, BigDecimal minimumMargePercent,
+    protected Merk(long merkId, String naam, BigDecimal minimumMargePercent,
                 BigDecimal minimumMargeBedrag) {
         this.merkId = merkId;
         this.naam = naam;

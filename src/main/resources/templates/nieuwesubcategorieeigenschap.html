@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>nieuwe subcategorie eigenschap</title>
+</head>
+<body>
+
+<nav th:replace="fragments::managerMenu"></nav>
+
+<h3>Voeg eigenschap toe</h3>
+<form method="post" th:action="@{/manager/nieuwesubcategorieeigenschap}"
+      th:object="${subcategorieEigenschap}" >
+    <label>
+        Kies subcategorie
+        <span th:errors="*{subcategorie}"></span>
+        <select th:field="*{subcategorie}" >
+            <option th:each="subcategorie:${subcategorieen}"
+                    th:value="${subcategorie.id}"
+                    th:text="${subcategorie} +' ('+ ${subcategorie.categorie.naam} + ')'"></option>
+        </select>
+    </label>
+    <label>
+        naam
+        <span th:errors="*{naam}"></span>
+        <input type="text" name="subcategorieeigenschap"  th:field="*{naam}" required>
+    </label>
+    <input type="submit" value="opslaan">
+</form>
+
+<h4>Bestaande subcategorie eigenschappen</h4>
+<ul class="subcategorieen">
+    <li th:each="subcategorie:${subcategorieen}" th:object="${subcategorie}" >
+        <span th:text="*{naam}"></span>
+        <ul class="subcategorieeigenschappen">
+            <li th:each="subcategorieeigenschap:${subcategorieeigenschappen}" th:object="${subcategorieeigenschap}"
+                th:if="${subcategorie.id == subcategorieeigenschap.subcategorie.id}">
+                <span th:text="*{naam}"></span>
+            </li>
+
+        </ul>
+    </li>
+</ul>
+
+</body>
+</html>

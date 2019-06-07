@@ -44,7 +44,9 @@ public class ProductRepositoryTest extends AbstractTransactionalJUnit4SpringCont
 
     @Before
     public void before(){
-        merk = new Merk(1L,"testM", BigDecimal.TEN, BigDecimal.TEN);
+        merk = new Merk("testM");
+        merk.setMinimumMargePercent(BigDecimal.TEN);
+        merk.setMinimumMargeBedrag(BigDecimal.TEN);
         categorie = new Categorie("testC");
         subcategorie = new Subcategorie("testSC", categorie);
 
@@ -55,10 +57,10 @@ public class ProductRepositoryTest extends AbstractTransactionalJUnit4SpringCont
 
     @Test
     public void findByVerkoopprijsBetween(){
-
         List<Product> producten = productRepository.findByVerkoopprijsBetween(BigDecimal.ONE,BigDecimal.TEN);
         assertEquals(super.countRowsInTableWhere(PRODUCTEN,"verkoopprijs between 1 and 10"),producten.size());
-        producten.stream().map(product1 -> product.getVerkoopprijs())
+        producten.stream()
+                .map(product1 -> product1.getVerkoopprijs())
                 .reduce((vorigePrijs,prijs)->{
             assertTrue(prijs.compareTo(BigDecimal.ONE)>= 0);
             assertTrue(prijs.compareTo(BigDecimal.TEN)<= 0);
@@ -86,7 +88,7 @@ public class ProductRepositoryTest extends AbstractTransactionalJUnit4SpringCont
 
     @Test
     public void findByNaamContaining(){
-        List<Product> producten = productRepository.findByNaamContaining("test");
+        List<Product> producten = productRepository.findByNaamContainingIgnoreCase("test");
         for (Product product : producten){
             assertTrue(product.getNaam().contains("test"));
         }
