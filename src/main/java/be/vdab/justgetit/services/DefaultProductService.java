@@ -54,7 +54,7 @@ public class DefaultProductService implements ProductService {
         productRepository.delete(product);
     }
     @Override
-    public List<Product>findByNaamContainingIgnoreCase(String zoekString){
+    public List<Product>findByNaamContaining(String zoekString){
         return productRepository.findByNaamContainingIgnoreCase(zoekString);
     }
 }

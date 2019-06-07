@@ -9,12 +9,18 @@ public class AantalForm {
     @Positive
     @Min(1)
     private final Integer aantal;
+    private final Long id;
 
-    public AantalForm (Integer aantal) {
+    public AantalForm(Integer aantal, Long id) {
         this.aantal = aantal;
+        this.id = id;
     }
 
     public Integer getAantal() {
         return aantal;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

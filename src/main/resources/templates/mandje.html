@@ -1,24 +1,39 @@
 <!DOCTYPE html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="fragments::klantHead(title='Mandje')"/>
-    <body>
-        <nav th:replace="fragments::menu"/>
-        <h1>Mandje</h1>
-        <table th:object="${bestelling}">
-            <tr>
-            <th>Naam</th>
-            <th>Prijs/stuk</th>
-            <th>Aantal</th>
-            <th>Subtotaal</th>
-            </tr>
-            <tr>
-                <td th:each="best:${bestelling}" th:object="${best}" th:text="*{id}"></td>
-                <td th:each="best:${bestelling}" th:object="${best}" th:text="*{aantal}"></td>
-            </tr>
-        </table>
-        <form th:object="${aantalForm}" method="get">
-            <label>Aantal:<input th:field="*{aantal}" autofocus></label>
-            <input type="submit" value="Aanpassen">
-        </form>
-    </body>
+
+<head th:replace="fragments::head(title='Mandje')"/>
+<body>
+<nav th:replace="fragments::menu"/>
+<h1>Mandje</h1>
+<table>
+    <tr>
+        <th>Naam </th>
+        <th>Prijs</th>
+        <th>Aantal</th>
+        <th>Subtotaal</th>
+        <th>Verwijder</th>
+    </tr>
+    <tr th:each="regel:${mandjeForm.mandje}" th:object="${regel}">
+        <td th:text="*{key.naam}"></td>
+        <td th:text="*{key.verkoopprijs}"></td>
+        <td>
+            <form th:object="${aantalForm}" method="get" th:action="@{/mandje/aantal}">
+                <label>
+                    <input th:field="*{aantal}" autofocus th:placeholder="${regel.value.aantal}">
+                    <input th:type="hidden" th:name="id" th:value="${regel.key.id}">
+                </label>
+                <input type="submit" value="ok">
+            </form>
+        </td>
+        <td th:text="*{key.verkoopprijs} * *{value.aantal}"></td>
+        <td>
+            <form method="get" th:object="${regel.key}" th:action="@{/mandje/verwijder}">
+                <input th:type="submit" value="v">
+                <input th:type="hidden" th:name="id" th:value="*{id}">
+            </form>
+        </td>
+    </tr>
+</table>
+<h1 th:text="|Totaal: ${totaal}|"></h1>
+</body>
 </html>
