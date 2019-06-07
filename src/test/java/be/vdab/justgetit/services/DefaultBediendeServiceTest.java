@@ -59,12 +59,5 @@ public class DefaultBediendeServiceTest extends AbstractTransactionalJUnit4Sprin
         manager.flush();
         assertEquals(subcategorieIdVanTestProduct(),subcategorieIdVanTestSubcategorie());
     }
-
-    @Test
-    public void bepaalMinimaleVerkoopprijs(){
-        long voorUpdate = minimaleVerkoopprijsVanProduct();
-        service.bepaalMinimaleVerkoopprijs(idVanTestProduct());
-        long naUpdate = minimaleVerkoopprijsVanProduct();
-        assertNotEquals(voorUpdate,naUpdate);
-    }
+    
 }
