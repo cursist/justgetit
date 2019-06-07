@@ -1,3 +1,3 @@
 insert into subcategorieen (naam,categorieId) values('TestSubcategorie', (select categorieId from categorieen where naam = 'testD'));
 insert into subcategorieen (naam,categorieId) values('Test2Subcategorie', (select categorieId from categorieen where naam = 'testD'));
-insert into subcategorieen (naam,minimumMargeBedrag,minimumMargePercent,categorieId) values('testSC',15,15 ,(select categorieId from categorieen where naam = 'testD'));
+insert into subcategorieen (naam,categorieId) values('testSC', (select categorieId from categorieen where naam = 'testD'));
