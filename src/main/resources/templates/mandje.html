@@ -19,6 +19,7 @@
         <td>
             <form th:object="${aantalForm}" method="get" th:action="@{/mandje/aantal}">
                 <label>
+                    <span th:errors="*{aantal}"></span>
                     <input th:field="*{aantal}" autofocus th:placeholder="${regel.value.aantal}">
                     <input th:type="hidden" th:name="id" th:value="${regel.key.id}">
                 </label>
