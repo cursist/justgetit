@@ -1,0 +1,47 @@
+body {
+    background-color: #F0F8FF;
+    font-family: Verdana;
+}
+
+nav {
+    text-align:center;
+}
+
+nav ul li {
+    list-style: none;
+    display: inline;
+    background-color: 	#A9A9A9 ;
+    padding: 0.5em;
+    margin: 0em;
+    font-size: 13px;
+}
+
+nav ul li a {
+    margin-bottom: 16px;
+    display:inline-block;
+    text-decoration: none;
+    color: white;
+}
+
+h3,h4,form{
+    text-align: center;
+}
+
+.bestaandecss{
+    margin-left: 40%;
+    list-style: none;
+}
+
+.categoriecss {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.subcategoriecss {
+    font-weight: normal;
+    font-style: italic;
+}
+
+.normaaltekstcss{
+    font-weight: normal;
+}
