@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments::managerHead">
     <meta charset="UTF-8">
-    <title>Voeg merk toe</title>
 </head>
 <body>
 <nav th:replace="fragments::managerMenu"></nav>
@@ -20,9 +19,9 @@
 
 <h4>Bestaande merken</h4>
 
-<ul class="merk">
+<ul th:class="bestaandecss"   class="merk">
 
-    <li th:each="merk:${merken}" th:object="${merk}">
+    <li th:class="subcategoriecss"  th:each="merk:${merken}" th:object="${merk}">
         <span th:text="*{naam}" ></span>
     </li>
 

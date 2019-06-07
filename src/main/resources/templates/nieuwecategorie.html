@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments::managerHead">
     <meta charset="UTF-8">
-    <title>nieuwe categorie</title>
 </head>
 <body>
     <nav th:replace="fragments::managerMenu"></nav>
@@ -16,8 +15,8 @@
     </form>
 
 <h4>Bestaande categorieën</h4>
-<ul class="categorieen">
-    <li th:each="categorie:${categorieen}" th:object="${categorie}" >
+<ul th:class="bestaandecss" class="categorieen">
+    <li th:class="subcategoriecss" th:each="categorie:${categorieen}" th:object="${categorie}" >
         <span th:text="*{naam}"></span>
     </li>
 </ul>

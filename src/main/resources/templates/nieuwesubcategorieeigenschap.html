@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="nl" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments::managerHead">
     <meta charset="UTF-8">
-    <title>nieuwe subcategorie eigenschap</title>
 </head>
 <body>
 
@@ -29,11 +28,11 @@
 </form>
 
 <h4>Bestaande subcategorie eigenschappen</h4>
-<ul class="subcategorieen">
-    <li th:each="subcategorie:${subcategorieen}" th:object="${subcategorie}" >
-        <span th:text="*{naam}"></span>
+<ul th:class="bestaandecss" class="subcategorieen">
+    <li th:class="categoriecss" th:each="subcategorie:${subcategorieen}" th:object="${subcategorie}" >
+        <span th:text="*{naam}"></span> <span class="normaaltekstcss" th:text="'(' + ${subcategorie.categorie.naam} + ')'"> </span>
         <ul class="subcategorieeigenschappen">
-            <li th:each="subcategorieeigenschap:${subcategorieeigenschappen}" th:object="${subcategorieeigenschap}"
+            <li class="subcategoriecss" th:each="subcategorieeigenschap:${subcategorieeigenschappen}" th:object="${subcategorieeigenschap}"
                 th:if="${subcategorie.id == subcategorieeigenschap.subcategorie.id}">
                 <span th:text="*{naam}"></span>
             </li>
