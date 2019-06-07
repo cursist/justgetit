@@ -123,7 +123,7 @@ CREATE TABLE `gebruikersrollen` (
 
 LOCK TABLES `gebruikersrollen` WRITE;
 /*!40000 ALTER TABLE `gebruikersrollen` DISABLE KEYS */;
-INSERT INTO `gebruikersrollen` VALUES (1,1);
+INSERT INTO `gebruikersrollen` VALUES (1,1),(8,3),(2,2),(3,2),(4,3),(5,3);
 /*!40000 ALTER TABLE `gebruikersrollen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +143,7 @@ CREATE TABLE `gemeenten` (
   UNIQUE KEY `plaatsId_UNIQUE` (`gemeenteId`),
   KEY `fk_Gemeenten_Provincies1_idx` (`provincieId`),
   CONSTRAINT `fk_Gemeenten_Provincies1` FOREIGN KEY (`provincieId`) REFERENCES `provincies` (`provincieId`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,7 +152,7 @@ CREATE TABLE `gemeenten` (
 
 LOCK TABLES `gemeenten` WRITE;
 /*!40000 ALTER TABLE `gemeenten` DISABLE KEYS */;
-INSERT INTO `gemeenten` VALUES (1,'Rotselaar','3110',1),(2,'Brugge','8000',2),(3,'Heverlee','3001',1),(4,'Schoten','2900',3),(5,'Landgraaf','6372 VG',5);
+INSERT INTO `gemeenten` VALUES (1,'Rotselaar','3110',1),(2,'Brugge','8000',2),(3,'Heverlee','3001',1),(4,'Schoten','2900',3),(5,'Landgraaf','6372 VG',5),(13,'testerst','6969',13),(22,'kutkop','6969',22);
 /*!40000 ALTER TABLE `gemeenten` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,7 +179,7 @@ CREATE TABLE `klanten` (
   UNIQUE KEY `accountnaam_UNIQUE` (`accountnaam`),
   KEY `fk_Klant_Gemeenten1_idx` (`gemeenteId`),
   CONSTRAINT `fk_Klant_Gemeenten1` FOREIGN KEY (`gemeenteId`) REFERENCES `gemeenten` (`gemeenteId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,7 +188,7 @@ CREATE TABLE `klanten` (
 
 LOCK TABLES `klanten` WRITE;
 /*!40000 ALTER TABLE `klanten` DISABLE KEYS */;
-INSERT INTO `klanten` VALUES (1,'Hilde','Pollet','Groenstraat 33','016447001','hildepollet@gmail.com',1,'hildepollet','hildepollet',1),(2,'Gervijn','Pollet','Koningin Astridlaan 158','','gervijnpollet@gmail.com',2,'gervpollet','gervpollet',1),(3,'Jan','Nannas','Broekstraat 43','0478456283','janvddr@gmail.com',3,'janvddr','janvddr',1),(4,'Joske','Vermeulen','Tramazantenlaan 143','078659325','joskedebospoeper@geenechtadres.be',4,'joskepoeper','joskepoeper',1),(5,'Kers','T. Man','Hofstraat 1','+3169696969','hey@ho.ho',5,'kerstman','kerstman',1);
+INSERT INTO `klanten` VALUES (1,'Hilde','Pollet','Groenstraat 33','016447001','hildepollet@gmail.com',1,'hildepollet','{noop}hildepollet',1),(2,'Gervijn','Pollet','Koningin Astridlaan 158','','gervijnpollet@gmail.com',2,'gervpollet','{noop}gervpollet',1),(3,'Jan','Nannas','Broekstraat 43','0478456283','janvddr@gmail.com',3,'janvddr','{noop}janvddr',1),(4,'Joske','Vermeulen','Tramazantenlaan 143','078659325','joskedebospoeper@geenechtadres.be',4,'joskepoeper','{noop}joskepoeper',1),(5,'Kers','T. Man','Hofstraat 1','+3169696969','hey@ho.ho',5,'kerstman','{noop}kerstman',1),(8,'test','tester','teststraat','69696969','test@test.test',13,'bertje','{noop}bertje',1);
 /*!40000 ALTER TABLE `klanten` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +230,7 @@ CREATE TABLE `landen` (
   PRIMARY KEY (`landId`),
   UNIQUE KEY `landId_UNIQUE` (`landId`),
   UNIQUE KEY `naam_UNIQUE` (`naam`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,7 +239,7 @@ CREATE TABLE `landen` (
 
 LOCK TABLES `landen` WRITE;
 /*!40000 ALTER TABLE `landen` DISABLE KEYS */;
-INSERT INTO `landen` VALUES (1,'België'),(2,'Nederland');
+INSERT INTO `landen` VALUES (1,'België'),(2,'Nederland'),(24,'poep'),(12,'testerigst');
 /*!40000 ALTER TABLE `landen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -324,7 +324,7 @@ CREATE TABLE `merken` (
 
 LOCK TABLES `merken` WRITE;
 /*!40000 ALTER TABLE `merken` DISABLE KEYS */;
-INSERT INTO `merken` VALUES (1,'A Film Benelux MSD B.V.',0,0,NULL),(2,'Samsung',0,0,NULL),(3,'HarperCollins Publishers',0,0,NULL),(4,'Hollister Co.',0,0,NULL),(5,'Vaporesso',0,0,NULL);
+INSERT INTO `merken` VALUES (1,'A Film Benelux MSD B.V.',0,0,0),(2,'Samsung',0,0,0),(3,'HarperCollins Publishers',0,0,0),(4,'Hollister Co.',0,0,0),(5,'Vaporesso',0,0,0);
 /*!40000 ALTER TABLE `merken` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -390,7 +390,7 @@ CREATE TABLE `producten` (
 
 LOCK TABLES `producten` WRITE;
 /*!40000 ALTER TABLE `producten` DISABLE KEYS */;
-INSERT INTO `producten` VALUES (1,'Lord of the Rings Trilogy: Extended Edition',23,100,50,'Meer dan 12u kijkplezier!',0,0,1,5,NULL),(2,'Lord of the Rings Boxset',5,18,10,'Meer dan 32u leesplezier!',0,0,3,1,NULL),(3,'QE55Q6F(2018) - QLED',200,799,399,'Meer kijkplezier!',0,0,2,7,NULL),(4,'Overhemd',5,39,15,'Meer dan zeer comfortabel draagplezier!',0,0,4,3,NULL);
+INSERT INTO `producten` VALUES (1,'Lord of the Rings Trilogy: Extended Edition',23,100,50,'Meer dan 12u kijkplezier!',0,0,1,5,0),(2,'Lord of the Rings Boxset',5,18,10,'Meer dan 32u leesplezier!',0,0,3,1,0),(3,'QE55Q6F(2018) - QLED',200,799,399,'Meer kijkplezier!',0,0,2,7,0),(4,'Overhemd',5,39,15,'Meer dan zeer comfortabel draagplezier!',0,0,4,3,0);
 /*!40000 ALTER TABLE `producten` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -409,7 +409,7 @@ CREATE TABLE `provincies` (
   UNIQUE KEY `provincieId_UNIQUE` (`provincieId`),
   KEY `fk_Provincies_Landen_idx` (`landId`),
   CONSTRAINT `fk_Provincies_Landen` FOREIGN KEY (`landId`) REFERENCES `landen` (`landId`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -418,7 +418,7 @@ CREATE TABLE `provincies` (
 
 LOCK TABLES `provincies` WRITE;
 /*!40000 ALTER TABLE `provincies` DISABLE KEYS */;
-INSERT INTO `provincies` VALUES (1,'Vlaams-Brabant',1),(2,'West-Vlaanderen',1),(3,'Antwerpen',1),(4,'Limburg',1),(5,'Limburg',2);
+INSERT INTO `provincies` VALUES (1,'Vlaams-Brabant',1),(2,'West-Vlaanderen',1),(3,'Antwerpen',1),(4,'Limburg',1),(5,'Limburg',2),(13,'testtesttest',12),(22,'beer',24);
 /*!40000 ALTER TABLE `provincies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -504,7 +504,7 @@ CREATE TABLE `subcategorieen` (
 
 LOCK TABLES `subcategorieen` WRITE;
 /*!40000 ALTER TABLE `subcategorieen` DISABLE KEYS */;
-INSERT INTO `subcategorieen` VALUES (1,'Fictie',0,0,2,NULL),(2,'Non-Fictie',0,0,2,NULL),(3,'Mannen',0,0,4,NULL),(4,'Vrouwen',0,0,4,NULL),(5,'DVD',0,0,1,NULL),(6,'Blu-Ray',0,0,1,NULL),(7,'Televisies',0,0,3,NULL),(8,'Huishoudapparatuur',0,0,3,NULL),(9,'Fruit',0,0,5,NULL),(10,'Conserven',0,0,5,NULL);
+INSERT INTO `subcategorieen` VALUES (1,'Fictie',0,0,2,0),(2,'Non-Fictie',0,0,2,0),(3,'Mannen',0,0,4,0),(4,'Vrouwen',0,0,4,0),(5,'DVD',0,0,1,0),(6,'Blu-Ray',0,0,1,0),(7,'Televisies',0,0,3,0),(8,'Huishoudapparatuur',0,0,3,0),(9,'Fruit',0,0,5,0),(10,'Conserven',0,0,5,0);
 /*!40000 ALTER TABLE `subcategorieen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -525,4 +525,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-06  9:51:55
+-- Dump completed on 2019-06-07  9:22:47
