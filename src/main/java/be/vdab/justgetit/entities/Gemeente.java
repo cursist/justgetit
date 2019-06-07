@@ -63,4 +63,9 @@ public class Gemeente implements Serializable {
     public String toString() {
         return naam;
     }
+
+    public void setProvincie(Provincie eerderOpgeslagenProvincie) {
+        this.provincie = provincie;
+    }
+
 }

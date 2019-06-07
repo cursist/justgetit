@@ -2,6 +2,9 @@ package be.vdab.justgetit.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name= "klanten")
 public class Klant implements Serializable {
@@ -13,7 +16,6 @@ public class Klant implements Serializable {
     private long klantId;
     private String voornaam;
     private String achternaam;
-    private  String naam;
     private String adres;
     @Column(name="telefoonnummer", unique = true)
     private String telefoonnummer;
@@ -23,6 +25,15 @@ public class Klant implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name="gemeenteId")
     private Gemeente gemeente;
+
+    private String accountnaam;
+    private String wachtwoord;
+
+    @ManyToMany
+    @JoinTable(name = "gebruikersrollen",
+               joinColumns = @JoinColumn(name = "klantId"),
+               inverseJoinColumns = @JoinColumn(name = "rolId"))
+    private Set<Rol> rollen = new HashSet<>();
 
     protected Klant() {}
 
@@ -34,7 +45,7 @@ public class Klant implements Serializable {
         this.telefoonnummer = telefoonnummer;
         this.email = email;
         this.gemeente = gemeente;
-        setNaam(voornaam, achternaam);
+        rollen.add(Rol.KLANT);
     }
 
     public long getKlantId() {
@@ -47,14 +58,6 @@ public class Klant implements Serializable {
 
     public String getAchternaam() {
         return achternaam;
-    }
-
-    public String getNaam() {
-        return naam;
-    }
-
-    public void setNaam(String voornaam, String achternaam) {
-        this.naam = voornaam + achternaam;
     }
 
     public String getAdres() {
@@ -73,4 +76,32 @@ public class Klant implements Serializable {
         return gemeente;
     }
 
+    public void setAccount(String accountnaam, String wachtwoord) {
+        this.accountnaam = accountnaam;
+        this.wachtwoord = wachtwoord;
+    }
+
+    public String getAccountnaam() {
+        return accountnaam;
+    }
+
+    public String getWachtwoord() {
+        return wachtwoord;
+    }
+
+    public Set<Rol> getRollen() {
+        return Collections.unmodifiableSet(rollen);
+    }
+
+    public void replaceRollen(Set<Rol> nieuweRollen) {
+        this.rollen = nieuweRollen;
+    }
+
+    public void setGemeente(Gemeente gemeente) {
+        this.gemeente = gemeente;
+    }
+
+    public void setWachtwoord(String string){
+        this.wachtwoord = string;
+    }
 }

@@ -25,7 +25,7 @@ public class DefaultKlantService implements KlantService {
     }
     @Override
     public List<Klant> findByGemeentenaamBegin(String str){
-        return klantRepository.findByGemeenteStartingWithOrderByNaam(str);
+        return klantRepository.findByGemeenteStartingWith(str);
     }
     @Override
     public List<Klant> findByPostcode(String str){
@@ -33,6 +33,6 @@ public class DefaultKlantService implements KlantService {
     }
     @Override
     public List<Klant> findByVoornaamBevat(String str){
-        return klantRepository.findByVoornaamContainingOrderByNaam(str);
+        return klantRepository.findByVoornaamContaining(str);
     }
 }

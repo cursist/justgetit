@@ -49,8 +49,9 @@ public class MandjeController {
     @GetMapping("aantal")
     ModelAndView voegToe(@Valid AantalForm form, @RequestParam("id") long id, Errors errors,
                          RedirectAttributes redirect){
+        ModelAndView modelAndView = new ModelAndView("mandje");
         if(errors.hasErrors()){
-            return new ModelAndView();
+            return modelAndView;
         }
         mandje.put(id, form.getAantal());
         System.out.println("test");
@@ -62,7 +63,7 @@ public class MandjeController {
         mandje.remove(id);
         return "redirect:/mandje";
     }
-
+/*
     @GetMapping("/bestelling")
     ModelAndView mandjeLijnenTonen (Errors errors) {
         if (errors.hasErrors()) {
@@ -75,5 +76,5 @@ public class MandjeController {
         });
         modelAndView.addObject("bestelling", bestelling);
         return modelAndView;
-    }
+    }*/
 }
